@@ -371,34 +371,38 @@ quarto_info <- paste0(
 
 ::: {.columns style="font-size:0.7em;"}
 ::: {.column width="25%"}
+
 ```{r}
 #| echo: false
 knitr::kable(column1)
-``
-`
+```
+
 :::
 
 ::: {.column width="25%"}
+
 ```{r}
 #| echo: false
 knitr::kable(column2)
-`
-``
+```
+
 :::
 
 ::: {.column width="25%"}
+
 ```{r}
 #| echo: false
 knitr::kable(column3)
-``
-`
+```
+
 :::
 
 ::: {.column width="25%"}
+
 ```{r}
 #| echo: false
 knitr::kable(column4)
-`
-``
+```
+
 :::
 :::
