@@ -114,7 +114,7 @@ Many thanks to Davis Vaughan, Julia Silge, David Robinson, Julie Jung, Alison Hi
 
 -   [pos.it/conf-event-portal](http://pos.it/conf-event-portal) (login)
 -   Click on "Join Discord, the virtual networking platform!"
--   Browse Channels -> `#workshop-tidymodels-advanced`
+-   Browse Channels -> `#workshop-feat-eng-tune`
 
 ## `r emo::ji("eyes")` {.annotation}
 
