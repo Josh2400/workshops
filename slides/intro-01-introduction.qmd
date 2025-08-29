@@ -283,7 +283,7 @@ If you are using your own laptop instead of Posit Cloud:
 # Install the packages for the workshop
 pkgs <- 
   c("bonsai", "Cubist", "doParallel", "earth", "embed", "finetune", 
-    "lightgbm", "lme4", "pak", "parallelly", "plumber", "probably", 
+    "lightgbm", "lme4", "parallelly", "plumber", "probably", 
     "ranger", "rpart", "rpart.plot", "rules", "splines2", "stacks", 
     "text2vec", "textrecipes", "tidymodels", "vetiver")
 
