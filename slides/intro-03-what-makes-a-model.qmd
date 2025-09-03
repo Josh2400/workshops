@@ -605,7 +605,7 @@ tree_fit |>
   )
 ```
 
-## Understand your model `r hexes("parsnip", "workflows")`
+## Understand your model `r hexes("parsnip", "workflows")` {.annotation}
 
 How do you **understand** your new `tree_fit` model?
 
@@ -614,7 +614,7 @@ How do you **understand** your new `tree_fit` model?
 library(rpart.plot)
 tree_fit |>
   extract_fit_engine() |>
-  rpart.plot(roundint = FALSE)
+  rpart.plot()
 ```
 
 You can `extract_*()` several components of your fitted workflow.
