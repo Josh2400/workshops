@@ -224,6 +224,10 @@ There are `r nrow(forested_test)` rows and `r ncol(forested_test)` columns in th
 
 *Try out different values in `set.seed()` to see how the results change.*
 
+<br></br>
+
+We recommend using the `.qmd` files in the `classwork/` folder for code exercises. They set you up with the code from the slides.
+
 ```{r ex-try-splitting}
 #| echo: false
 countdown::countdown(minutes = 5, id = "try-splitting")
