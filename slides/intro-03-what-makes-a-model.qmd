@@ -506,11 +506,23 @@ workflow(forested ~ ., tree_spec) |>
 
 ![](images/parsnip-flagger.jpg){.absolute top="0" right="0" width="150" height="150"}
 
-*Run the `tree_wflow` chunk in your `.qmd`.*
+*Run the `tree_wflow` chunk in your `intro-03-classwork.qmd`.*
+
+```{r tree_wflow}
+#| eval: false
+tree_spec <- decision_tree() |> 
+  set_mode("classification")
+
+tree_wflow <- workflow() |>
+  add_formula(forested ~ .) |>
+  add_model(tree_spec)
+
+tree_wflow
+```
 
 *Edit this code to make a workflow with your own model of choice.*
 
-<br></br>
+<br>
 
 *Extension/Challenge: Other than formulas, what kinds of preprocessors are supported?*
 
