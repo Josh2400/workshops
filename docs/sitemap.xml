@@ -158,79 +158,79 @@
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/intro-extra-recipes.html</loc>
-    <lastmod>2025-08-15T19:44:00.390Z</lastmod>
+    <lastmod>2025-09-05T14:46:03.899Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/intro-05-tuning-models.html</loc>
-    <lastmod>2025-08-15T19:43:29.535Z</lastmod>
+    <lastmod>2025-09-05T14:43:34.333Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/intro-03-what-makes-a-model.html</loc>
-    <lastmod>2025-08-15T19:43:05.172Z</lastmod>
+    <lastmod>2025-09-05T14:37:46.842Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/intro-01-introduction.html</loc>
-    <lastmod>2025-08-15T19:42:31.151Z</lastmod>
+    <lastmod>2025-09-05T14:36:38.130Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/extras-transit-case-study.html</loc>
-    <lastmod>2025-08-15T19:40:02.123Z</lastmod>
+    <lastmod>2025-09-05T15:00:44.179Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/annotations.html</loc>
-    <lastmod>2025-08-15T19:39:03.576Z</lastmod>
+    <lastmod>2025-09-05T14:25:43.324Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/advanced-05-iterative.html</loc>
-    <lastmod>2025-08-15T19:36:31.817Z</lastmod>
+    <lastmod>2025-09-05T14:56:40.961Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/advanced-03-tuning-hyperparameters.html</loc>
-    <lastmod>2025-08-15T19:32:23.291Z</lastmod>
+    <lastmod>2025-09-05T14:54:59.246Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/advanced-01-introduction.html</loc>
-    <lastmod>2025-08-15T19:31:26.462Z</lastmod>
+    <lastmod>2025-09-05T14:54:12.284Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/index.html</loc>
-    <lastmod>2025-08-20T12:48:26.080Z</lastmod>
+    <lastmod>2025-09-05T14:31:53.875Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/advanced-02-feature-engineering.html</loc>
-    <lastmod>2025-08-15T19:31:46.692Z</lastmod>
+    <lastmod>2025-09-05T14:54:28.734Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/advanced-04-racing.html</loc>
-    <lastmod>2025-08-15T19:34:17.760Z</lastmod>
+    <lastmod>2025-09-05T14:55:40.836Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/advanced-06-wrapping-up.html</loc>
-    <lastmod>2025-08-14T22:26:37.430Z</lastmod>
+    <lastmod>2025-09-05T14:58:21.531Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/extras-effect-encodings.html</loc>
-    <lastmod>2025-08-15T19:39:18.479Z</lastmod>
+    <lastmod>2025-09-05T14:58:38.772Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/extras-vetiver.html</loc>
-    <lastmod>2025-08-15T19:42:06.326Z</lastmod>
+    <lastmod>2025-09-05T15:07:37.112Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/intro-02-data-budget.html</loc>
-    <lastmod>2025-08-15T19:42:41.777Z</lastmod>
+    <lastmod>2025-09-05T14:37:14.110Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/intro-04-evaluating-models.html</loc>
-    <lastmod>2025-08-15T19:43:21.961Z</lastmod>
+    <lastmod>2025-09-05T14:38:33.968Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/intro-06-wrapping-up.html</loc>
-    <lastmod>2025-08-14T22:07:12.033Z</lastmod>
+    <lastmod>2025-09-05T14:45:46.372Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/slides/intro-extra-workflowsets.html</loc>
-    <lastmod>2025-08-14T16:20:51.232Z</lastmod>
+    <lastmod>2025-09-05T14:49:21.700Z</lastmod>
   </url>
   <url>
     <loc>https://workshops.tidymodels.org/archive/2022-07-RStudio-conf/02-data-budget.html</loc>
@@ -455,5 +455,9 @@
   <url>
     <loc>https://workshops.tidymodels.org/archive/2025-08-nyr/slides/intro-extra-recipes.html</loc>
     <lastmod>2025-08-28T17:52:08.995Z</lastmod>
+  </url>
+  <url>
+    <loc>https://workshops.tidymodels.org/archive/2025-08-nyr/index.html</loc>
+    <lastmod>2025-09-03T14:35:57.346Z</lastmod>
   </url>
 </urlset>
