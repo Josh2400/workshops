@@ -1,6 +1,13 @@
 # packages needed to make the slides, but not needed for participants
-dev_pkgs <- c("countdown", "forcats", "hadley/emo", "sessioninfo", "svglite",
-              "leaflet", "doMC")
+dev_pkgs <- c(
+  "countdown",
+  "forcats",
+  "hadley/emo",
+  "sessioninfo",
+  "svglite",
+  "leaflet",
+  "doMC"
+)
 # pak::pak(dev_pkgs)
 
 #   ----------------------------------------------------------------------
@@ -12,7 +19,8 @@ hexes <- function(..., size = 64) {
 
   res <- glue::glue(
     '![](hexes/<x>.png){.absolute top=-20 right=<right> width="<size>" height="<size * 1.16>"}',
-    .open = "<", .close = ">"
+    .open = "<",
+    .close = ">"
   )
 
   paste0(res, collapse = " ")
@@ -36,7 +44,7 @@ options(
 )
 
 train_color <- "#1a162d"
-test_color  <- "#cd4173"
-data_color  <- "#767381"
+test_color <- "#cd4173"
+data_color <- "#767381"
 assess_color <- "#84cae1"
 splits_pal <- c(data_color, train_color, test_color)
