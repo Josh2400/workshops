@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.33">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
 
   <title>Machine learning with tidymodels – Extras - Recipes</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -190,10 +190,10 @@
   <link href="../site_libs/countdown-0.4.0/countdown.css" rel="stylesheet">
   <script src="../site_libs/countdown-0.4.0/countdown.js"></script>
 <meta property="og:title" content="Extras - Recipes – Machine learning with tidymodels">
-<meta property="og:description" content="Introduction to tidymodels">
+<meta property="og:description" content="Introduction to Machine Learning in R with tidymodels">
 <meta property="og:site_name" content="Machine learning with tidymodels">
 <meta name="twitter:title" content="Extras - Recipes – Machine learning with tidymodels">
-<meta name="twitter:description" content="Introduction to tidymodels">
+<meta name="twitter:description" content="Introduction to Machine Learning in R with tidymodels">
 <meta name="twitter:card" content="summary">
 </head>
 <body class="quarto-light">
@@ -203,7 +203,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Extras - Recipes</h1>
-  <p class="subtitle">Introduction to tidymodels</p>
+  <p class="subtitle">Introduction to Machine Learning in R with tidymodels</p>
 
 <div class="quarto-title-authors">
 </div>
@@ -326,20 +326,20 @@
 <section id="how-to-write-a-recipe" class="slide level2">
 <h2>How to write a recipe</h2>
 <div style="font-family: 'Source Code Pro', monospace; font-size: 0.8em;">
-<p>forested_rec &lt;- recipe(forested ~ ., data = forested_train) %&gt;%<br>
-&nbsp;&nbsp;step_dummy(all_nominal_predictors()) %&gt;%<br>
-&nbsp;&nbsp;step_zv(all_predictors()) %&gt;%<br>
-&nbsp;&nbsp;step_log(canopy_cover, offset = 0.5) %&gt;%<br>
+<p>forested_rec &lt;- recipe(forested ~ ., data = forested_train) |&gt;<br>
+&nbsp;&nbsp;step_dummy(all_nominal_predictors()) |&gt;<br>
+&nbsp;&nbsp;step_zv(all_predictors()) |&gt;<br>
+&nbsp;&nbsp;step_log(canopy_cover, offset = 0.5) |&gt;<br>
 &nbsp;&nbsp;step_normalize(all_numeric_predictors())</p>
 </div>
 </section>
 <section id="how-to-write-a-recipe-1" class="slide level2">
 <h2>How to write a recipe</h2>
 <div style="font-family: 'Source Code Pro', monospace; font-size: 0.8em;">
-<p>forested_rec &lt;- <span style="color: #CA225E;">recipe(forested ~ ., data = forested_train)</span> %&gt;%<br>
-&nbsp;&nbsp;step_dummy(all_nominal_predictors()) %&gt;%<br>
-&nbsp;&nbsp;step_zv(all_predictors()) %&gt;%<br>
-&nbsp;&nbsp;step_log(canopy_cover, offset = 0.5) %&gt;%<br>
+<p>forested_rec &lt;- <span style="color: #CA225E;">recipe(forested ~ ., data = forested_train)</span> |&gt;<br>
+&nbsp;&nbsp;step_dummy(all_nominal_predictors()) |&gt;<br>
+&nbsp;&nbsp;step_zv(all_predictors()) |&gt;<br>
+&nbsp;&nbsp;step_log(canopy_cover, offset = 0.5) |&gt;<br>
 &nbsp;&nbsp;step_normalize(all_numeric_predictors())</p>
 </div>
 <p><br></p>
@@ -348,10 +348,10 @@
 <section id="how-to-write-a-recipe-2" class="slide level2">
 <h2>How to write a recipe</h2>
 <div style="font-family: 'Source Code Pro', monospace; font-size: 0.8em;">
-<p>forested_rec &lt;- recipe(forested ~ ., data = forested_train) %&gt;%<br>
-&nbsp;&nbsp;<span style="color: #CA225E;">step_dummy</span>(all_nominal_predictors()) %&gt;%<br>
-&nbsp;&nbsp;<span style="color: #CA225E;">step_zv</span>(all_predictors()) %&gt;%<br>
-&nbsp;&nbsp;<span style="color: #CA225E;">step_log</span>(canopy_cover, offset = 0.5) %&gt;%<br>
+<p>forested_rec &lt;- recipe(forested ~ ., data = forested_train) |&gt;<br>
+&nbsp;&nbsp;<span style="color: #CA225E;">step_dummy</span>(all_nominal_predictors()) |&gt;<br>
+&nbsp;&nbsp;<span style="color: #CA225E;">step_zv</span>(all_predictors()) |&gt;<br>
+&nbsp;&nbsp;<span style="color: #CA225E;">step_log</span>(canopy_cover, offset = 0.5) |&gt;<br>
 &nbsp;&nbsp;<span style="color: #CA225E;">step_normalize</span>(all_numeric_predictors())</p>
 </div>
 <p><br></p>
@@ -360,10 +360,10 @@
 <section id="how-to-write-a-recipe-3" class="slide level2">
 <h2>How to write a recipe</h2>
 <div style="font-family: 'Source Code Pro', monospace; font-size: 0.8em;">
-<p>forested_rec &lt;- recipe(forested ~ ., data = forested_train) %&gt;%<br>
-&nbsp;&nbsp;step_dummy(<span style="color: #CA225E;">all_nominal_predictors()</span>) %&gt;%<br>
-&nbsp;&nbsp;step_zv(<span style="color: #CA225E;">all_predictors()</span>) %&gt;%<br>
-&nbsp;&nbsp;step_log(<span style="color: #CA225E;">canopy_cover</span>, offset = 0.5) %&gt;% &nbsp;&nbsp;step_normalize(<span style="color: #CA225E;">all_numeric_predictors()</span>)</p>
+<p>forested_rec &lt;- recipe(forested ~ ., data = forested_train) |&gt;<br>
+&nbsp;&nbsp;step_dummy(<span style="color: #CA225E;">all_nominal_predictors()</span>) |&gt;<br>
+&nbsp;&nbsp;step_zv(<span style="color: #CA225E;">all_predictors()</span>) |&gt;<br>
+&nbsp;&nbsp;step_log(<span style="color: #CA225E;">canopy_cover</span>, offset = 0.5) |&gt; &nbsp;&nbsp;step_normalize(<span style="color: #CA225E;">all_numeric_predictors()</span>)</p>
 </div>
 <p><br></p>
 <p>Use {tidyselect} and recipes-specific selectors to denote affected variables.</p>
@@ -371,10 +371,10 @@
 <section id="using-a-recipe" class="slide level2">
 <h2>Using a recipe</h2>
 <div style="font-family: 'Source Code Pro', monospace; font-size: 0.8em;">
-<p>forested_rec &lt;- recipe(forested ~ ., data = forested_train) %&gt;%<br>
-&nbsp;&nbsp;step_dummy(all_nominal_predictors()) %&gt;%<br>
-&nbsp;&nbsp;step_zv(all_predictors()) %&gt;%<br>
-&nbsp;&nbsp;step_log(canopy_cover, offset = 0.5) %&gt;% &nbsp;&nbsp;step_normalize(all_numeric_predictors())</p>
+<p>forested_rec &lt;- recipe(forested ~ ., data = forested_train) |&gt;<br>
+&nbsp;&nbsp;step_dummy(all_nominal_predictors()) |&gt;<br>
+&nbsp;&nbsp;step_zv(all_predictors()) |&gt;<br>
+&nbsp;&nbsp;step_log(canopy_cover, offset = 0.5) |&gt; &nbsp;&nbsp;step_normalize(all_numeric_predictors())</p>
 </div>
 <p><br></p>
 <p>Save the recipe we like so that we can use it in various places, e.g., with different models.</p>
@@ -385,8 +385,8 @@
 <p>Recipes are typically combined with a model in a <code>workflow()</code> object:</p>
 <p><br></p>
 <div style="font-family: 'Source Code Pro', monospace; font-size: 0.8em;">
-<p>forested_wflow &lt;- workflow() %&gt;%<br>
-&nbsp;&nbsp;<span style="color: #CA225E;">add_recipe(forested_rec)</span> %&gt;%<br>
+<p>forested_wflow &lt;- workflow() |&gt;<br>
+&nbsp;&nbsp;<span style="color: #CA225E;">add_recipe(forested_rec)</span> |&gt;<br>
 &nbsp;&nbsp;add_model(linear_reg())</p>
 </div>
 </section>
@@ -477,7 +477,7 @@
 <section id="baking-a-recipe" class="slide level2">
 <h2>Baking a recipe</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">prep</span>(forested_rec) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">prep</span>(forested_rec) <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a></a>  <span class="fu">bake</span>(<span class="at">new_data =</span> forested_train)</span>
 <span id="cb4-3"><a></a><span class="co">#&gt; # A tibble: 8,749 × 177</span></span>
 <span id="cb4-4"><a></a><span class="co">#&gt;      year elevation eastness roughness dew_temp precip_annual temp_annual_mean temp_annual_min temp_annual_max temp_january_min vapor_min vapor_max canopy_cover     lon     lat forested</span></span>
@@ -526,7 +526,7 @@
 <section id="tidying-a-recipe-1" class="slide level2">
 <h2>Tidying a recipe</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">prep</span>(forested_rec) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">prep</span>(forested_rec) <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a></a>  <span class="fu">tidy</span>()</span>
 <span id="cb5-3"><a></a><span class="co">#&gt; # A tibble: 4 × 6</span></span>
 <span id="cb5-4"><a></a><span class="co">#&gt;   number operation type      trained skip  id             </span></span>
@@ -540,7 +540,7 @@
 <section id="tidying-a-recipe-2" class="slide level2">
 <h2>Tidying a recipe</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">prep</span>(forested_rec) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">prep</span>(forested_rec) <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a></a>  <span class="fu">tidy</span>(<span class="at">number =</span> <span class="dv">1</span>)</span>
 <span id="cb6-3"><a></a><span class="co">#&gt; # A tibble: 161 × 3</span></span>
 <span id="cb6-4"><a></a><span class="co">#&gt;    terms        columns             id         </span></span>
@@ -562,8 +562,8 @@
 <h2>Using a recipe in tidymodels</h2>
 <p>The recommended way to use a recipe in tidymodels is to use it as part of a <code>workflow()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>forested_wflow <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span>  </span>
-<span id="cb7-2"><a></a>  <span class="fu">add_recipe</span>(forested_rec) <span class="sc">%&gt;%</span>  </span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>forested_wflow <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">|&gt;</span>  </span>
+<span id="cb7-2"><a></a>  <span class="fu">add_recipe</span>(forested_rec) <span class="sc">|&gt;</span>  </span>
 <span id="cb7-3"><a></a>  <span class="fu">add_model</span>(<span class="fu">linear_reg</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When used in this way, you don’t need to worry about <code>prep()</code> and <code>bake()</code> as it is handled for you.</p>
