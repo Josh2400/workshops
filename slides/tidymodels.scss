@@ -38,3 +38,7 @@ $presentation-heading-color: $charcoal !default;
 .reveal .column-output-location .column:first-of-type div.sourceCode {
   height: unset !important;
 }
+
+#title-slide .subtitle {
+  font-size: 60px;
+}
