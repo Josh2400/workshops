@@ -20241,7 +20241,7 @@
     "href": "slides/advanced-05-feature-engineering-part-two.html#splines-explained",
     "title": "5 - Feature engineering: splines, target encoding and dates",
     "section": "Splines explained",
-    "text": "Splines explained\nA B-spline is a piecewise polynomial function.\nWe have 2 main parameters to worry about. Number of knots and the polynomial degree.\nThe domain of the predictor is split into k regions, with a knot between each, and a polynomial function is fit within each region, under the constraint that they touch each other at the knot."
+    "text": "Splines explained\nA spline is a piecewise polynomial function.\nWe have 2 main parameters to worry about. Number of knots and the polynomial degree.\nThe domain of the predictor is split into k regions, with a knot between each, and a polynomial function is fit within each region, under the constraint that they touch each other at the knot."
   },
   {
     "objectID": "slides/advanced-05-feature-engineering-part-two.html#knots-1-degree-1",
