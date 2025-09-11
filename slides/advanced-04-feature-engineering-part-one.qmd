@@ -555,10 +555,11 @@ leaf_data |>
 
 ## Redundant Information
 
-Or duplicated or functionally equivalent features
-
 ```{r}
 #| label: area-vs-equivalent-diameter
+#| echo: false
+#| fig-align: center
+#| fig-asp: 1
 leaf_data |>
   ggplot(aes(area, equivalent_diameter)) +
   geom_point()
@@ -578,6 +579,8 @@ While keeping our models in mind, we want to make sure the data is well-suited
 ```{r}
 #| label: mean-red-val-vs-mean-blue-val
 #| echo: false
+#| fig-align: center
+#| fig-asp: 1
 leaf_data |>
   ggplot(aes(mean_red_val, mean_blue_val)) +
   geom_point()
@@ -588,6 +591,8 @@ leaf_data |>
 ```{r}
 #| label: physiological-length-vs-diameter
 #| echo: false
+#| fig-align: center
+#| fig-asp: 1
 leaf_data |>
   ggplot(aes(physiological_length, diameter)) +
   geom_point()

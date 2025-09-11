@@ -19926,7 +19926,7 @@
     "href": "slides/advanced-04-feature-engineering-part-one.html#redundant-information-1",
     "title": "4 - Feature engineering: dummies and embeddings",
     "section": "Redundant Information",
-    "text": "Redundant Information\nOr duplicated or functionally equivalent features\n\nleaf_data |&gt;\n  ggplot(aes(area, equivalent_diameter)) +\n  geom_point()"
+    "text": "Redundant Information"
   },
   {
     "objectID": "slides/advanced-04-feature-engineering-part-one.html#ineffective-representation",
