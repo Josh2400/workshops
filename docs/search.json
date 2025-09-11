@@ -20136,7 +20136,7 @@
     "href": "slides/advanced-04-feature-engineering-part-one.html#umap-parameters",
     "title": "4 - Feature engineering: dummies and embeddings",
     "section": "UMAP parameters",
-    "text": "UMAP parameters\n\nn_neighbors\n\nDetermines how many points are considered neighbors. A point counts as its own neighbor. Lower values lead to a local view.\n\nmin_dist\n\nDetermines how close points are allowed to be to each other in the low-dimensional space.\n\nmetric\n\nHow distances are calculated in the input data: euclidean, manhattan, jaccard, etc."
+    "text": "UMAP parameters\n\n\n\nn_neighbors\n\n\nDetermines how many points are considered neighbors. A point counts as its own neighbor. Lower values lead to a local view.\n\n\n\n\nmin_dist\n\n\nDetermines how close points are allowed to be to each other in the low-dimensional space.\n\n\n\n\nmetric\n\n\nHow distances are calculated in the input data: euclidean, manhattan, jaccard, etc."
   },
   {
     "objectID": "slides/advanced-04-feature-engineering-part-one.html#umap-hesitancy",

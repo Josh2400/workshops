@@ -947,18 +947,45 @@ Rough algorithm
 
 ## UMAP parameters
 
+::: {.columns}
+::: {.column width=25%}
+
 - `n_neighbors`
+
+:::
+::: {.column width=75%}
 
 Determines how many points are considered neighbors. A point counts as its own neighbor.
 Lower values lead to a local view.
 
+:::
+:::
+
+::: {.columns}
+::: {.column width=25%}
+
 - `min_dist`
+
+:::
+::: {.column width=75%}
 
 Determines how close points are allowed to be to each other in the low-dimensional space.
 
+:::
+:::
+
+::: {.columns}
+::: {.column width=25%}
+
 - `metric`
 
+:::
+::: {.column width=75%}
+
 How distances are calculated in the input data: `euclidean`, `manhattan`, `jaccard`, etc.
+
+:::
+:::
 
 ## UMAP hesitancy 
 
