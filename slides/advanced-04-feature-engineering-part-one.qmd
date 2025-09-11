@@ -209,7 +209,7 @@ Done using regular expressions, either by specifying `sep` to split the string b
 
 Allows for 0 to many items in each string.
 
-Implemented as `step_dummy_extract()`.
+Implemented as [`step_dummy_extract()`](https://recipes.tidymodels.org/reference/step_dummy_extract.html).
 
 ::: {.absolute bottom=0 right=0}
 [FEAZ](https://feaz-book.com/categorical-multi-dummy)
@@ -430,7 +430,7 @@ It can be seen as joining multiple applications of dummy variables together.
 
 Allows for 0 to many items.
 
-Implemented as `step_dummy_multi_choice()`.
+Implemented as [`step_dummy_multi_choice()`](https://recipes.tidymodels.org/reference/step_dummy_multi_choice.html).
 
 ::: {.absolute bottom=0 right=0}
 [FEAZ](https://feaz-book.com/categorical-multi-dummy)
@@ -479,11 +479,11 @@ recipe(~., data = values) |>
 
 ## Othering
 
-Both `step_dummy_extract()` and `step_dummy_multi_choice()` contain a `threshold` argument.
+Both [`step_dummy_extract()`](https://recipes.tidymodels.org/reference/step_dummy_extract.html) and [`step_dummy_multi_choice()`](https://recipes.tidymodels.org/reference/step_dummy_multi_choice.html) contain a `threshold` argument.
 
 This is used to combine infrequent levels together.
 
-We have a step `step_other()` that does this for nominal variables, but it doesn't work in these cases, as it has to happen after the extraction/combination.
+We have a step [`step_other()`](https://recipes.tidymodels.org/reference/step_dummy_other.html) that does this for nominal variables, but it doesn't work in these cases, as it has to happen after the extraction/combination.
 
 ## Othering
 
@@ -785,7 +785,7 @@ countdown(minutes = 5, id = "pca-leaf_data")
 
 > Computational time is linear in the number of columns
 
-By default, `step_pca()` calculates all the loading vectors. And then subset them down to what you need.
+By default, [`step_pca()`](https://recipes.tidymodels.org/reference/step_pca.html) calculates all the loading vectors. And then subset them down to what you need.
 
 Instead, we can use a different implementation that only calculates what you need. This is what we call truncated PCA.
 

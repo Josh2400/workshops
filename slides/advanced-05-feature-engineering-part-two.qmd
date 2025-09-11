@@ -526,11 +526,11 @@ bind_rows(
 
 ## Implentations
 
-We have described this method solely based on analytical calculations (`step_lencode()`), but you could arrive at similar numbers using a model-based approach by fitting a no-intercept generalized linear model. A hierarchical version would induce partial pooling.
+We have described this method solely based on analytical calculations ([`step_lencode()`](https://embed.tidymodels.org/reference/step_lencode.html)), but you could arrive at similar numbers using a model-based approach by fitting a no-intercept generalized linear model. A hierarchical version would induce partial pooling.
 
-- `step_lencode_glm()`
-- `step_lencode_bayes()`
-- `step_lencode_mixed()`
+- [`step_lencode_glm()`](https://embed.tidymodels.org/reference/step_lencode_glm.html)
+- [`step_lencode_bayes()`](https://embed.tidymodels.org/reference/step_lencode_bayes.html)
+- [`step_lencode_mixed()`](https://embed.tidymodels.org/reference/step_lencode_mixed.html)
 
 ## Target encoding in recipes `r hexes("embed", "recipes")`
 
@@ -668,11 +668,11 @@ recipe(~arrival_date, data = hotel_rates) |>
 
 ## Other recipes steps
 
-- `step_time()`
+- [`step_time()`](https://recipes.tidymodels.org/reference/step_date.html)
 
 Works the same as `step_date()` but for measurements smaller than day: hour, hour12, am/pm, minute, second, decimal_day.
 
-- `step_holiday()`
+- [`step_holiday()`](https://recipes.tidymodels.org/reference/step_holiday.html)
 
 Adds indicators for holidays. See `timeDate::listHolidays()` for supported holidays.
 
@@ -766,7 +766,7 @@ rule_3 <- yearly("1997-06-05") |>
 
 ## `step_time_event()`  `r hexes("recipes")`
 
-Create a list of rules (last slide) and pass them to the `rules` argument of `step_time_event()`
+Create a list of rules (last slide) and pass them to the `rules` argument of [`extrasteps::step_time_event()`](https://emilhvitfeldt.github.io/extrasteps/reference/step_time_event.html)
 
 ```{r}
 #| label: step-time-event
@@ -806,9 +806,9 @@ These features still have the issue that they only attach value to the date itse
 
 We can attach values based on how far we are away from those dates.
 
-- `step_date_before()`
-- `step_date_after()`
-- `step_date_nearest()`
+- [`step_date_before()`](https://emilhvitfeldt.github.io/extrasteps/reference/step_date_before.html)
+- [`step_date_after()`](https://emilhvitfeldt.github.io/extrasteps/reference/step_date_after.html)
+- [`step_date_nearest()`](https://emilhvitfeldt.github.io/extrasteps/reference/step_date_nearest.html)
 
 ## `step_date_before()`
 

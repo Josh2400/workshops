@@ -497,7 +497,7 @@
 <p>Works on a singular column, using a regular expression to extract the items we want to count.</p>
 <p>Done using regular expressions, either by specifying <code>sep</code> to split the string by, or by using <code>pattern</code> to extract the items.</p>
 <p>Allows for 0 to many items in each string.</p>
-<p>Implemented as <code>step_dummy_extract()</code>.</p>
+<p>Implemented as <a href="https://recipes.tidymodels.org/reference/step_dummy_extract.html"><code>step_dummy_extract()</code></a>.</p>
 <div class="absolute" style="bottom: 0px; right: 0px; ">
 <p><a href="https://feaz-book.com/categorical-multi-dummy">FEAZ</a></p>
 </div>
@@ -803,7 +803,7 @@
 <p>Works on multiple columns, counting items across columns.</p>
 <p>It can be seen as joining multiple applications of dummy variables together.</p>
 <p>Allows for 0 to many items.</p>
-<p>Implemented as <code>step_dummy_multi_choice()</code>.</p>
+<p>Implemented as <a href="https://recipes.tidymodels.org/reference/step_dummy_multi_choice.html"><code>step_dummy_multi_choice()</code></a>.</p>
 <div class="absolute" style="bottom: 0px; right: 0px; ">
 <p><a href="https://feaz-book.com/categorical-multi-dummy">FEAZ</a></p>
 </div>
@@ -894,9 +894,9 @@
 </section>
 <section id="othering" class="slide level2">
 <h2>Othering</h2>
-<p>Both <code>step_dummy_extract()</code> and <code>step_dummy_multi_choice()</code> contain a <code>threshold</code> argument.</p>
+<p>Both <a href="https://recipes.tidymodels.org/reference/step_dummy_extract.html"><code>step_dummy_extract()</code></a> and <a href="https://recipes.tidymodels.org/reference/step_dummy_multi_choice.html"><code>step_dummy_multi_choice()</code></a> contain a <code>threshold</code> argument.</p>
 <p>This is used to combine infrequent levels together.</p>
-<p>We have a step <code>step_other()</code> that does this for nominal variables, but it doesn’t work in these cases, as it has to happen after the extraction/combination.</p>
+<p>We have a step <a href="https://recipes.tidymodels.org/reference/step_dummy_other.html"><code>step_other()</code></a> that does this for nominal variables, but it doesn’t work in these cases, as it has to happen after the extraction/combination.</p>
 </section>
 <section id="othering-1" class="slide level2">
 <h2>Othering</h2>
@@ -10991,7 +10991,7 @@ Z_1 = \phi_{11} X_1 + \phi_{21} X_2 + ... + \phi_{p1}X_p
 <blockquote>
 <p>Computational time is linear in the number of columns</p>
 </blockquote>
-<p>By default, <code>step_pca()</code> calculates all the loading vectors. And then subset them down to what you need.</p>
+<p>By default, <a href="https://recipes.tidymodels.org/reference/step_pca.html"><code>step_pca()</code></a> calculates all the loading vectors. And then subset them down to what you need.</p>
 <p>Instead, we can use a different implementation that only calculates what you need. This is what we call truncated PCA.</p>
 <div class="absolute" style="bottom: 0px; right: 0px; ">
 <p><a href="https://feaz-book.com/too-many-pca-variants">FEAZ</a></p>

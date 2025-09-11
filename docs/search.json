@@ -20472,7 +20472,7 @@
     "href": "slides/advanced-05-feature-engineering-part-two.html#step_time_event",
     "title": "5 - Feature engineering: splines, target encoding and dates",
     "section": "step_time_event() ",
-    "text": "step_time_event() \nCreate a list of rules (last slide) and pass them to the rules argument of step_time_event()\n\nrules &lt;- list(rule_1 = rule_1, rule_2 = rule_2, rule_3 = rule_3)\n\nrecipe(~arrival_date, data = hotel_rates) |&gt;\n  step_time_event(arrival_date, rules = rules)\n\n\nFEAZ"
+    "text": "step_time_event() \nCreate a list of rules (last slide) and pass them to the rules argument of extrasteps::step_time_event()\n\nrules &lt;- list(rule_1 = rule_1, rule_2 = rule_2, rule_3 = rule_3)\n\nrecipe(~arrival_date, data = hotel_rates) |&gt;\n  step_time_event(arrival_date, rules = rules)\n\n\nFEAZ"
   },
   {
     "objectID": "slides/advanced-05-feature-engineering-part-two.html#step_time_event-as-numerics",
