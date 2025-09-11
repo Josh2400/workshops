@@ -103,7 +103,7 @@ If you've ever used `geom_smooth()` you have seen splines in action.
 
 ## Splines explained
 
-A B-spline is a piecewise polynomial function.
+A spline is a piecewise polynomial function.
 
 We have 2 main parameters to worry about. Number of knots and the polynomial degree.
 
