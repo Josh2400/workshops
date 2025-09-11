@@ -96,6 +96,10 @@ Wi-Fi password
 
 . . .
 
+\+ our TA today, Edgar Ruiz!
+
+. . . 
+
 Many thanks to Davis Vaughan, Julia Silge, David Robinson, Julie Jung, Alison Hill, and Desirée De Leon for their role in creating these materials!
 
 ## Asking for help
@@ -141,9 +145,25 @@ Many thanks to Davis Vaughan, Julia Silge, David Robinson, Julie Jung, Alison Hi
 
 ### Introduce yourself to your neighbors 👋
 
-<br></br>
+## Getting the materials
 
-### <i class="fa fa-cloud"></i> Log in to Posit Cloud (free): TODO-ADD-LATER
+<br>
+
+### If you are using Posit Cloud: 
+
+<i class="fa fa-cloud"></i> Log in to Posit Cloud (free): TODO-ADD-LATER
+
+<br> 
+
+### If you are working locally: 
+
+```r
+# local download
+usethis::use_course("tidymodels/workshops", destdir = "some_path")
+
+# or fork via
+usethis::create_from_github("tidymodels/workshops", fork = TRUE)
+```
 
 ## Let's install some packages
 
