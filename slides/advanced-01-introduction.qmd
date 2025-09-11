@@ -154,7 +154,7 @@ If you are using your own laptop instead of Posit Cloud:
 
 # Install the packages for the workshop
 pkgs <- 
-  c("almanac", "betacal", "bonsai", "C50", "Cubist", "desirability2", 
+  c("almanac", "betacal", "bonsai", "brulee", "C50", "Cubist", "desirability2", 
     "dimRed", "earth", "embed", "extrasteps", "finetune", "igraph", 
     "important", "irlba", "kknn", "lightgbm", "lme4", "mirai", "parallelly", 
     "plumber", "probably", "RANN", "rpart", "RSpectra", "rules", 
@@ -461,7 +461,7 @@ countdown::countdown(minutes = 5, id = "change-engine")
 
 ```{r pkg-list, echo = FALSE}
 pkgs <- 
-  c("almanac", "betacal", "bonsai", "C50", "Cubist", "desirability2", 
+  c("almanac", "betacal", "bonsai", "brulee", "C50", "Cubist", "desirability2", 
     "dimRed", "earth", "embed", "extrasteps", "finetune", "igraph", 
     "important", "irlba", "kknn", "lightgbm", "lme4", "mirai", "parallelly", 
     "plumber", "probably", "RANN", "rpart", "RSpectra", "rules", 
