@@ -101,7 +101,7 @@ Mostly needed with linear models, but it should rarely hurt to use it.
 
 ## Splines explained
 
-A B-spline is a piecewise polynomial function.
+A spline is a piecewise polynomial function.
 
 We have 2 main parameters to worry about. Number of knots and the polynomial degree.
 
