@@ -20234,7 +20234,7 @@
     "href": "slides/advanced-05-feature-engineering-part-two.html#splines-1",
     "title": "5 - Feature engineering: splines, target encoding and dates",
     "section": "Splines",
-    "text": "Splines\nIt is a way to transform a single numeric predictor into multiple numeric predictors, with the hope that the new numeric predictors are more linearly related to the outcome.\nMostly needed with linear models, but it should rarely hurt to use it.\n\nFEAZ FES"
+    "text": "Splines\nIt is a way to transform a single numeric predictor into multiple numeric predictors, with the hope that the new numeric predictors are more linearly related to the outcome.\nMostly needed with linear models, but it should rarely hurt to use it.\nIf you’ve ever used geom_smooth() you have seen splines in action.\n\nFEAZ FES"
   },
   {
     "objectID": "slides/advanced-05-feature-engineering-part-two.html#splines-explained",

@@ -95,6 +95,8 @@ It is a way to transform a single numeric predictor into multiple numeric predic
 
 Mostly needed with linear models, but it should rarely hurt to use it.
 
+If you've ever used `geom_smooth()` you have seen splines in action.
+
 ::: {.absolute bottom=0 right=0}
 [FEAZ](https://feaz-book.com/numeric-splines) [FES](http://www.feat.engineering/numeric-one-to-many)
 :::
