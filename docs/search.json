@@ -7963,7 +7963,7 @@
     "href": "slides/annotations.html#different-types-of-grids",
     "title": "Annotations",
     "section": "Different types of grids",
-    "text": "Different types of grids\nMore on space-filling designs in Chapters 4 and 5 of Surrogates: Gaussian process modeling, design, and optimization for the applied sciences.\nIn the next version of tune (version 1.3.0) an improved set of space-filling designs will be the first choice if you ask for an automated grid."
+    "text": "Different types of grids\nMore on space-filling designs in Chapters 4 and 5 of Surrogates: Gaussian process modeling, design, and optimization for the applied sciences.\nThese designs also scale well as the number of tuning parameters grows. They are designed to fill the predictor space efficiently."
   },
   {
     "objectID": "slides/annotations.html#update-parameter-ranges",
@@ -9972,7 +9972,7 @@
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#dangers-of-overfitting-3",
     "title": "4 - Evaluating models",
     "section": "Dangers of overfitting ⚠️ ",
-    "text": "Dangers of overfitting ⚠️ \n\ntree_fit %&gt;%\n  augment(frog_train)\n#&gt; # A tibble: 456 × 6\n#&gt;    treatment  reflex   age t_o_d     latency .pred\n#&gt;    &lt;chr&gt;      &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt; &lt;dbl&gt;\n#&gt;  1 control    full    5.42 morning        33  39.8\n#&gt;  2 control    full    5.38 morning        19  66.7\n#&gt;  3 control    full    5.38 morning         2  66.7\n#&gt;  4 control    full    5.44 morning        39  39.8\n#&gt;  5 control    full    5.41 morning        42  39.8\n#&gt;  6 control    full    4.75 afternoon      20  59.8\n#&gt;  7 control    full    4.95 night          31  83.1\n#&gt;  8 control    full    5.42 morning        21  39.8\n#&gt;  9 gentamicin full    5.39 morning        30  64.6\n#&gt; 10 control    full    4.55 afternoon      43 174. \n#&gt; # … with 446 more rows\n#&gt; # ℹ Use `print(n = ...)` to see more rows\n\nWe call this “resubstitution” or “repredicting the training set”"
+    "text": "Dangers of overfitting ⚠️ \n\ntree_fit %&gt;%\n  augment(frog_train)\n#&gt; # A tibble: 456 × 7\n#&gt;    .pred   .resid treatment  reflex   age t_o_d     latency\n#&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;      &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;\n#&gt;  1  39.8   -6.85  control    full    5.42 morning        33\n#&gt;  2  66.7  -47.7   control    full    5.38 morning        19\n#&gt;  3  66.7  -64.7   control    full    5.38 morning         2\n#&gt;  4  39.8   -0.848 control    full    5.44 morning        39\n#&gt;  5  39.8    2.15  control    full    5.41 morning        42\n#&gt;  6  59.8  -39.8   control    full    4.75 afternoon      20\n#&gt;  7  83.1  -52.1   control    full    4.95 night          31\n#&gt;  8  39.8  -18.8   control    full    5.42 morning        21\n#&gt;  9  64.6  -34.6   gentamicin full    5.39 morning        30\n#&gt; 10 174.  -131.    control    full    4.55 afternoon      43\n#&gt; # ℹ 446 more rows\n\nWe call this “resubstitution” or “repredicting the training set”"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#dangers-of-overfitting-4",
@@ -10000,7 +10000,7 @@
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#your-turn",
     "title": "4 - Evaluating models",
     "section": "Your turn",
-    "text": "Your turn\n\nUse augment() and metrics() to compute a regression metric like mae().\nCompute the metrics for both training and testing data.\nNotice the evidence of overfitting! ⚠️\n\n\n\n05:00"
+    "text": "Your turn\n\nUse augment() and metrics() to compute a regression metric like mae().\nCompute the metrics for both training and testing data.\nNotice the evidence of overfitting! ⚠️\n\n\n\n−+\n05:00"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#dangers-of-overfitting-7",
@@ -10028,7 +10028,7 @@
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#your-turn-1",
     "title": "4 - Evaluating models",
     "section": "Your turn",
-    "text": "Your turn\n\nIf we use 10 folds, what percent of the training data\n\nends up in analysis\nends up in assessment\n\nfor each fold?\n\n\n\n\n03:00"
+    "text": "Your turn\n\nIf we use 10 folds, what percent of the training data\n\nends up in analysis\nends up in assessment\n\nfor each fold?\n\n\n\n\n−+\n03:00"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#cross-validation-2",
@@ -10070,14 +10070,14 @@
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#fit-our-model-to-the-resamples",
     "title": "4 - Evaluating models",
     "section": "Fit our model to the resamples",
-    "text": "Fit our model to the resamples\n\ntree_res &lt;- fit_resamples(tree_wflow, frog_folds)\ntree_res\n#&gt; # Resampling results\n#&gt; # 10-fold cross-validation using stratification \n#&gt; # A tibble: 10 × 4\n#&gt;    splits           id     .metrics         .notes          \n#&gt;    &lt;list&gt;           &lt;chr&gt;  &lt;list&gt;           &lt;list&gt;          \n#&gt;  1 &lt;split [408/48]&gt; Fold01 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;\n#&gt;  2 &lt;split [408/48]&gt; Fold02 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;\n#&gt;  3 &lt;split [408/48]&gt; Fold03 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;\n#&gt;  4 &lt;split [409/47]&gt; Fold04 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;\n#&gt;  5 &lt;split [411/45]&gt; Fold05 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;\n#&gt;  6 &lt;split [412/44]&gt; Fold06 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;\n#&gt;  7 &lt;split [412/44]&gt; Fold07 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;\n#&gt;  8 &lt;split [412/44]&gt; Fold08 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;\n#&gt;  9 &lt;split [412/44]&gt; Fold09 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;\n#&gt; 10 &lt;split [412/44]&gt; Fold10 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;"
+    "text": "Fit our model to the resamples\n\ntree_res &lt;- fit_resamples(tree_wflow, frog_folds)\ntree_res\n#&gt; # Resampling results\n#&gt; # 10-fold cross-validation using stratification \n#&gt; # A tibble: 10 × 4\n#&gt;    splits           id     .metrics         .notes          \n#&gt;    &lt;list&gt;           &lt;chr&gt;  &lt;list&gt;           &lt;list&gt;          \n#&gt;  1 &lt;split [408/48]&gt; Fold01 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt;\n#&gt;  2 &lt;split [408/48]&gt; Fold02 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt;\n#&gt;  3 &lt;split [408/48]&gt; Fold03 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt;\n#&gt;  4 &lt;split [409/47]&gt; Fold04 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt;\n#&gt;  5 &lt;split [411/45]&gt; Fold05 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt;\n#&gt;  6 &lt;split [412/44]&gt; Fold06 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt;\n#&gt;  7 &lt;split [412/44]&gt; Fold07 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt;\n#&gt;  8 &lt;split [412/44]&gt; Fold08 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt;\n#&gt;  9 &lt;split [412/44]&gt; Fold09 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt;\n#&gt; 10 &lt;split [412/44]&gt; Fold10 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt;"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#evaluating-model-performance",
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#evaluating-model-performance",
     "title": "4 - Evaluating models",
     "section": "Evaluating model performance ",
-    "text": "Evaluating model performance \n\ntree_res %&gt;%\n  collect_metrics()\n#&gt; # A tibble: 2 × 6\n#&gt;   .metric .estimator   mean     n std_err .config             \n#&gt;   &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               \n#&gt; 1 rmse    standard   59.6      10  2.31   Preprocessor1_Model1\n#&gt; 2 rsq     standard    0.305    10  0.0342 Preprocessor1_Model1\n\n\nWe can reliably measure performance using only the training data 🎉"
+    "text": "Evaluating model performance \n\ntree_res %&gt;%\n  collect_metrics()\n#&gt; # A tibble: 2 × 6\n#&gt;   .metric .estimator   mean     n std_err .config        \n#&gt;   &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;          \n#&gt; 1 rmse    standard   59.6      10  2.31   pre0_mod0_post0\n#&gt; 2 rsq     standard    0.305    10  0.0342 pre0_mod0_post0\n\n\nWe can reliably measure performance using only the training data 🎉"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#comparing-metrics",
@@ -10091,7 +10091,7 @@
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#evaluating-model-performance-1",
     "title": "4 - Evaluating models",
     "section": "Evaluating model performance ",
-    "text": "Evaluating model performance \n\n# Save the assessment set results\nctrl_frog &lt;- control_resamples(save_pred = TRUE)\ntree_res &lt;- fit_resamples(tree_wflow, frog_folds, control = ctrl_frog)\n\ntree_preds &lt;- collect_predictions(tree_res)\ntree_preds\n#&gt; # A tibble: 456 × 5\n#&gt;    id     .pred  .row latency .config             \n#&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               \n#&gt;  1 Fold01  39.6     1      33 Preprocessor1_Model1\n#&gt;  2 Fold01  72.1     3       2 Preprocessor1_Model1\n#&gt;  3 Fold01  63.8     9      30 Preprocessor1_Model1\n#&gt;  4 Fold01  72.1    13      46 Preprocessor1_Model1\n#&gt;  5 Fold01  43.3    28      11 Preprocessor1_Model1\n#&gt;  6 Fold01  61.7    35      41 Preprocessor1_Model1\n#&gt;  7 Fold01  39.6    51      43 Preprocessor1_Model1\n#&gt;  8 Fold01 134.     70      20 Preprocessor1_Model1\n#&gt;  9 Fold01  70.6    74      21 Preprocessor1_Model1\n#&gt; 10 Fold01  39.6   106      14 Preprocessor1_Model1\n#&gt; # … with 446 more rows\n#&gt; # ℹ Use `print(n = ...)` to see more rows"
+    "text": "Evaluating model performance \n\n# Save the assessment set results\nctrl_frog &lt;- control_resamples(save_pred = TRUE)\ntree_res &lt;- fit_resamples(tree_wflow, frog_folds, control = ctrl_frog)\n\ntree_preds &lt;- collect_predictions(tree_res)\ntree_preds\n#&gt; # A tibble: 456 × 5\n#&gt;    .pred id     latency  .row .config        \n#&gt;    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;          \n#&gt;  1  39.6 Fold01      33     1 pre0_mod0_post0\n#&gt;  2  72.1 Fold01       2     3 pre0_mod0_post0\n#&gt;  3  63.8 Fold01      30     9 pre0_mod0_post0\n#&gt;  4  72.1 Fold01      46    13 pre0_mod0_post0\n#&gt;  5  43.3 Fold01      11    28 pre0_mod0_post0\n#&gt;  6  61.7 Fold01      41    35 pre0_mod0_post0\n#&gt;  7  39.6 Fold01      43    51 pre0_mod0_post0\n#&gt;  8 134.  Fold01      20    70 pre0_mod0_post0\n#&gt;  9  70.6 Fold01      21    74 pre0_mod0_post0\n#&gt; 10  39.6 Fold01      14   106 pre0_mod0_post0\n#&gt; # ℹ 446 more rows"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#section-3",
@@ -10105,7 +10105,7 @@
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#where-are-the-fitted-models",
     "title": "4 - Evaluating models",
     "section": "Where are the fitted models? ",
-    "text": "Where are the fitted models? \n\ntree_res\n#&gt; # Resampling results\n#&gt; # 10-fold cross-validation using stratification \n#&gt; # A tibble: 10 × 5\n#&gt;    splits           id     .metrics         .notes           .predictions     \n#&gt;    &lt;list&gt;           &lt;chr&gt;  &lt;list&gt;           &lt;list&gt;           &lt;list&gt;           \n#&gt;  1 &lt;split [408/48]&gt; Fold01 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  2 &lt;split [408/48]&gt; Fold02 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  3 &lt;split [408/48]&gt; Fold03 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  4 &lt;split [409/47]&gt; Fold04 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [47 × 4]&gt;\n#&gt;  5 &lt;split [411/45]&gt; Fold05 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [45 × 4]&gt;\n#&gt;  6 &lt;split [412/44]&gt; Fold06 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  7 &lt;split [412/44]&gt; Fold07 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  8 &lt;split [412/44]&gt; Fold08 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  9 &lt;split [412/44]&gt; Fold09 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;\n#&gt; 10 &lt;split [412/44]&gt; Fold10 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;\n\n\n🗑️"
+    "text": "Where are the fitted models? \n\ntree_res\n#&gt; # Resampling results\n#&gt; # 10-fold cross-validation using stratification \n#&gt; # A tibble: 10 × 5\n#&gt;    splits           id     .metrics         .notes           .predictions     \n#&gt;    &lt;list&gt;           &lt;chr&gt;  &lt;list&gt;           &lt;list&gt;           &lt;list&gt;           \n#&gt;  1 &lt;split [408/48]&gt; Fold01 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  2 &lt;split [408/48]&gt; Fold02 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  3 &lt;split [408/48]&gt; Fold03 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  4 &lt;split [409/47]&gt; Fold04 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [47 × 4]&gt;\n#&gt;  5 &lt;split [411/45]&gt; Fold05 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [45 × 4]&gt;\n#&gt;  6 &lt;split [412/44]&gt; Fold06 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  7 &lt;split [412/44]&gt; Fold07 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  8 &lt;split [412/44]&gt; Fold08 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  9 &lt;split [412/44]&gt; Fold09 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;\n#&gt; 10 &lt;split [412/44]&gt; Fold10 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;\n\n\n🗑️"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#bootstrapping",
@@ -10119,14 +10119,14 @@
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#bootstrapping-1",
     "title": "4 - Evaluating models",
     "section": "Bootstrapping ",
-    "text": "Bootstrapping \n\nset.seed(3214)\nbootstraps(frog_train)\n#&gt; # Bootstrap sampling \n#&gt; # A tibble: 25 × 2\n#&gt;    splits            id         \n#&gt;    &lt;list&gt;            &lt;chr&gt;      \n#&gt;  1 &lt;split [456/163]&gt; Bootstrap01\n#&gt;  2 &lt;split [456/166]&gt; Bootstrap02\n#&gt;  3 &lt;split [456/173]&gt; Bootstrap03\n#&gt;  4 &lt;split [456/177]&gt; Bootstrap04\n#&gt;  5 &lt;split [456/166]&gt; Bootstrap05\n#&gt;  6 &lt;split [456/163]&gt; Bootstrap06\n#&gt;  7 &lt;split [456/164]&gt; Bootstrap07\n#&gt;  8 &lt;split [456/165]&gt; Bootstrap08\n#&gt;  9 &lt;split [456/170]&gt; Bootstrap09\n#&gt; 10 &lt;split [456/177]&gt; Bootstrap10\n#&gt; # … with 15 more rows\n#&gt; # ℹ Use `print(n = ...)` to see more rows"
+    "text": "Bootstrapping \n\nset.seed(3214)\nbootstraps(frog_train)\n#&gt; # Bootstrap sampling \n#&gt; # A tibble: 25 × 2\n#&gt;    splits            id         \n#&gt;    &lt;list&gt;            &lt;chr&gt;      \n#&gt;  1 &lt;split [456/163]&gt; Bootstrap01\n#&gt;  2 &lt;split [456/166]&gt; Bootstrap02\n#&gt;  3 &lt;split [456/173]&gt; Bootstrap03\n#&gt;  4 &lt;split [456/177]&gt; Bootstrap04\n#&gt;  5 &lt;split [456/166]&gt; Bootstrap05\n#&gt;  6 &lt;split [456/163]&gt; Bootstrap06\n#&gt;  7 &lt;split [456/164]&gt; Bootstrap07\n#&gt;  8 &lt;split [456/165]&gt; Bootstrap08\n#&gt;  9 &lt;split [456/170]&gt; Bootstrap09\n#&gt; 10 &lt;split [456/177]&gt; Bootstrap10\n#&gt; # ℹ 15 more rows"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#your-turn-2",
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#your-turn-2",
     "title": "4 - Evaluating models",
     "section": "Your turn",
-    "text": "Your turn\n\nCreate:\n\nbootstrap folds (change times from the default)\nvalidation set (use the reference guide to find the function)\n\nDon’t forget to set a seed when you resample!\n\n\n\n05:00"
+    "text": "Your turn\n\nCreate:\n\nbootstrap folds (change times from the default)\nvalidation set (use the reference guide to find the function)\n\nDon’t forget to set a seed when you resample!\n\n\n\n−+\n05:00"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#bootstrapping-2",
@@ -10168,14 +10168,14 @@
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#your-turn-3",
     "title": "4 - Evaluating models",
     "section": "Your turn",
-    "text": "Your turn\n\nUse fit_resamples() and rf_wflow to:\n\nkeep predictions\ncompute metrics\nplot true vs. predicted values\n\n\n\n\n08:00"
+    "text": "Your turn\n\nUse fit_resamples() and rf_wflow to:\n\nkeep predictions\ncompute metrics\nplot true vs. predicted values\n\n\n\n\n−+\n08:00"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#evaluating-model-performance-2",
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#evaluating-model-performance-2",
     "title": "4 - Evaluating models",
     "section": "Evaluating model performance ",
-    "text": "Evaluating model performance \n\nctrl_frog &lt;- control_resamples(save_pred = TRUE)\n\n# Random forest uses random numbers so set the seed first\n\nset.seed(2)\nrf_res &lt;- fit_resamples(rf_wflow, frog_folds, control = ctrl_frog)\ncollect_metrics(rf_res)\n#&gt; # A tibble: 2 × 6\n#&gt;   .metric .estimator   mean     n std_err .config             \n#&gt;   &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               \n#&gt; 1 rmse    standard   55.9      10  1.71   Preprocessor1_Model1\n#&gt; 2 rsq     standard    0.370    10  0.0306 Preprocessor1_Model1"
+    "text": "Evaluating model performance \n\nctrl_frog &lt;- control_resamples(save_pred = TRUE)\n\n# Random forest uses random numbers so set the seed first\n\nset.seed(2)\nrf_res &lt;- fit_resamples(rf_wflow, frog_folds, control = ctrl_frog)\ncollect_metrics(rf_res)\n#&gt; # A tibble: 2 × 6\n#&gt;   .metric .estimator   mean     n std_err .config        \n#&gt;   &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;          \n#&gt; 1 rmse    standard   55.7      10  1.77   pre0_mod0_post0\n#&gt; 2 rsq     standard    0.375    10  0.0311 pre0_mod0_post0"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#section-5",
@@ -10210,14 +10210,14 @@
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#evaluate-a-workflow-set-2",
     "title": "4 - Evaluating models",
     "section": "Evaluate a workflow set",
-    "text": "Evaluate a workflow set\n\nworkflow_set(list(latency ~ .), list(tree_spec, rf_spec)) %&gt;%\n  workflow_map(\"fit_resamples\", resamples = frog_folds) %&gt;%\n  rank_results()\n#&gt; # A tibble: 4 × 9\n#&gt;   wflow_id              .config .metric   mean std_err     n prepr…¹ model  rank\n#&gt;   &lt;chr&gt;                 &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;int&gt;\n#&gt; 1 formula_rand_forest   Prepro… rmse    55.8    1.71      10 formula rand…     1\n#&gt; 2 formula_rand_forest   Prepro… rsq      0.371  0.0301    10 formula rand…     1\n#&gt; 3 formula_decision_tree Prepro… rmse    59.6    2.31      10 formula deci…     2\n#&gt; 4 formula_decision_tree Prepro… rsq      0.305  0.0342    10 formula deci…     2\n#&gt; # … with abbreviated variable name ¹​preprocessor\n\nThe first metric of the metric set is used for ranking. Use rank_metric to change that.\n\nLots more available with workflow sets, like collect_metrics(), autoplot() methods, and more!"
+    "text": "Evaluate a workflow set\n\nworkflow_set(list(latency ~ .), list(tree_spec, rf_spec)) %&gt;%\n  workflow_map(\"fit_resamples\", resamples = frog_folds) %&gt;%\n  rank_results()\n#&gt; # A tibble: 4 × 9\n#&gt;   wflow_id         .config .metric   mean std_err     n preprocessor model  rank\n#&gt;   &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;        &lt;chr&gt; &lt;int&gt;\n#&gt; 1 formula_rand_fo… pre0_m… rmse    55.7    1.82      10 formula      rand…     1\n#&gt; 2 formula_rand_fo… pre0_m… rsq      0.375  0.0314    10 formula      rand…     1\n#&gt; 3 formula_decisio… pre0_m… rmse    59.6    2.31      10 formula      deci…     2\n#&gt; 4 formula_decisio… pre0_m… rsq      0.305  0.0342    10 formula      deci…     2\n\nThe first metric of the metric set is used for ranking. Use rank_metric to change that.\n\nLots more available with workflow sets, like collect_metrics(), autoplot() methods, and more!"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#your-turn-4",
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#your-turn-4",
     "title": "4 - Evaluating models",
     "section": "Your turn",
-    "text": "Your turn\n\nWhen do you think a workflow set would be useful?\n\n\n\n03:00"
+    "text": "Your turn\n\nWhen do you think a workflow set would be useful?\n\n\n\n−+\n03:00"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#the-final-fit",
@@ -10231,14 +10231,14 @@
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#what-is-in-final_fit",
     "title": "4 - Evaluating models",
     "section": "What is in final_fit? ",
-    "text": "What is in final_fit? \n\ncollect_metrics(final_fit)\n#&gt; # A tibble: 2 × 4\n#&gt;   .metric .estimator .estimate .config             \n#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;               \n#&gt; 1 rmse    standard      57.1   Preprocessor1_Model1\n#&gt; 2 rsq     standard       0.420 Preprocessor1_Model1\n\n\nThese are metrics computed with the test set"
+    "text": "What is in final_fit? \n\ncollect_metrics(final_fit)\n#&gt; # A tibble: 2 × 4\n#&gt;   .metric .estimator .estimate .config        \n#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;          \n#&gt; 1 rmse    standard      57.4   pre0_mod0_post0\n#&gt; 2 rsq     standard       0.414 pre0_mod0_post0\n\n\nThese are metrics computed with the test set"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#what-is-in-final_fit-1",
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#what-is-in-final_fit-1",
     "title": "4 - Evaluating models",
     "section": "What is in final_fit? ",
-    "text": "What is in final_fit? \n\ncollect_predictions(final_fit)\n#&gt; # A tibble: 116 × 5\n#&gt;    id               .pred  .row latency .config             \n#&gt;    &lt;chr&gt;            &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               \n#&gt;  1 train/test split  43.5     1      22 Preprocessor1_Model1\n#&gt;  2 train/test split 104.      3     106 Preprocessor1_Model1\n#&gt;  3 train/test split  76.2     6      39 Preprocessor1_Model1\n#&gt;  4 train/test split  42.4     8      50 Preprocessor1_Model1\n#&gt;  5 train/test split  43.5    10      63 Preprocessor1_Model1\n#&gt;  6 train/test split  43.1    14      25 Preprocessor1_Model1\n#&gt;  7 train/test split  51.5    16      48 Preprocessor1_Model1\n#&gt;  8 train/test split 160.     17      91 Preprocessor1_Model1\n#&gt;  9 train/test split  50.9    32      11 Preprocessor1_Model1\n#&gt; 10 train/test split 171.     33     109 Preprocessor1_Model1\n#&gt; # … with 106 more rows\n#&gt; # ℹ Use `print(n = ...)` to see more rows\n\n\nThese are predictions for the test set"
+    "text": "What is in final_fit? \n\ncollect_predictions(final_fit)\n#&gt; # A tibble: 116 × 5\n#&gt;    .pred id               latency  .row .config        \n#&gt;    &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;          \n#&gt;  1  44.0 train/test split      22     1 pre0_mod0_post0\n#&gt;  2 101.  train/test split     106     3 pre0_mod0_post0\n#&gt;  3  76.0 train/test split      39     6 pre0_mod0_post0\n#&gt;  4  43.1 train/test split      50     8 pre0_mod0_post0\n#&gt;  5  43.5 train/test split      63    10 pre0_mod0_post0\n#&gt;  6  43.5 train/test split      25    14 pre0_mod0_post0\n#&gt;  7  51.4 train/test split      48    16 pre0_mod0_post0\n#&gt;  8 161.  train/test split      91    17 pre0_mod0_post0\n#&gt;  9  50.6 train/test split      11    32 pre0_mod0_post0\n#&gt; 10 178.  train/test split     109    33 pre0_mod0_post0\n#&gt; # ℹ 106 more rows\n\n\nThese are predictions for the test set"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#section-6",
@@ -10252,14 +10252,14 @@
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#what-is-in-final_fit-2",
     "title": "4 - Evaluating models",
     "section": "What is in final_fit? ",
-    "text": "What is in final_fit? \n\nextract_workflow(final_fit)\n#&gt; ══ Workflow [trained] ════════════════════════════════════════════════\n#&gt; Preprocessor: Formula\n#&gt; Model: rand_forest()\n#&gt; \n#&gt; ── Preprocessor ──────────────────────────────────────────────────────\n#&gt; latency ~ .\n#&gt; \n#&gt; ── Model ─────────────────────────────────────────────────────────────\n#&gt; Ranger result\n#&gt; \n#&gt; Call:\n#&gt;  ranger::ranger(x = maybe_data_frame(x), y = y, num.trees = ~1000,      num.threads = 1, verbose = FALSE, seed = sample.int(10^5,          1)) \n#&gt; \n#&gt; Type:                             Regression \n#&gt; Number of trees:                  1000 \n#&gt; Sample size:                      456 \n#&gt; Number of independent variables:  4 \n#&gt; Mtry:                             2 \n#&gt; Target node size:                 5 \n#&gt; Variable importance mode:         none \n#&gt; Splitrule:                        variance \n#&gt; OOB prediction error (MSE):       3124.583 \n#&gt; R squared (OOB):                  0.3531813\n\n\nUse this for prediction on new data, like for deploying"
+    "text": "What is in final_fit? \n\nextract_workflow(final_fit)\n#&gt; ══ Workflow [trained] ════════════════════════════════════════════════\n#&gt; Preprocessor: Formula\n#&gt; Model: rand_forest()\n#&gt; \n#&gt; ── Preprocessor ──────────────────────────────────────────────────────\n#&gt; latency ~ .\n#&gt; \n#&gt; ── Model ─────────────────────────────────────────────────────────────\n#&gt; Ranger result\n#&gt; \n#&gt; Call:\n#&gt;  ranger::ranger(x = maybe_data_frame(x), y = y, num.trees = ~1000,      num.threads = 1, verbose = FALSE, seed = sample.int(10^5,          1)) \n#&gt; \n#&gt; Type:                             Regression \n#&gt; Number of trees:                  1000 \n#&gt; Sample size:                      456 \n#&gt; Number of independent variables:  4 \n#&gt; Mtry:                             2 \n#&gt; Target node size:                 5 \n#&gt; Variable importance mode:         none \n#&gt; Splitrule:                        variance \n#&gt; OOB prediction error (MSE):       3099.566 \n#&gt; R squared (OOB):                  0.3583602\n\n\nUse this for prediction on new data, like for deploying"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#your-turn-5",
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#your-turn-5",
     "title": "4 - Evaluating models",
     "section": "Your turn",
-    "text": "Your turn\n\nEnd of the day discussion!\nWhich model do you think you would decide to use?\nWhat surprised you the most?\nWhat is one thing you are looking forward to for tomorrow?\n\n\n\n05:00"
+    "text": "Your turn\n\nEnd of the day discussion!\nWhich model do you think you would decide to use?\nWhat surprised you the most?\nWhat is one thing you are looking forward to for tomorrow?\n\n\n\n−+\n05:00"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#why-choose-just-one-final_fit",
@@ -10329,7 +10329,7 @@
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#building-a-model-stack-3",
     "title": "4 - Evaluating models",
     "section": "Building a model stack ",
-    "text": "Building a model stack \n\nlr_res\n#&gt; # Resampling results\n#&gt; # 10-fold cross-validation using stratification \n#&gt; # A tibble: 10 × 5\n#&gt;    splits           id     .metrics         .notes           .predictions     \n#&gt;    &lt;list&gt;           &lt;chr&gt;  &lt;list&gt;           &lt;list&gt;           &lt;list&gt;           \n#&gt;  1 &lt;split [408/48]&gt; Fold01 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  2 &lt;split [408/48]&gt; Fold02 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  3 &lt;split [408/48]&gt; Fold03 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  4 &lt;split [409/47]&gt; Fold04 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [47 × 4]&gt;\n#&gt;  5 &lt;split [411/45]&gt; Fold05 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [45 × 4]&gt;\n#&gt;  6 &lt;split [412/44]&gt; Fold06 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  7 &lt;split [412/44]&gt; Fold07 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  8 &lt;split [412/44]&gt; Fold08 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  9 &lt;split [412/44]&gt; Fold09 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;\n#&gt; 10 &lt;split [412/44]&gt; Fold10 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;"
+    "text": "Building a model stack \n\nlr_res\n#&gt; # Resampling results\n#&gt; # 10-fold cross-validation using stratification \n#&gt; # A tibble: 10 × 5\n#&gt;    splits           id     .metrics         .notes           .predictions     \n#&gt;    &lt;list&gt;           &lt;chr&gt;  &lt;list&gt;           &lt;list&gt;           &lt;list&gt;           \n#&gt;  1 &lt;split [408/48]&gt; Fold01 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  2 &lt;split [408/48]&gt; Fold02 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  3 &lt;split [408/48]&gt; Fold03 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  4 &lt;split [409/47]&gt; Fold04 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [47 × 4]&gt;\n#&gt;  5 &lt;split [411/45]&gt; Fold05 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [45 × 4]&gt;\n#&gt;  6 &lt;split [412/44]&gt; Fold06 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  7 &lt;split [412/44]&gt; Fold07 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  8 &lt;split [412/44]&gt; Fold08 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  9 &lt;split [412/44]&gt; Fold09 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;\n#&gt; 10 &lt;split [412/44]&gt; Fold10 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#building-a-model-stack-4",
@@ -10343,7 +10343,7 @@
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#building-a-model-stack-5",
     "title": "4 - Evaluating models",
     "section": "Building a model stack ",
-    "text": "Building a model stack \n\nrf_res\n#&gt; # Resampling results\n#&gt; # 10-fold cross-validation using stratification \n#&gt; # A tibble: 10 × 5\n#&gt;    splits           id     .metrics         .notes           .predictions     \n#&gt;    &lt;list&gt;           &lt;chr&gt;  &lt;list&gt;           &lt;list&gt;           &lt;list&gt;           \n#&gt;  1 &lt;split [408/48]&gt; Fold01 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  2 &lt;split [408/48]&gt; Fold02 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  3 &lt;split [408/48]&gt; Fold03 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  4 &lt;split [409/47]&gt; Fold04 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [47 × 4]&gt;\n#&gt;  5 &lt;split [411/45]&gt; Fold05 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [45 × 4]&gt;\n#&gt;  6 &lt;split [412/44]&gt; Fold06 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  7 &lt;split [412/44]&gt; Fold07 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  8 &lt;split [412/44]&gt; Fold08 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  9 &lt;split [412/44]&gt; Fold09 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;\n#&gt; 10 &lt;split [412/44]&gt; Fold10 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt; &lt;tibble [44 × 4]&gt;"
+    "text": "Building a model stack \n\nrf_res\n#&gt; # Resampling results\n#&gt; # 10-fold cross-validation using stratification \n#&gt; # A tibble: 10 × 5\n#&gt;    splits           id     .metrics         .notes           .predictions     \n#&gt;    &lt;list&gt;           &lt;chr&gt;  &lt;list&gt;           &lt;list&gt;           &lt;list&gt;           \n#&gt;  1 &lt;split [408/48]&gt; Fold01 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  2 &lt;split [408/48]&gt; Fold02 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  3 &lt;split [408/48]&gt; Fold03 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [48 × 4]&gt;\n#&gt;  4 &lt;split [409/47]&gt; Fold04 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [47 × 4]&gt;\n#&gt;  5 &lt;split [411/45]&gt; Fold05 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [45 × 4]&gt;\n#&gt;  6 &lt;split [412/44]&gt; Fold06 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  7 &lt;split [412/44]&gt; Fold07 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  8 &lt;split [412/44]&gt; Fold08 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;\n#&gt;  9 &lt;split [412/44]&gt; Fold09 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;\n#&gt; 10 &lt;split [412/44]&gt; Fold10 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble [44 × 4]&gt;"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#building-a-model-stack-6",
@@ -10364,14 +10364,14 @@
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#building-a-model-stack-8",
     "title": "4 - Evaluating models",
     "section": "Building a model stack ",
-    "text": "Building a model stack \n\nEvaluate how to combine their predictions\n\n\nfrog_st_res &lt;- frog_st %&gt;%\n  blend_predictions()\n\nfrog_st_res\n#&gt; # A tibble: 2 × 3\n#&gt;   member     type        weight\n#&gt;   &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;\n#&gt; 1 rf_res_1_1 rand_forest  0.635\n#&gt; 2 lr_res_1_1 linear_reg   0.344"
+    "text": "Building a model stack \n\nEvaluate how to combine their predictions\n\n\nfrog_st_res &lt;- frog_st %&gt;%\n  blend_predictions()\n\nfrog_st_res\n#&gt; # A tibble: 2 × 3\n#&gt;   member                type        weight\n#&gt;   &lt;chr&gt;                 &lt;chr&gt;        &lt;dbl&gt;\n#&gt; 1 rf_respre0_mod0_post0 rand_forest  0.650\n#&gt; 2 lr_respre0_mod0_post0 linear_reg   0.325"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#building-a-model-stack-9",
     "href": "archive/2022-07-RStudio-conf/04-evaluating-models.html#building-a-model-stack-9",
     "title": "4 - Evaluating models",
     "section": "Building a model stack ",
-    "text": "Building a model stack \n\nFit candidate ensemble members with non-zero stacking coefficients\n\n\nfrog_st_res &lt;- frog_st_res %&gt;%\n  fit_members()\n\nfrog_st_res\n#&gt; # A tibble: 2 × 3\n#&gt;   member     type        weight\n#&gt;   &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;\n#&gt; 1 rf_res_1_1 rand_forest  0.635\n#&gt; 2 lr_res_1_1 linear_reg   0.344"
+    "text": "Building a model stack \n\nFit candidate ensemble members with non-zero stacking coefficients\n\n\nfrog_st_res &lt;- frog_st_res %&gt;%\n  fit_members()\n\nfrog_st_res\n#&gt; # A tibble: 2 × 3\n#&gt;   member                type        weight\n#&gt;   &lt;chr&gt;                 &lt;chr&gt;        &lt;dbl&gt;\n#&gt; 1 rf_respre0_mod0_post0 rand_forest  0.650\n#&gt; 2 lr_respre0_mod0_post0 linear_reg   0.325"
   },
   {
     "objectID": "archive/2022-07-RStudio-conf/04-evaluating-models.html#building-a-model-stack-10",
@@ -20522,5 +20522,33 @@
     "title": "5 - Feature engineering: splines, target encoding and dates",
     "section": "Datetime features",
     "text": "Datetime features\nAvoid crafting datetime features by hand if at all possible.\nDealing with uneven month lengths, leap days (leap seconds)\nOr tried to define any event that doesn’t land on the same day of the week or date each year.\n\nThe first Sunday after the first full moon on or after the vernal equinox"
+  },
+  {
+    "objectID": "slides/annotations.html#extract-and-update-parameters",
+    "href": "slides/annotations.html#extract-and-update-parameters",
+    "title": "Annotations",
+    "section": "Extract and update parameters",
+    "text": "Extract and update parameters\nIn about 90% of the cases, the dials function that you use to update the parameter range has the same name as the argument. For example, if you were to update the mtry parameter in a random forests model, the code would look like\n\nparameter_object |&gt; \n  update(mtry = mtry(c(1, 100)))\n\nThere are some cases where the parameter function, or its associated values, are different from the argument name.\nFor example, with step_spline_naturall(), we might want to tune the deg_free argument (for the degrees of freedom of a spline function. ). In this case, the argument name is deg_free but we update it with spline_degree().\ndeg_free represents the general concept of degrees of freedom and could be associated with many different things. For example, if we ever had an argument that was the number of degrees of freedom for a \\(t\\) distribution, we would call that argument deg_free.\nFor splines, we probably want a wider range for the degrees of freedom. We made a specialized function called spline_degree() to be used in these cases.\nHow can you tell when this happens? There is a helper function called tunable() and that gives information on how we make the default ranges for parameters. There is a column in these objects names call_info:\n\nlibrary(tidymodels)\nns_tunable &lt;- \n  recipe(mpg ~ ., data = mtcars) |&gt; \n  step_spline_natural(dis, deg_free = tune()) |&gt; \n  tunable()\n\nns_tunable\n#&gt; # A tibble: 1 × 5\n#&gt;   name     call_info        source component           component_id        \n#&gt;   &lt;chr&gt;    &lt;list&gt;           &lt;chr&gt;  &lt;chr&gt;               &lt;chr&gt;               \n#&gt; 1 deg_free &lt;named list [3]&gt; recipe step_spline_natural spline_natural_P1Tjg\nns_tunable$call_info\n#&gt; [[1]]\n#&gt; [[1]]$pkg\n#&gt; [1] \"dials\"\n#&gt; \n#&gt; [[1]]$fun\n#&gt; [1] \"spline_degree\"\n#&gt; \n#&gt; [[1]]$range\n#&gt; [1]  2 15"
+  },
+  {
+    "objectID": "slides/annotations.html#grid-search",
+    "href": "slides/annotations.html#grid-search",
+    "title": "Annotations",
+    "section": "Grid Search",
+    "text": "Grid Search\nThere might be some warnings that\n\n“Early stopping occurred at epoch 3 due to numerical overflow of the loss function.”\n\ntorch can be very aggressive about moving in the direction of the gradient. In some cases, it moves to a space where the gradient is not well-behaved (e.g., flat in multiple directions, saddle point, etc).\nThis can cause abnormally large parameter values with magnitudes larger than double precision variables can hold.\nIn this case, brulee stops the optimization and returns the parameters from the last best iteration."
+  },
+  {
+    "objectID": "slides/annotations.html#running-in-parallel",
+    "href": "slides/annotations.html#running-in-parallel",
+    "title": "Annotations",
+    "section": "Running in parallel",
+    "text": "Running in parallel\nWe usually leave one or two cores available to work with when we run in parallel.\nIf you are using an HPC system, be careful to use only the cores allocated to you.\nAlso, memory is duplicated for each worker. If your main R session is using 1GB of memory, using 10 workers requires 11GB.\nComparing these methods:\n\nThey usually perform about the same.\nfuture is more mature and is geared towards users and developers.\nmirai contains its own queuing system and can be more efficient in allocating work."
+  },
+  {
+    "objectID": "slides/annotations.html#isomap-with-recipes",
+    "href": "slides/annotations.html#isomap-with-recipes",
+    "title": "Annotations",
+    "section": "isomap with recipes",
+    "text": "isomap with recipes\nThe results from isomap unlike UMAP is not able to be distorted in the same way. Here the number of nieghbors change between the charts. Each of the charts are an application of isomap on the same completely random data. The points are in different locations but none of the charts appear to show any patterns.\n\n#&gt; Warning: The `x` argument of `as_tibble.matrix()` must have unique column\n#&gt; names if `.name_repair` is omitted as of tibble 2.0.0.\n#&gt; ℹ Using compatibility `.name_repair`.\n#&gt; 2025-09-11 12:44:46.88998: Isomap START\n#&gt; 2025-09-11 12:44:46.890359: constructing knn graph\n#&gt; 2025-09-11 12:44:46.901975: calculating geodesic distances\n#&gt; 2025-09-11 12:44:46.903437: Classical Scaling\n#&gt; 2025-09-11 12:44:46.997862: Isomap START\n#&gt; 2025-09-11 12:44:47.000672: constructing knn graph\n#&gt; 2025-09-11 12:44:47.008607: calculating geodesic distances\n#&gt; 2025-09-11 12:44:47.009998: Classical Scaling\n#&gt; 2025-09-11 12:44:47.094436: Isomap START\n#&gt; 2025-09-11 12:44:47.094649: constructing knn graph\n#&gt; 2025-09-11 12:44:47.102851: calculating geodesic distances\n#&gt; 2025-09-11 12:44:47.104791: Classical Scaling\n#&gt; 2025-09-11 12:44:47.191248: Isomap START\n#&gt; 2025-09-11 12:44:47.191422: constructing knn graph\n#&gt; 2025-09-11 12:44:47.199814: calculating geodesic distances\n#&gt; 2025-09-11 12:44:47.202704: Classical Scaling"
   }
 ]

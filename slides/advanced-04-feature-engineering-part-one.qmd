@@ -1104,7 +1104,7 @@ A very high-level description of the Isomap algorithm is given below.
 :::
 :::
 
-## isomap with recipes `r hexes("recipes")`
+## isomap with recipes `r hexes("recipes")` {.annotation}
 
 ```{r}
 #| label: step-isomap
@@ -1116,3 +1116,5 @@ recipe(mpg ~ ., data = mtcars) |>
   prep() |>
   bake(NULL)
 ```
+
+
