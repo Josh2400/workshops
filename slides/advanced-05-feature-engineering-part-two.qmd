@@ -254,7 +254,7 @@ data_splines |>
 ## Splines as numbers
 
 ```{r}
-#| label: tbl-spline-numbers
+#| label: spline-numbers
 #| echo: false
 set.seed(1234)
 data_splines |>
@@ -612,7 +612,7 @@ countdown(minutes = 5, id = "explore-arrival_date")
 using `step_date( features = c("year", "month", "dow", "decimal", "mday", "doy", "week", "semester", "quarter"))`
 
 ```{r}
-#| label: tbl-step-date
+#| label: step-date
 #| echo: false
 recipe(~arrival_date, data = hotel_rates) |>
   step_date(
@@ -641,7 +641,7 @@ recipe(~arrival_date, data = hotel_rates) |>
 Adding `label = FALSE`
 
 ```{r}
-#| label: tbl-step-date-label-false
+#| label: step-date-label-false-table
 #| echo: false
 recipe(~arrival_date, data = hotel_rates) |>
   step_date(
@@ -691,7 +691,7 @@ countdown(minutes = 3, id = "step_date-step_holiday-arrival_date")
 ## dates as numerics
 
 ```{r}
-#| label: step-date
+#| label: step-date-label-false
 #| echo: false
 recipe(~arrival_date, data = hotel_rates) |>
   step_date(

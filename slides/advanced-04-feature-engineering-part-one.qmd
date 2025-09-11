@@ -117,7 +117,7 @@ leaf_data |>
 (technically one-hot encoding)
 
 ```{r}
-#| label: tbl-leaf-edges-dummies
+#| label: leaf-edges-dummies
 #| echo: false
 recipe(~edge, data = leaf_data) |>
   step_dummy(edge, one_hot = TRUE) |>
@@ -242,7 +242,7 @@ Using
 ### Result
 
 ```{r}
-#| label: tbl-leaf-dummy-extract
+#| label: leaf-dummy-extract
 #| echo: false
 leaf_data |>
   count(edge) |>
@@ -296,7 +296,7 @@ Using
 ### Result
 
 ```{r}
-#| label: tbl-tate-medium-dummy-extract
+#| label: tate-medium-dummy-extract
 #| echo: false
 medium_examples |>
   recipe() |>
@@ -348,7 +348,7 @@ Using
 ### Result
 
 ```{r}
-#| label: tbl-better-tate-medium-dummy-extract
+#| label: better-tate-medium-dummy-extract
 #| echo: false
 medium_examples |>
   recipe() |>
@@ -399,7 +399,7 @@ Using
 ### Result
 
 ```{r}
-#| label: tbl-colors-dummy-extract
+#| label: colors-dummy-extract
 #| echo: false
 color_examples |>
   recipe() |>
@@ -436,7 +436,7 @@ Implemented as `step_dummy_multi_choice()`.
 ### Input
 
 ```{r}
-#| label: tbl-lang-sample
+#| label: lang-sample
 #| echo: false
 #| comment: ""
 values <- tribble(
@@ -456,7 +456,7 @@ knitr::kable(values)
 ### Result
 
 ```{r}
-#| label: tbl-lang-dummy-multi-choice
+#| label: lang-dummy-multi-choice
 #| echo: false
 recipe(~., data = values) |>
   step_dummy_multi_choice(starts_with("lang")) |>
@@ -482,7 +482,7 @@ We have a step `step_other()` that does this for nominal variables, but it doesn
 `threshold = 0` produces 1217 columns.
 
 ```{r}
-#| label: tbl-medium-dummy-extract-threshold-0
+#| label: medium-dummy-extract-threshold-0
 #| echo: false
 recipe(~ medium, data = tate_text) |>
   step_dummy_extract(medium, sep = "(, )|( and )|( on )", threshold = 0) |>
@@ -498,7 +498,7 @@ recipe(~ medium, data = tate_text) |>
 `threshold = 0.05` produces 11 columns.
 
 ```{r}
-#| label: tbl-medium-dummy-extract-threshold-0.05
+#| label: medium-dummy-extract-threshold-0.05
 #| echo: false
 recipe(~ medium, data = tate_text) |>
   step_dummy_extract(medium, sep = "(, )|( and )|( on )", threshold = 0.05) |>
