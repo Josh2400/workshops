@@ -19807,7 +19807,7 @@
     "href": "slides/advanced-04-feature-engineering-part-one.html#leaf-edges-dummies",
     "title": "4 - Feature engineering: dummies and embeddings",
     "section": "Leaf edges dummies",
-    "text": "Leaf edges dummies\n(technically one-hot encoding)\n\n\n\n\n\nX\ndenate\nlobed\nlobed..smooth\nlobed..toothed\nsmooth\ntoothed\n\n\n\n\n0\n0\n0\n0\n1\n0\n0\n\n\n0\n0\n0\n0\n0\n0\n1\n\n\n0\n0\n0\n0\n0\n1\n0\n\n\n0\n0\n0\n0\n0\n1\n0\n\n\n0\n0\n0\n0\n0\n0\n1\n\n\n0\n0\n1\n0\n0\n0\n0"
+    "text": "Leaf edges dummies\n(technically one-hot encoding)\n\n\n\n\n\n\nX\ndenate\nlobed\nlobed..smooth\nlobed..toothed\nsmooth\ntoothed\n\n\n\n\n0\n0\n0\n0\n1\n0\n0\n\n\n0\n0\n0\n0\n0\n0\n1\n\n\n0\n0\n0\n0\n0\n1\n0\n\n\n0\n0\n0\n0\n0\n1\n0\n\n\n0\n0\n0\n0\n0\n0\n1\n\n\n0\n0\n1\n0\n0\n0\n0"
   },
   {
     "objectID": "slides/advanced-04-feature-engineering-part-one.html#dummy-variables",
@@ -19842,7 +19842,7 @@
     "href": "slides/advanced-04-feature-engineering-part-one.html#advanced-dummies---extraction-1",
     "title": "4 - Feature engineering: dummies and embeddings",
     "section": "Advanced Dummies - Extraction",
-    "text": "Advanced Dummies - Extraction\n\n\nInput\n\n\"\"\n\"denate\"\n\"lobed\"\n\"lobed, smooth\"\n\"lobed, toothed\"\n\"smooth\"\n\"toothed\"\n\n\nUsing\nsep = \", \"\n\nResult\n\n\n\n\n\ndenate\nlobed\nsmooth\ntoothed\n\n\n\n\n0\n0\n0\n0\n\n\n1\n0\n0\n0\n\n\n0\n1\n0\n0\n\n\n0\n1\n1\n0\n\n\n0\n1\n0\n1\n\n\n0\n0\n1\n0\n\n\n0\n0\n0\n1"
+    "text": "Advanced Dummies - Extraction\n\n\nInput\n\n\"\"\n\"denate\"\n\"lobed\"\n\"lobed, smooth\"\n\"lobed, toothed\"\n\"smooth\"\n\"toothed\"\n\n\nUsing\nsep = \", \"\n\nResult\n\n\n\n\n\n\ndenate\nlobed\nsmooth\ntoothed\n\n\n\n\n0\n0\n0\n0\n\n\n1\n0\n0\n0\n\n\n0\n1\n0\n0\n\n\n0\n1\n1\n0\n\n\n0\n1\n0\n1\n\n\n0\n0\n1\n0\n\n\n0\n0\n0\n1"
   },
   {
     "objectID": "slides/advanced-04-feature-engineering-part-one.html#advanced-dummies---extraction-2",

@@ -116,6 +116,8 @@ leaf_data |>
 
 (technically one-hot encoding)
 
+::: {style="font-size:0.9em;"}
+
 ```{r}
 #| label: leaf-edges-dummies
 #| echo: false
@@ -127,6 +129,8 @@ recipe(~edge, data = leaf_data) |>
   rename_with(\(x) stringr::str_remove(x, "edge_")) |>
   knitr::kable()
 ```
+
+:::
 
 ## Dummy variables
 
@@ -241,6 +245,8 @@ Using
 
 ### Result
 
+::: {style="font-size:0.9em;"}
+
 ```{r}
 #| label: leaf-dummy-extract
 #| echo: false
@@ -255,6 +261,8 @@ leaf_data |>
   select(-other) |>
   knitr::kable()
 ```
+
+:::
 
 :::
 :::
