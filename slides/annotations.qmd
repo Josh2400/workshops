@@ -307,6 +307,57 @@ More references:
 - _Bayesian Optimization_, Chapter 6 [(pdf)](https://github.com/bayesoptbook/bayesoptbook.github.io/tree/master/book)
 - _Gaussian Processes for Machine Learning_
 
+# Advanced 4 - Feature Engieering: dummies and embeddings
+
+## isomap with recipes
+
+The results from isomap unlike UMAP is not able to be distorted in the same way. Here the number of nieghbors change between the charts. Each of the charts are an application of isomap on the same completely random data. The points are in different locations but none of the charts appear to show any patterns.
+
+```{r}
+#| label: umap-unknown
+#| echo: false
+set.seed(2)
+data_random <- rnorm(1000 * 100) |>
+  matrix(ncol = 1000) |>
+  as_tibble()
+
+umap_5 <- recipe(~., data_random) |>
+  step_isomap(all_predictors(), neighbors = 5, num_terms = 2) |>
+  prep() |>
+  bake(NULL)
+
+umap_10 <- recipe(~., data_random) |>
+  step_isomap(all_predictors(), neighbors = 10, num_terms = 2) |>
+  prep() |>
+  bake(NULL)
+  
+umap_20 <- recipe(~., data_random) |>
+  step_isomap(all_predictors(), neighbors = 20, num_terms = 2) |>
+  prep() |>
+  bake(NULL)
+
+umap_40 <- recipe(~., data_random) |>
+  step_isomap(all_predictors(), neighbors = 40, num_terms = 2) |>
+  prep() |>
+  bake(NULL)
+  
+umap_all <- bind_rows(
+  umap_5 |> mutate(type = "A", neighbors = 5),
+  umap_10 |> mutate(type = "B", neighbors = 10),
+  umap_20 |> mutate(type = "C", neighbors = 20),
+  umap_40 |> mutate(type = "D", neighbors = 40)
+)
+
+umap_all |>
+  ggplot(aes(Isomap1, Isomap2)) +
+  geom_point() +
+  facet_wrap(~neighbors, scales = "free") +
+  labs(
+    title = "number of neighbors"
+  ) +
+  theme_minimal()
+```
+
 # Advanced Extras - Effect Encodings
 
 ## Per-agent statistics
