@@ -51,13 +51,44 @@ The process to set up your computer for either workshop will look the same. Plea
 #| echo: true
 
 # Install the packages for the workshop
-pkgs <- 
-  c("almanac", "betacal", "bonsai", "brulee", "C50", "Cubist", "desirability2", 
-    "dimRed", "embed", "extrasteps", "finetune", "forested", 
-    "igraph", "important", "irlba", "kknn", "lightgbm", "lme4", "mirai", 
-    "parallelly", "plumber", "probably", "ranger", "RANN", "rpart", 
-    "rpart.plot", "RSpectra", "rules", "splines2", "stacks", "text2vec", 
-    "textrecipes", "tidymodels", "uwot", "vetiver")
+pkgs <-
+  c(
+    "almanac",
+    "betacal",
+    "bonsai",
+    "brulee",
+    "C50",
+    "Cubist",
+    "desirability2",
+    "dimRed",
+    "embed",
+    "extrasteps",
+    "finetune",
+    "forested",
+    "igraph",
+    "important",
+    "irlba",
+    "kknn",
+    "lightgbm",
+    "lme4",
+    "mirai",
+    "parallelly",
+    "plumber",
+    "probably",
+    "ranger",
+    "RANN",
+    "rpart",
+    "rpart.plot",
+    "RSpectra",
+    "rules",
+    "splines2",
+    "stacks",
+    "text2vec",
+    "textrecipes",
+    "tidymodels",
+    "uwot",
+    "vetiver"
+  )
 
 install.packages(pkgs)
 ```
@@ -92,7 +123,7 @@ These slides are designed to use with live teaching and are published for worksh
 -   01: [Introduction](slides/advanced-01-introduction.html){target="_blank"}
 -   02: [Model optimization by tuning](slides/advanced-02-model-tuning.html){target="_blank"}
 -   03: [Grid search via racing](slides/advanced-03-racing.html){target="_blank"}
--   04: [Feature engieering:dummies and embeddings](slides/advanced-04-feature-engineering-part-one.html){target="_blank"}
+-   04: [Feature engineering: dummies and embeddings](slides/advanced-04-feature-engineering-part-one.html){target="_blank"}
 -   05: [Feature engineering: splines, target encoding and dates](slides/advanced-05-feature-engineering-part-two.html){target="_blank"}
 -   06: [Postprocessing](slides/advanced-06-postprocessing.html){target="_blank"}
 -   07: [Feature selection](slides/advanced-07-feature-selection.html){target="_blank"}
