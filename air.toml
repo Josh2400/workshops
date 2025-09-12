@@ -1,2 +1,2 @@
 [format]
-exclude = ["archive/", "slides/"]
+exclude = ["archive/", "slides/", "index.qmd"]
