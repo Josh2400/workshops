@@ -1,5 +1,5 @@
 ---
-title: "9 - Wrapping up"
+title: "8 - Wrapping up"
 subtitle: "Getting More Out of Feature Engineering and Tuning for Machine Learning"
 format:
   revealjs: 
