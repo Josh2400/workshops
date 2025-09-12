@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.31">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
 
   <title>Machine learning with tidymodels – 2 - Model optimization by tuning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -355,10 +355,10 @@
 <span id="cb6-7"><a></a><span class="co">#&gt; # A tibble: 4 × 3</span></span>
 <span id="cb6-8"><a></a><span class="co">#&gt;   .metric     .estimator .estimate</span></span>
 <span id="cb6-9"><a></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt;</span></span>
-<span id="cb6-10"><a></a><span class="co">#&gt; 1 sensitivity binary        0.706 </span></span>
-<span id="cb6-11"><a></a><span class="co">#&gt; 2 specificity binary        0.970 </span></span>
-<span id="cb6-12"><a></a><span class="co">#&gt; 3 brier_class binary        0.0545</span></span>
-<span id="cb6-13"><a></a><span class="co">#&gt; 4 roc_auc     binary        0.928</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-10"><a></a><span class="co">#&gt; 1 sensitivity binary        0.765 </span></span>
+<span id="cb6-11"><a></a><span class="co">#&gt; 2 specificity binary        0.948 </span></span>
+<span id="cb6-12"><a></a><span class="co">#&gt; 3 brier_class binary        0.0500</span></span>
+<span id="cb6-13"><a></a><span class="co">#&gt; 4 roc_auc     binary        0.958</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Kind of?</p>
 <p>If sensitivity is important, then the model is moderately successful.</p>
@@ -730,24 +730,33 @@ Brier = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
 <span id="cb16-4"><a></a><span class="co">#&gt; # A tibble: 10 × 5</span></span>
 <span id="cb16-5"><a></a><span class="co">#&gt;    splits             id     .metrics           .notes           .predictions</span></span>
 <span id="cb16-6"><a></a><span class="co">#&gt;    &lt;list&gt;             &lt;chr&gt;  &lt;list&gt;             &lt;list&gt;           &lt;list&gt;      </span></span>
-<span id="cb16-7"><a></a><span class="co">#&gt;  1 &lt;split [1348/151]&gt; Fold01 &lt;tibble [100 × 9]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble&gt;    </span></span>
-<span id="cb16-8"><a></a><span class="co">#&gt;  2 &lt;split [1349/150]&gt; Fold02 &lt;tibble [100 × 9]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble&gt;    </span></span>
-<span id="cb16-9"><a></a><span class="co">#&gt;  3 &lt;split [1349/150]&gt; Fold03 &lt;tibble [100 × 9]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble&gt;    </span></span>
-<span id="cb16-10"><a></a><span class="co">#&gt;  4 &lt;split [1349/150]&gt; Fold04 &lt;tibble [100 × 9]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble&gt;    </span></span>
-<span id="cb16-11"><a></a><span class="co">#&gt;  5 &lt;split [1349/150]&gt; Fold05 &lt;tibble [100 × 9]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble&gt;    </span></span>
-<span id="cb16-12"><a></a><span class="co">#&gt;  6 &lt;split [1349/150]&gt; Fold06 &lt;tibble [100 × 9]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble&gt;    </span></span>
-<span id="cb16-13"><a></a><span class="co">#&gt;  7 &lt;split [1349/150]&gt; Fold07 &lt;tibble [100 × 9]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble&gt;    </span></span>
-<span id="cb16-14"><a></a><span class="co">#&gt;  8 &lt;split [1349/150]&gt; Fold08 &lt;tibble [100 × 9]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble&gt;    </span></span>
-<span id="cb16-15"><a></a><span class="co">#&gt;  9 &lt;split [1350/149]&gt; Fold09 &lt;tibble [100 × 9]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble&gt;    </span></span>
-<span id="cb16-16"><a></a><span class="co">#&gt; 10 &lt;split [1350/149]&gt; Fold10 &lt;tibble [100 × 9]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble&gt;    </span></span>
+<span id="cb16-7"><a></a><span class="co">#&gt;  1 &lt;split [1348/151]&gt; Fold01 &lt;tibble [100 × 9]&gt; &lt;tibble [3 × 4]&gt; &lt;tibble&gt;    </span></span>
+<span id="cb16-8"><a></a><span class="co">#&gt;  2 &lt;split [1349/150]&gt; Fold02 &lt;tibble [100 × 9]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble&gt;    </span></span>
+<span id="cb16-9"><a></a><span class="co">#&gt;  3 &lt;split [1349/150]&gt; Fold03 &lt;tibble [100 × 9]&gt; &lt;tibble [3 × 4]&gt; &lt;tibble&gt;    </span></span>
+<span id="cb16-10"><a></a><span class="co">#&gt;  4 &lt;split [1349/150]&gt; Fold04 &lt;tibble [100 × 9]&gt; &lt;tibble [4 × 4]&gt; &lt;tibble&gt;    </span></span>
+<span id="cb16-11"><a></a><span class="co">#&gt;  5 &lt;split [1349/150]&gt; Fold05 &lt;tibble [100 × 9]&gt; &lt;tibble [2 × 4]&gt; &lt;tibble&gt;    </span></span>
+<span id="cb16-12"><a></a><span class="co">#&gt;  6 &lt;split [1349/150]&gt; Fold06 &lt;tibble [96 × 9]&gt;  &lt;tibble [5 × 4]&gt; &lt;tibble&gt;    </span></span>
+<span id="cb16-13"><a></a><span class="co">#&gt;  7 &lt;split [1349/150]&gt; Fold07 &lt;tibble [100 × 9]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble&gt;    </span></span>
+<span id="cb16-14"><a></a><span class="co">#&gt;  8 &lt;split [1349/150]&gt; Fold08 &lt;tibble [100 × 9]&gt; &lt;tibble [3 × 4]&gt; &lt;tibble&gt;    </span></span>
+<span id="cb16-15"><a></a><span class="co">#&gt;  9 &lt;split [1350/149]&gt; Fold09 &lt;tibble [100 × 9]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble&gt;    </span></span>
+<span id="cb16-16"><a></a><span class="co">#&gt; 10 &lt;split [1350/149]&gt; Fold10 &lt;tibble [100 × 9]&gt; &lt;tibble [3 × 4]&gt; &lt;tibble&gt;    </span></span>
 <span id="cb16-17"><a></a><span class="co">#&gt; </span></span>
 <span id="cb16-18"><a></a><span class="co">#&gt; There were issues with some computations:</span></span>
 <span id="cb16-19"><a></a><span class="co">#&gt; </span></span>
-<span id="cb16-20"><a></a><span class="co">#&gt;   - Warning(s) x1: Early stopping occurred at epoch 2 due to numerical overflow of t...</span></span>
-<span id="cb16-21"><a></a><span class="co">#&gt;   - Warning(s) x1: Early stopping occurred at epoch 3 due to numerical overflow of t...</span></span>
-<span id="cb16-22"><a></a><span class="co">#&gt;   - Warning(s) x2: Early stopping occurred at epoch 5 due to numerical overflow of t...</span></span>
-<span id="cb16-23"><a></a><span class="co">#&gt; </span></span>
-<span id="cb16-24"><a></a><span class="co">#&gt; Run `show_notes(.Last.tune.result)` for more information.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-20"><a></a><span class="co">#&gt;   - Error(s) x1: 'best_epoch' should be an integer</span></span>
+<span id="cb16-21"><a></a><span class="co">#&gt;   - Warning(s) x1: Loss is NaN at epoch 1. Training is stopped.</span></span>
+<span id="cb16-22"><a></a><span class="co">#&gt;   - Warning(s) x1: Loss is NaN at epoch 10. Training is stopped.</span></span>
+<span id="cb16-23"><a></a><span class="co">#&gt;   - Warning(s) x1: Loss is NaN at epoch 11. Training is stopped.</span></span>
+<span id="cb16-24"><a></a><span class="co">#&gt;   - Warning(s) x1: Loss is NaN at epoch 12. Training is stopped.</span></span>
+<span id="cb16-25"><a></a><span class="co">#&gt;   - Warning(s) x2: Loss is NaN at epoch 2. Training is stopped.</span></span>
+<span id="cb16-26"><a></a><span class="co">#&gt;   - Warning(s) x1: Loss is NaN at epoch 4. Training is stopped.</span></span>
+<span id="cb16-27"><a></a><span class="co">#&gt;   - Warning(s) x3: Loss is NaN at epoch 5. Training is stopped.</span></span>
+<span id="cb16-28"><a></a><span class="co">#&gt;   - Warning(s) x2: Loss is NaN at epoch 6. Training is stopped.</span></span>
+<span id="cb16-29"><a></a><span class="co">#&gt;   - Warning(s) x6: Loss is NaN at epoch 7. Training is stopped.</span></span>
+<span id="cb16-30"><a></a><span class="co">#&gt;   - Warning(s) x5: Loss is NaN at epoch 8. Training is stopped.</span></span>
+<span id="cb16-31"><a></a><span class="co">#&gt;   - Warning(s) x1: Loss is NaN at epoch 9. Training is stopped.</span></span>
+<span id="cb16-32"><a></a><span class="co">#&gt; </span></span>
+<span id="cb16-33"><a></a><span class="co">#&gt; Run `show_notes(.Last.tune.result)` for more information.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="grid-results" class="slide level2">
@@ -832,16 +841,16 @@ Brier = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
 <span id="cb21-3"><a></a><span class="co">#&gt; # A tibble: 100 × 11</span></span>
 <span id="cb21-4"><a></a><span class="co">#&gt;    .metric      mean hidden_units    penalty activation learn_rate class_weights</span></span>
 <span id="cb21-5"><a></a><span class="co">#&gt;    &lt;chr&gt;       &lt;dbl&gt;        &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;</span></span>
-<span id="cb21-6"><a></a><span class="co">#&gt;  1 brier_class 0.135            2 0.00000147 elu           0.0962           17.3</span></span>
-<span id="cb21-7"><a></a><span class="co">#&gt;  2 roc_auc     0.887            2 0.00000147 elu           0.0962           17.3</span></span>
-<span id="cb21-8"><a></a><span class="co">#&gt;  3 sensitivity 0.875            2 0.00000147 elu           0.0962           17.3</span></span>
-<span id="cb21-9"><a></a><span class="co">#&gt;  4 specificity 0.778            2 0.00000147 elu           0.0962           17.3</span></span>
-<span id="cb21-10"><a></a><span class="co">#&gt;  5 brier_class 0.134            4 0.000464   tanhshrink    0.0736           31.6</span></span>
-<span id="cb21-11"><a></a><span class="co">#&gt;  6 roc_auc     0.924            4 0.000464   tanhshrink    0.0736           31.6</span></span>
-<span id="cb21-12"><a></a><span class="co">#&gt;  7 sensitivity 0.863            4 0.000464   tanhshrink    0.0736           31.6</span></span>
-<span id="cb21-13"><a></a><span class="co">#&gt;  8 specificity 0.802            4 0.000464   tanhshrink    0.0736           31.6</span></span>
-<span id="cb21-14"><a></a><span class="co">#&gt;  9 brier_class 0.203            6 0.00000383 relu          0.00224          41.8</span></span>
-<span id="cb21-15"><a></a><span class="co">#&gt; 10 roc_auc     0.880            6 0.00000383 relu          0.00224          41.8</span></span>
+<span id="cb21-6"><a></a><span class="co">#&gt;  1 brier_class 0.215            2 0.00000147 elu           0.0962           17.3</span></span>
+<span id="cb21-7"><a></a><span class="co">#&gt;  2 roc_auc     0.835            2 0.00000147 elu           0.0962           17.3</span></span>
+<span id="cb21-8"><a></a><span class="co">#&gt;  3 sensitivity 0.905            2 0.00000147 elu           0.0962           17.3</span></span>
+<span id="cb21-9"><a></a><span class="co">#&gt;  4 specificity 0.644            2 0.00000147 elu           0.0962           17.3</span></span>
+<span id="cb21-10"><a></a><span class="co">#&gt;  5 brier_class 0.211            4 0.000464   tanhshrink    0.0736           31.6</span></span>
+<span id="cb21-11"><a></a><span class="co">#&gt;  6 roc_auc     0.901            4 0.000464   tanhshrink    0.0736           31.6</span></span>
+<span id="cb21-12"><a></a><span class="co">#&gt;  7 sensitivity 0.935            4 0.000464   tanhshrink    0.0736           31.6</span></span>
+<span id="cb21-13"><a></a><span class="co">#&gt;  8 specificity 0.641            4 0.000464   tanhshrink    0.0736           31.6</span></span>
+<span id="cb21-14"><a></a><span class="co">#&gt;  9 brier_class 0.167            6 0.00000383 relu          0.00224          41.8</span></span>
+<span id="cb21-15"><a></a><span class="co">#&gt; 10 roc_auc     0.943            6 0.00000383 relu          0.00224          41.8</span></span>
 <span id="cb21-16"><a></a><span class="co">#&gt; # ℹ 90 more rows</span></span>
 <span id="cb21-17"><a></a><span class="co">#&gt; # ℹ 4 more variables: .estimator &lt;chr&gt;, n &lt;int&gt;, std_err &lt;dbl&gt;, .config &lt;chr&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -851,20 +860,20 @@ Brier = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">collect_metrics</span>(nnet_res, <span class="at">summarize =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb22-2"><a></a>  <span class="fu">relocate</span>(.metric, .estimate)</span>
-<span id="cb22-3"><a></a><span class="co">#&gt; # A tibble: 1,000 × 10</span></span>
+<span id="cb22-3"><a></a><span class="co">#&gt; # A tibble: 996 × 10</span></span>
 <span id="cb22-4"><a></a><span class="co">#&gt;    .metric     .estimate id     hidden_units    penalty activation learn_rate</span></span>
 <span id="cb22-5"><a></a><span class="co">#&gt;    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;         &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;</span></span>
-<span id="cb22-6"><a></a><span class="co">#&gt;  1 sensitivity    1      Fold01            2 0.00000147 elu            0.0962</span></span>
-<span id="cb22-7"><a></a><span class="co">#&gt;  2 specificity    0.851  Fold01            2 0.00000147 elu            0.0962</span></span>
-<span id="cb22-8"><a></a><span class="co">#&gt;  3 brier_class    0.0886 Fold01            2 0.00000147 elu            0.0962</span></span>
-<span id="cb22-9"><a></a><span class="co">#&gt;  4 roc_auc        0.972  Fold01            2 0.00000147 elu            0.0962</span></span>
-<span id="cb22-10"><a></a><span class="co">#&gt;  5 sensitivity    0.941  Fold02            2 0.00000147 elu            0.0962</span></span>
-<span id="cb22-11"><a></a><span class="co">#&gt;  6 specificity    0.887  Fold02            2 0.00000147 elu            0.0962</span></span>
-<span id="cb22-12"><a></a><span class="co">#&gt;  7 brier_class    0.0847 Fold02            2 0.00000147 elu            0.0962</span></span>
-<span id="cb22-13"><a></a><span class="co">#&gt;  8 roc_auc        0.974  Fold02            2 0.00000147 elu            0.0962</span></span>
-<span id="cb22-14"><a></a><span class="co">#&gt;  9 sensitivity    0.882  Fold03            2 0.00000147 elu            0.0962</span></span>
-<span id="cb22-15"><a></a><span class="co">#&gt; 10 specificity    0.872  Fold03            2 0.00000147 elu            0.0962</span></span>
-<span id="cb22-16"><a></a><span class="co">#&gt; # ℹ 990 more rows</span></span>
+<span id="cb22-6"><a></a><span class="co">#&gt;  1 sensitivity    0.824  Fold01            2 0.00000147 elu            0.0962</span></span>
+<span id="cb22-7"><a></a><span class="co">#&gt;  2 specificity    0.910  Fold01            2 0.00000147 elu            0.0962</span></span>
+<span id="cb22-8"><a></a><span class="co">#&gt;  3 brier_class    0.0659 Fold01            2 0.00000147 elu            0.0962</span></span>
+<span id="cb22-9"><a></a><span class="co">#&gt;  4 roc_auc        0.967  Fold01            2 0.00000147 elu            0.0962</span></span>
+<span id="cb22-10"><a></a><span class="co">#&gt;  5 sensitivity    1      Fold02            2 0.00000147 elu            0.0962</span></span>
+<span id="cb22-11"><a></a><span class="co">#&gt;  6 specificity    0.474  Fold02            2 0.00000147 elu            0.0962</span></span>
+<span id="cb22-12"><a></a><span class="co">#&gt;  7 brier_class    0.305  Fold02            2 0.00000147 elu            0.0962</span></span>
+<span id="cb22-13"><a></a><span class="co">#&gt;  8 roc_auc        0.797  Fold02            2 0.00000147 elu            0.0962</span></span>
+<span id="cb22-14"><a></a><span class="co">#&gt;  9 sensitivity    0.941  Fold03            2 0.00000147 elu            0.0962</span></span>
+<span id="cb22-15"><a></a><span class="co">#&gt; 10 specificity    0.910  Fold03            2 0.00000147 elu            0.0962</span></span>
+<span id="cb22-16"><a></a><span class="co">#&gt; # ℹ 986 more rows</span></span>
 <span id="cb22-17"><a></a><span class="co">#&gt; # ℹ 3 more variables: class_weights &lt;dbl&gt;, .estimator &lt;chr&gt;, .config &lt;chr&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -874,13 +883,13 @@ Brier = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
 <div class="sourceCode cell-code" id="cb23" data-code-line-numbers="|1|6|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">show_best</span>(nnet_res, <span class="at">metric =</span> <span class="st">"brier_class"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb23-2"><a></a>  <span class="fu">relocate</span>(.metric, mean) </span>
 <span id="cb23-3"><a></a><span class="co">#&gt; # A tibble: 5 × 11</span></span>
-<span id="cb23-4"><a></a><span class="co">#&gt;   .metric       mean hidden_units   penalty activation  learn_rate class_weights</span></span>
-<span id="cb23-5"><a></a><span class="co">#&gt;   &lt;chr&gt;        &lt;dbl&gt;        &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;         &lt;dbl&gt;</span></span>
-<span id="cb23-6"><a></a><span class="co">#&gt; 1 brier_class 0.0496           36 0.0000261 elu            0.0562           3.04</span></span>
-<span id="cb23-7"><a></a><span class="co">#&gt; 2 brier_class 0.0705           14 0.000178  tanhshrink     0.0329           1   </span></span>
-<span id="cb23-8"><a></a><span class="co">#&gt; 3 brier_class 0.0720           18 0.0562    log_sigmoid    0.631           19.4 </span></span>
-<span id="cb23-9"><a></a><span class="co">#&gt; 4 brier_class 0.0962           40 0.0215    tanh           0.00293          7.12</span></span>
-<span id="cb23-10"><a></a><span class="co">#&gt; 5 brier_class 0.100            44 0.383     log_sigmoid    0.0430          27.5 </span></span>
+<span id="cb23-4"><a></a><span class="co">#&gt;   .metric       mean hidden_units    penalty activation learn_rate class_weights</span></span>
+<span id="cb23-5"><a></a><span class="co">#&gt;   &lt;chr&gt;        &lt;dbl&gt;        &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;</span></span>
+<span id="cb23-6"><a></a><span class="co">#&gt; 1 brier_class 0.0463           36    2.61e-5 elu           0.0562           3.04</span></span>
+<span id="cb23-7"><a></a><span class="co">#&gt; 2 brier_class 0.0628           16    8.25e-8 log_sigmo…    0.00171          5.08</span></span>
+<span id="cb23-8"><a></a><span class="co">#&gt; 3 brier_class 0.0646           40    2.15e-2 tanh          0.00293          7.12</span></span>
+<span id="cb23-9"><a></a><span class="co">#&gt; 4 brier_class 0.0673           48    1.78e-9 relu          0.0112          11.2 </span></span>
+<span id="cb23-10"><a></a><span class="co">#&gt; 5 brier_class 0.0694           26    4.64e-9 relu          0.482            9.17</span></span>
 <span id="cb23-11"><a></a><span class="co">#&gt; # ℹ 4 more variables: .estimator &lt;chr&gt;, n &lt;int&gt;, std_err &lt;dbl&gt;, .config &lt;chr&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -901,10 +910,10 @@ Brier = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
 <span id="cb24-11"><a></a><span class="co">#&gt; # A tibble: 4 × 2</span></span>
 <span id="cb24-12"><a></a><span class="co">#&gt;   .metric       mean</span></span>
 <span id="cb24-13"><a></a><span class="co">#&gt;   &lt;chr&gt;        &lt;dbl&gt;</span></span>
-<span id="cb24-14"><a></a><span class="co">#&gt; 1 brier_class 0.0496</span></span>
-<span id="cb24-15"><a></a><span class="co">#&gt; 2 roc_auc     0.965 </span></span>
-<span id="cb24-16"><a></a><span class="co">#&gt; 3 sensitivity 0.828 </span></span>
-<span id="cb24-17"><a></a><span class="co">#&gt; 4 specificity 0.950</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-14"><a></a><span class="co">#&gt; 1 brier_class 0.0463</span></span>
+<span id="cb24-15"><a></a><span class="co">#&gt; 2 roc_auc     0.967 </span></span>
+<span id="cb24-16"><a></a><span class="co">#&gt; 3 sensitivity 0.799 </span></span>
+<span id="cb24-17"><a></a><span class="co">#&gt; 4 specificity 0.958</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="checking-approximate-calibration" class="slide level2">
@@ -977,11 +986,11 @@ Brier = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
 <span id="cb26-8"><a></a><span class="co">#&gt; # A tibble: 5 × 14</span></span>
 <span id="cb26-9"><a></a><span class="co">#&gt;   class_weights sensitivity specificity brier_class .d_overall hidden_units</span></span>
 <span id="cb26-10"><a></a><span class="co">#&gt;           &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;int&gt;</span></span>
-<span id="cb26-11"><a></a><span class="co">#&gt; 1          48.0       0.947       0.811      0.127       0.926           34</span></span>
-<span id="cb26-12"><a></a><span class="co">#&gt; 2          33.7       0.941       0.805      0.130       0.919           32</span></span>
-<span id="cb26-13"><a></a><span class="co">#&gt; 3          25.5       0.899       0.850      0.101       0.918           28</span></span>
-<span id="cb26-14"><a></a><span class="co">#&gt; 4          29.6       0.917       0.830      0.117       0.915           38</span></span>
-<span id="cb26-15"><a></a><span class="co">#&gt; 5          19.4       0.852       0.914      0.0720      0.907           18</span></span>
+<span id="cb26-11"><a></a><span class="co">#&gt; 1         29.6        0.947       0.859      0.0948      0.940           38</span></span>
+<span id="cb26-12"><a></a><span class="co">#&gt; 2         50          0.958       0.841      0.111       0.937           30</span></span>
+<span id="cb26-13"><a></a><span class="co">#&gt; 3          7.12       0.899       0.914      0.0646      0.930           40</span></span>
+<span id="cb26-14"><a></a><span class="co">#&gt; 4         11.2        0.894       0.914      0.0673      0.925           48</span></span>
+<span id="cb26-15"><a></a><span class="co">#&gt; 5         25.5        0.923       0.833      0.111       0.917           28</span></span>
 <span id="cb26-16"><a></a><span class="co">#&gt; # ℹ 8 more variables: penalty &lt;dbl&gt;, activation &lt;chr&gt;, learn_rate &lt;dbl&gt;,</span></span>
 <span id="cb26-17"><a></a><span class="co">#&gt; #   .config &lt;chr&gt;, roc_auc &lt;dbl&gt;, .d_max_sensitivity &lt;dbl&gt;,</span></span>
 <span id="cb26-18"><a></a><span class="co">#&gt; #   .d_min_brier_class &lt;dbl&gt;, .d_box_specificity &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1062,16 +1071,16 @@ Brier = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a>nnet_sens_fit <span class="sc">|&gt;</span> <span class="fu">extract_fit_engine</span>()</span>
 <span id="cb29-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Multilayer perceptron</span></span>
 <span id="cb29-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb29-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; relu activation,</span></span>
-<span id="cb29-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34 hidden units,</span></span>
-<span id="cb29-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1,124 model parameters</span></span>
+<span id="cb29-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; elu activation,</span></span>
+<span id="cb29-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38 hidden units,</span></span>
+<span id="cb29-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1,256 model parameters</span></span>
 <span id="cb29-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1,499 samples, 30 features, 2 classes </span></span>
-<span id="cb29-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; class weights event=47.95833, no_event= 1.00000 </span></span>
-<span id="cb29-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; weight decay: 6.812921e-10 </span></span>
+<span id="cb29-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; class weights event=29.58333, no_event= 1.00000 </span></span>
+<span id="cb29-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; weight decay: 1e-05 </span></span>
 <span id="cb29-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dropout proportion: 0 </span></span>
 <span id="cb29-11"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; batch size: 1350 </span></span>
-<span id="cb29-12"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; learn rate: 0.006556418 </span></span>
-<span id="cb29-13"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; validation loss after 13 epochs: 0.0969</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-12"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; learn rate: 0.001 </span></span>
+<span id="cb29-13"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; validation loss after 68 epochs: 0.145</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></div>
 </section>
@@ -1100,7 +1109,7 @@ Brier = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
 <span id="cb31-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dropout proportion: 0 </span></span>
 <span id="cb31-11"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; batch size: 1350 </span></span>
 <span id="cb31-12"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; learn rate: 0.05623413 </span></span>
-<span id="cb31-13"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; validation loss after 2 epochs: 0.304</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-13"><a aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; validation loss after 6 epochs: 0.411</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></div>
 </section>
@@ -1130,11 +1139,11 @@ Brier = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
 <span id="cb33-4"><a></a><span class="co">#&gt; # A tibble: 5 × 2</span></span>
 <span id="cb33-5"><a></a><span class="co">#&gt;    loss epoch</span></span>
 <span id="cb33-6"><a></a><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb33-7"><a></a><span class="co">#&gt; 1 0.696     0</span></span>
-<span id="cb33-8"><a></a><span class="co">#&gt; 2 0.304     1</span></span>
-<span id="cb33-9"><a></a><span class="co">#&gt; 3 0.217     2</span></span>
-<span id="cb33-10"><a></a><span class="co">#&gt; 4 0.316     3</span></span>
-<span id="cb33-11"><a></a><span class="co">#&gt; 5 0.619     4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-7"><a></a><span class="co">#&gt; 1 0.517     0</span></span>
+<span id="cb33-8"><a></a><span class="co">#&gt; 2 0.501     1</span></span>
+<span id="cb33-9"><a></a><span class="co">#&gt; 3 0.483     2</span></span>
+<span id="cb33-10"><a></a><span class="co">#&gt; 4 0.461     3</span></span>
+<span id="cb33-11"><a></a><span class="co">#&gt; 5 0.437     4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></div>
 </section>

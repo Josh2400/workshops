@@ -7207,7 +7207,7 @@
     "href": "slides/extras-transit-case-study.html#estimate-weights-for-each-candidate",
     "title": "Case Study on Transportation",
     "section": "Estimate weights for each candidate ",
-    "text": "Estimate weights for each candidate \nWhich configurations should be retained? Uses a penalized linear model:\n\nset.seed(122)\nchi_stack_res &lt;- blend_predictions(chi_stack, penalty = 10^seq(-6, -1, length.out = 25))\n\nchi_stack_res\n#&gt; # A tibble: 5 × 3\n#&gt;   member                      type         weight\n#&gt;   &lt;chr&gt;                       &lt;chr&gt;         &lt;dbl&gt;\n#&gt; 1 pca_cubistpre2_mod01_post0  cubist_rules 0.358 \n#&gt; 2 basic_cubistpre0_mod1_post0 cubist_rules 0.270 \n#&gt; 3 pca_cubistpre2_mod07_post0  cubist_rules 0.202 \n#&gt; 4 basic_cubistpre0_mod6_post0 cubist_rules 0.144 \n#&gt; 5 pca_lmpre1_mod0_post0       linear_reg   0.0381"
+    "text": "Estimate weights for each candidate \nWhich configurations should be retained? Uses a penalized linear model:\n\nset.seed(122)\nchi_stack_res &lt;- blend_predictions(chi_stack, penalty = 10^seq(-6, -1, length.out = 25))\n\nchi_stack_res\n#&gt; # A tibble: 5 × 3\n#&gt;   member             type         weight\n#&gt;   &lt;chr&gt;              &lt;chr&gt;         &lt;dbl&gt;\n#&gt; 1 pca_cubist_2_01_0  cubist_rules 0.358 \n#&gt; 2 basic_cubist_0_1_0 cubist_rules 0.270 \n#&gt; 3 pca_cubist_2_07_0  cubist_rules 0.202 \n#&gt; 4 basic_cubist_0_6_0 cubist_rules 0.144 \n#&gt; 5 pca_lm_1_0_0       linear_reg   0.0381"
   },
   {
     "objectID": "slides/extras-transit-case-study.html#how-did-it-do",
@@ -8047,14 +8047,14 @@
     "href": "slides/advanced-01-introduction.html#who-are-tidymodels",
     "title": "1 - Introduction",
     "section": "Who are tidymodels?",
-    "text": "Who are tidymodels?\n\nSimon Couch\nHannah Frick\nEmil Hvitfeldt\nMax Kuhn\n\n. . .\n+ our TA today, Edgar Ruiz!\n. . .\nMany thanks to Davis Vaughan, Julia Silge, David Robinson, Julie Jung, Alison Hill, and Desirée De Leon for their role in creating these materials!"
+    "text": "Who are tidymodels?\n\nSimon Couch\nHannah Frick\nEmil Hvitfeldt\nMax Kuhn\n\n\n+ our TA today, Edgar Ruiz!\n\n\nMany thanks to Davis Vaughan, Julia Silge, David Robinson, Julie Jung, Alison Hill, and Desirée De Leon for their role in creating these materials!"
   },
   {
     "objectID": "slides/advanced-01-introduction.html#asking-for-help",
     "href": "slides/advanced-01-introduction.html#asking-for-help",
     "title": "1 - Introduction",
     "section": "Asking for help",
-    "text": "Asking for help\n. . .\n🟪 “I’m stuck and need help!”\n. . .\n🟩 “I finished the exercise”"
+    "text": "Asking for help\n\n🟪 “I’m stuck and need help!”\n\n\n🟩 “I finished the exercise”"
   },
   {
     "objectID": "slides/advanced-01-introduction.html#discord",
@@ -8096,7 +8096,7 @@
     "href": "slides/advanced-01-introduction.html#getting-the-materials",
     "title": "1 - Introduction",
     "section": "Getting the materials",
-    "text": "Getting the materials\n\n\nIf you are using Posit Cloud:\n Log in to Posit Cloud (free): TODO-ADD-LATER\n\n\n\nIf you are working locally:\n# local download\nusethis::use_course(\"tidymodels/workshops\", destdir = \"some_path\")\n\n# or fork via\nusethis::create_from_github(\"tidymodels/workshops\", fork = TRUE)"
+    "text": "Getting the materials\n\nIf you are using Posit Cloud:\n Log in to Posit Cloud (free): TODO-ADD-LATER\n\nIf you are working locally:\n# local download\nusethis::use_course(\"tidymodels/workshops\", destdir = \"some_path\")\n\n# or fork via\nusethis::create_from_github(\"tidymodels/workshops\", fork = TRUE)"
   },
   {
     "objectID": "slides/advanced-01-introduction.html#lets-install-some-packages",
@@ -8124,7 +8124,7 @@
     "href": "slides/advanced-01-introduction.html#data-sets",
     "title": "1 - Introduction",
     "section": "Data sets",
-    "text": "Data sets\nFor illustration, we’ll use a few different data sets today:\n\n\nclass_data: a simulated set of data with a 1:10 class imbalance. Two classes, 20 predictors, and 2,000 data points.\nleaf_data: a real data set to identify plant species from their leaves. Thirty-two levels, 53 predictors, and 1,907 data points.\nhotel_data: a real data set for predicting the average cost per night. Numeric outcome, 27 predictors, and 15,402 data points.\n\n\n. . .\n\nLet’s get warmed up with the first data set."
+    "text": "Data sets\nFor illustration, we’ll use a few different data sets today:\n\nclass_data: a simulated set of data with a 1:10 class imbalance. Two classes, 20 predictors, and 2,000 data points.\nleaf_data: a real data set to identify plant species from their leaves. Thirty-two levels, 53 predictors, and 1,907 data points.\nhotel_data: a real data set for predicting the average cost per night. Numeric outcome, 27 predictors, and 15,402 data points.\n\n\n\nLet’s get warmed up with the first data set."
   },
   {
     "objectID": "slides/advanced-01-introduction.html#imbalanced-data",
@@ -8159,7 +8159,7 @@
     "href": "slides/advanced-01-introduction.html#resampling",
     "title": "1 - Introduction",
     "section": "Resampling",
-    "text": "Resampling\n\n\nWe’ll want to get accurate estimates of model performance.\nLet’s use a resampling method to make multiple versions of our data (using 10-fold cross-validation).\n\nFor large amounts of data, a validation set is also a good alternative.\n\n\n\n\n\n\n\n\n\nAML4TD, TMwR"
+    "text": "Resampling\n\n\nWe’ll want to get accurate estimates of model performance.\nLet’s use a resampling method to make multiple versions of our data (using 10-fold cross-validation).\n\nFor large amounts of data, a validation set is also a good alternative.\n\n\n\n\n\n\n\n\nAML4TD, TMwR"
   },
   {
     "objectID": "slides/advanced-01-introduction.html#resampling-1",
@@ -8208,7 +8208,7 @@
     "href": "slides/advanced-01-introduction.html#recipes-and-workflows",
     "title": "1 - Introduction",
     "section": "Recipes and workflows  ",
-    "text": "Recipes and workflows  \nRecipes are preprocessors that perform sequential operations on the preductors.\n. . .\n\nFor example, to center and scale our predictors:\n\nrec &lt;- \n  recipe(class ~ ., data = sim_train) |&gt; \n  step_normalize(all_numeric_predictors())\n\n. . .\n\nA model, a recipe, and other objects can be added to a workflow to have a single object for the whole modeling sequence:\n\ntree_wflow &lt;- workflow(rec, tree_spec)"
+    "text": "Recipes and workflows  \nRecipes are preprocessors that perform sequential operations on the preductors.\n\n\nFor example, to center and scale our predictors:\n\nrec &lt;- \n  recipe(class ~ ., data = sim_train) |&gt; \n  step_normalize(all_numeric_predictors())\n\n\n\n\nA model, a recipe, and other objects can be added to a workflow to have a single object for the whole modeling sequence:\n\ntree_wflow &lt;- workflow(rec, tree_spec)"
   },
   {
     "objectID": "slides/advanced-01-introduction.html#your-turn-1",
@@ -8222,7 +8222,7 @@
     "href": "slides/advanced-01-introduction.html#our-versions",
     "title": "1 - Introduction",
     "section": "Our versions",
-    "text": "Our versions\n\n#&gt; Loading required package: lattice\n#&gt; Loading required package: DRR\n#&gt; Loading required package: kernlab\n#&gt; \n#&gt; Attaching package: 'kernlab'\n#&gt; The following object is masked from 'package:purrr':\n#&gt; \n#&gt;     cross\n#&gt; The following object is masked from 'package:dials':\n#&gt; \n#&gt;     buffer\n#&gt; The following object is masked from 'package:scales':\n#&gt; \n#&gt;     alpha\n#&gt; The following object is masked from 'package:ggplot2':\n#&gt; \n#&gt;     alpha\n#&gt; Loading required package: CVST\n#&gt; Loading required package: Matrix\n#&gt; \n#&gt; Attaching package: 'Matrix'\n#&gt; The following objects are masked from 'package:tidyr':\n#&gt; \n#&gt;     expand, pack, unpack\n#&gt; Loading required package: Formula\n#&gt; Loading required package: plotmo\n#&gt; Loading required package: plotrix\n#&gt; \n#&gt; Attaching package: 'plotrix'\n#&gt; The following object is masked from 'package:scales':\n#&gt; \n#&gt;     rescale\n#&gt; Registered S3 method overwritten by 'butcher':\n#&gt;   method                 from    \n#&gt;   as.character.dev_topic generics\n\nR version 4.5.1 (2025-06-13), Quarto (1.7.32)\n\n\n\n\n\n\n\npackage\nversion\n\n\n\n\nalmanac\n1.0.0\n\n\nbetacal\n0.1.0\n\n\nbonsai\n0.4.0\n\n\nbroom\n1.0.9\n\n\nbrulee\n0.5.0\n\n\nC50\n0.2.0\n\n\nCubist\n0.5.0\n\n\nCVST\n0.2-3\n\n\ndesirability2\n0.2.0\n\n\ndials\n1.4.2\n\n\ndimRed\n0.2.7\n\n\ndplyr\n1.1.4\n\n\nDRR\n0.0.4\n\n\nearth\n5.3.4\n\n\nembed\n1.2.0\n\n\n\n\n\n\n\n\n\n\n\npackage\nversion\n\n\n\n\nextrasteps\n0.3.0\n\n\nfinetune\n1.2.1\n\n\nforested\n0.2.0\n\n\nFormula\n1.2-5\n\n\nggplot2\n3.5.2\n\n\nigraph\n2.1.4\n\n\nimportant\n0.2.0\n\n\nirlba\n2.3.5.1\n\n\nkernlab\n0.9-33\n\n\nkknn\n1.4.1\n\n\nlattice\n0.22-7\n\n\nlightgbm\n4.6.0\n\n\nlme4\n1.1-37\n\n\nmirai\n2.5.0\n\n\nmodeldata\n1.5.1\n\n\n\n\n\n\n\n\n\n\n\npackage\nversion\n\n\n\n\nparallelly\n1.45.1\n\n\nparsnip\n1.3.3\n\n\nplotmo\n3.6.4\n\n\nplotrix\n3.8-4\n\n\nplumber\n1.3.0\n\n\nprobably\n1.1.1\n\n\npurrr\n1.1.0\n\n\nRANN\n2.6.2\n\n\nrecipes\n1.3.1\n\n\nrpart\n4.1.24\n\n\nrsample\n1.3.1\n\n\nRSpectra\n0.16-2\n\n\nrules\n1.0.2\n\n\nscales\n1.4.0\n\n\nsplines2\n0.5.4\n\n\n\n\n\n\n\n\n\n\n\npackage\nversion\n\n\n\n\nstacks\n1.1.1.9001\n\n\ntailor\n0.1.0.9000\n\n\ntext2vec\n0.6.4\n\n\ntextrecipes\n1.1.0\n\n\ntidymodels\n1.4.1\n\n\ntidyr\n1.3.1\n\n\ntune\n2.0.0\n\n\nuwot\n0.2.3\n\n\nvetiver\n0.2.5\n\n\nworkflows\n1.3.0\n\n\nworkflowsets\n1.1.1\n\n\nyardstick\n1.3.2"
+    "text": "Our versions\nR version 4.5.1 (2025-06-13), Quarto (1.7.32)\n\n\n\n\n\n\n\npackage\nversion\n\n\n\n\nalmanac\n1.0.0\n\n\nbetacal\n0.1.0\n\n\nbonsai\n0.4.0\n\n\nbroom\n1.0.9\n\n\nbrulee\n0.5.0\n\n\nC50\n0.2.0\n\n\nCubist\n0.5.0\n\n\nCVST\n0.2-3\n\n\ndesirability2\n0.2.0\n\n\ndials\n1.4.2\n\n\ndimRed\n0.2.7\n\n\ndplyr\n1.1.4\n\n\nDRR\n0.0.4\n\n\nearth\n5.3.4\n\n\nembed\n1.2.0\n\n\n\n\n\n\n\n\n\n\n\npackage\nversion\n\n\n\n\nextrasteps\n0.3.0\n\n\nfinetune\n1.2.1\n\n\nforested\n0.2.0\n\n\nFormula\n1.2-5\n\n\nggplot2\n3.5.2\n\n\nigraph\n2.1.4\n\n\nimportant\n0.2.0\n\n\nirlba\n2.3.5.1\n\n\nkernlab\n0.9-33\n\n\nkknn\n1.4.1\n\n\nlattice\n0.22-7\n\n\nlightgbm\n4.6.0\n\n\nlme4\n1.1-37\n\n\nmirai\n2.5.0\n\n\nmodeldata\n1.5.1\n\n\n\n\n\n\n\n\n\n\n\npackage\nversion\n\n\n\n\nparallelly\n1.45.1\n\n\nparsnip\n1.3.3\n\n\nplotmo\n3.6.4\n\n\nplotrix\n3.8-4\n\n\nplumber\n1.3.0\n\n\nprobably\n1.1.1\n\n\npurrr\n1.1.0\n\n\nRANN\n2.6.2\n\n\nrecipes\n1.3.1\n\n\nrpart\n4.1.24\n\n\nrsample\n1.3.1\n\n\nRSpectra\n0.16-2\n\n\nrules\n1.0.2\n\n\nscales\n1.4.0\n\n\nsplines2\n0.5.4\n\n\n\n\n\n\n\n\n\n\n\npackage\nversion\n\n\n\n\nstacks\n1.1.1.9001\n\n\ntailor\n0.1.0.9000\n\n\ntext2vec\n0.6.4\n\n\ntextrecipes\n1.1.0\n\n\ntidymodels\n1.4.1\n\n\ntidyr\n1.3.1\n\n\ntune\n2.0.0\n\n\nuwot\n0.2.3\n\n\nvetiver\n0.2.5\n\n\nworkflows\n1.3.0\n\n\nworkflowsets\n1.1.1\n\n\nyardstick\n1.3.2"
   },
   {
     "objectID": "archive/2025-08-nyr/slides/intro-extra-recipes.html#looking-at-the-predictors",
@@ -11085,7 +11085,7 @@
     "href": "slides/advanced-02-model-tuning.html#did-it-work",
     "title": "2 - Model optimization by tuning",
     "section": "Did it work?    ",
-    "text": "Did it work?    \n\nassessment_data &lt;- assessment(sim_rs$splits[[1]])\ncls_mtr &lt;- metric_set(brier_class, roc_auc, sensitivity, specificity)\nholdout_pred &lt;- augment(nnet_ex_fit, assessment_data) \n\n# Performance metrics\nholdout_pred |&gt; cls_mtr(class, estimate = .pred_class, .pred_event)\n#&gt; # A tibble: 4 × 3\n#&gt;   .metric     .estimator .estimate\n#&gt;   &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt;\n#&gt; 1 sensitivity binary        0.706 \n#&gt; 2 specificity binary        0.970 \n#&gt; 3 brier_class binary        0.0545\n#&gt; 4 roc_auc     binary        0.928\n\nKind of?\nIf sensitivity is important, then the model is moderately successful."
+    "text": "Did it work?    \n\nassessment_data &lt;- assessment(sim_rs$splits[[1]])\ncls_mtr &lt;- metric_set(brier_class, roc_auc, sensitivity, specificity)\nholdout_pred &lt;- augment(nnet_ex_fit, assessment_data) \n\n# Performance metrics\nholdout_pred |&gt; cls_mtr(class, estimate = .pred_class, .pred_event)\n#&gt; # A tibble: 4 × 3\n#&gt;   .metric     .estimator .estimate\n#&gt;   &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt;\n#&gt; 1 sensitivity binary        0.765 \n#&gt; 2 specificity binary        0.948 \n#&gt; 3 brier_class binary        0.0500\n#&gt; 4 roc_auc     binary        0.958\n\nKind of?\nIf sensitivity is important, then the model is moderately successful."
   },
   {
     "objectID": "slides/advanced-02-model-tuning.html#calibration",
@@ -11218,7 +11218,7 @@
     "href": "slides/advanced-02-model-tuning.html#grid-search-4",
     "title": "2 - Model optimization by tuning",
     "section": "Grid Search   ",
-    "text": "Grid Search   \n\nnnet_res \n#&gt; # Tuning results\n#&gt; # 10-fold cross-validation using stratification \n#&gt; # A tibble: 10 × 5\n#&gt;    splits             id     .metrics           .notes           .predictions\n#&gt;    &lt;list&gt;             &lt;chr&gt;  &lt;list&gt;             &lt;list&gt;           &lt;list&gt;      \n#&gt;  1 &lt;split [1348/151]&gt; Fold01 &lt;tibble [100 × 9]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble&gt;    \n#&gt;  2 &lt;split [1349/150]&gt; Fold02 &lt;tibble [100 × 9]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble&gt;    \n#&gt;  3 &lt;split [1349/150]&gt; Fold03 &lt;tibble [100 × 9]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble&gt;    \n#&gt;  4 &lt;split [1349/150]&gt; Fold04 &lt;tibble [100 × 9]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble&gt;    \n#&gt;  5 &lt;split [1349/150]&gt; Fold05 &lt;tibble [100 × 9]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble&gt;    \n#&gt;  6 &lt;split [1349/150]&gt; Fold06 &lt;tibble [100 × 9]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble&gt;    \n#&gt;  7 &lt;split [1349/150]&gt; Fold07 &lt;tibble [100 × 9]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble&gt;    \n#&gt;  8 &lt;split [1349/150]&gt; Fold08 &lt;tibble [100 × 9]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble&gt;    \n#&gt;  9 &lt;split [1350/149]&gt; Fold09 &lt;tibble [100 × 9]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble&gt;    \n#&gt; 10 &lt;split [1350/149]&gt; Fold10 &lt;tibble [100 × 9]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble&gt;    \n#&gt; \n#&gt; There were issues with some computations:\n#&gt; \n#&gt;   - Warning(s) x1: Early stopping occurred at epoch 2 due to numerical overflow of t...\n#&gt;   - Warning(s) x1: Early stopping occurred at epoch 3 due to numerical overflow of t...\n#&gt;   - Warning(s) x2: Early stopping occurred at epoch 5 due to numerical overflow of t...\n#&gt; \n#&gt; Run `show_notes(.Last.tune.result)` for more information."
+    "text": "Grid Search   \n\nnnet_res \n#&gt; # Tuning results\n#&gt; # 10-fold cross-validation using stratification \n#&gt; # A tibble: 10 × 5\n#&gt;    splits             id     .metrics           .notes           .predictions\n#&gt;    &lt;list&gt;             &lt;chr&gt;  &lt;list&gt;             &lt;list&gt;           &lt;list&gt;      \n#&gt;  1 &lt;split [1348/151]&gt; Fold01 &lt;tibble [100 × 9]&gt; &lt;tibble [3 × 4]&gt; &lt;tibble&gt;    \n#&gt;  2 &lt;split [1349/150]&gt; Fold02 &lt;tibble [100 × 9]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble&gt;    \n#&gt;  3 &lt;split [1349/150]&gt; Fold03 &lt;tibble [100 × 9]&gt; &lt;tibble [3 × 4]&gt; &lt;tibble&gt;    \n#&gt;  4 &lt;split [1349/150]&gt; Fold04 &lt;tibble [100 × 9]&gt; &lt;tibble [4 × 4]&gt; &lt;tibble&gt;    \n#&gt;  5 &lt;split [1349/150]&gt; Fold05 &lt;tibble [100 × 9]&gt; &lt;tibble [2 × 4]&gt; &lt;tibble&gt;    \n#&gt;  6 &lt;split [1349/150]&gt; Fold06 &lt;tibble [96 × 9]&gt;  &lt;tibble [5 × 4]&gt; &lt;tibble&gt;    \n#&gt;  7 &lt;split [1349/150]&gt; Fold07 &lt;tibble [100 × 9]&gt; &lt;tibble [0 × 4]&gt; &lt;tibble&gt;    \n#&gt;  8 &lt;split [1349/150]&gt; Fold08 &lt;tibble [100 × 9]&gt; &lt;tibble [3 × 4]&gt; &lt;tibble&gt;    \n#&gt;  9 &lt;split [1350/149]&gt; Fold09 &lt;tibble [100 × 9]&gt; &lt;tibble [1 × 4]&gt; &lt;tibble&gt;    \n#&gt; 10 &lt;split [1350/149]&gt; Fold10 &lt;tibble [100 × 9]&gt; &lt;tibble [3 × 4]&gt; &lt;tibble&gt;    \n#&gt; \n#&gt; There were issues with some computations:\n#&gt; \n#&gt;   - Error(s) x1: 'best_epoch' should be an integer\n#&gt;   - Warning(s) x1: Loss is NaN at epoch 1. Training is stopped.\n#&gt;   - Warning(s) x1: Loss is NaN at epoch 10. Training is stopped.\n#&gt;   - Warning(s) x1: Loss is NaN at epoch 11. Training is stopped.\n#&gt;   - Warning(s) x1: Loss is NaN at epoch 12. Training is stopped.\n#&gt;   - Warning(s) x2: Loss is NaN at epoch 2. Training is stopped.\n#&gt;   - Warning(s) x1: Loss is NaN at epoch 4. Training is stopped.\n#&gt;   - Warning(s) x3: Loss is NaN at epoch 5. Training is stopped.\n#&gt;   - Warning(s) x2: Loss is NaN at epoch 6. Training is stopped.\n#&gt;   - Warning(s) x6: Loss is NaN at epoch 7. Training is stopped.\n#&gt;   - Warning(s) x5: Loss is NaN at epoch 8. Training is stopped.\n#&gt;   - Warning(s) x1: Loss is NaN at epoch 9. Training is stopped.\n#&gt; \n#&gt; Run `show_notes(.Last.tune.result)` for more information."
   },
   {
     "objectID": "slides/advanced-02-model-tuning.html#grid-results",
@@ -11260,28 +11260,28 @@
     "href": "slides/advanced-02-model-tuning.html#tuning-results",
     "title": "2 - Model optimization by tuning",
     "section": "Tuning results ",
-    "text": "Tuning results \n\ncollect_metrics(nnet_res) |&gt; \n  relocate(.metric, mean) \n#&gt; # A tibble: 100 × 11\n#&gt;    .metric      mean hidden_units    penalty activation learn_rate class_weights\n#&gt;    &lt;chr&gt;       &lt;dbl&gt;        &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;\n#&gt;  1 brier_class 0.135            2 0.00000147 elu           0.0962           17.3\n#&gt;  2 roc_auc     0.887            2 0.00000147 elu           0.0962           17.3\n#&gt;  3 sensitivity 0.875            2 0.00000147 elu           0.0962           17.3\n#&gt;  4 specificity 0.778            2 0.00000147 elu           0.0962           17.3\n#&gt;  5 brier_class 0.134            4 0.000464   tanhshrink    0.0736           31.6\n#&gt;  6 roc_auc     0.924            4 0.000464   tanhshrink    0.0736           31.6\n#&gt;  7 sensitivity 0.863            4 0.000464   tanhshrink    0.0736           31.6\n#&gt;  8 specificity 0.802            4 0.000464   tanhshrink    0.0736           31.6\n#&gt;  9 brier_class 0.203            6 0.00000383 relu          0.00224          41.8\n#&gt; 10 roc_auc     0.880            6 0.00000383 relu          0.00224          41.8\n#&gt; # ℹ 90 more rows\n#&gt; # ℹ 4 more variables: .estimator &lt;chr&gt;, n &lt;int&gt;, std_err &lt;dbl&gt;, .config &lt;chr&gt;"
+    "text": "Tuning results \n\ncollect_metrics(nnet_res) |&gt; \n  relocate(.metric, mean) \n#&gt; # A tibble: 100 × 11\n#&gt;    .metric      mean hidden_units    penalty activation learn_rate class_weights\n#&gt;    &lt;chr&gt;       &lt;dbl&gt;        &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;\n#&gt;  1 brier_class 0.215            2 0.00000147 elu           0.0962           17.3\n#&gt;  2 roc_auc     0.835            2 0.00000147 elu           0.0962           17.3\n#&gt;  3 sensitivity 0.905            2 0.00000147 elu           0.0962           17.3\n#&gt;  4 specificity 0.644            2 0.00000147 elu           0.0962           17.3\n#&gt;  5 brier_class 0.211            4 0.000464   tanhshrink    0.0736           31.6\n#&gt;  6 roc_auc     0.901            4 0.000464   tanhshrink    0.0736           31.6\n#&gt;  7 sensitivity 0.935            4 0.000464   tanhshrink    0.0736           31.6\n#&gt;  8 specificity 0.641            4 0.000464   tanhshrink    0.0736           31.6\n#&gt;  9 brier_class 0.167            6 0.00000383 relu          0.00224          41.8\n#&gt; 10 roc_auc     0.943            6 0.00000383 relu          0.00224          41.8\n#&gt; # ℹ 90 more rows\n#&gt; # ℹ 4 more variables: .estimator &lt;chr&gt;, n &lt;int&gt;, std_err &lt;dbl&gt;, .config &lt;chr&gt;"
   },
   {
     "objectID": "slides/advanced-02-model-tuning.html#tuning-results-1",
     "href": "slides/advanced-02-model-tuning.html#tuning-results-1",
     "title": "2 - Model optimization by tuning",
     "section": "Tuning results ",
-    "text": "Tuning results \n\ncollect_metrics(nnet_res, summarize = FALSE) |&gt; \n  relocate(.metric, .estimate)\n#&gt; # A tibble: 1,000 × 10\n#&gt;    .metric     .estimate id     hidden_units    penalty activation learn_rate\n#&gt;    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;         &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;\n#&gt;  1 sensitivity    1      Fold01            2 0.00000147 elu            0.0962\n#&gt;  2 specificity    0.851  Fold01            2 0.00000147 elu            0.0962\n#&gt;  3 brier_class    0.0886 Fold01            2 0.00000147 elu            0.0962\n#&gt;  4 roc_auc        0.972  Fold01            2 0.00000147 elu            0.0962\n#&gt;  5 sensitivity    0.941  Fold02            2 0.00000147 elu            0.0962\n#&gt;  6 specificity    0.887  Fold02            2 0.00000147 elu            0.0962\n#&gt;  7 brier_class    0.0847 Fold02            2 0.00000147 elu            0.0962\n#&gt;  8 roc_auc        0.974  Fold02            2 0.00000147 elu            0.0962\n#&gt;  9 sensitivity    0.882  Fold03            2 0.00000147 elu            0.0962\n#&gt; 10 specificity    0.872  Fold03            2 0.00000147 elu            0.0962\n#&gt; # ℹ 990 more rows\n#&gt; # ℹ 3 more variables: class_weights &lt;dbl&gt;, .estimator &lt;chr&gt;, .config &lt;chr&gt;"
+    "text": "Tuning results \n\ncollect_metrics(nnet_res, summarize = FALSE) |&gt; \n  relocate(.metric, .estimate)\n#&gt; # A tibble: 996 × 10\n#&gt;    .metric     .estimate id     hidden_units    penalty activation learn_rate\n#&gt;    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;         &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;\n#&gt;  1 sensitivity    0.824  Fold01            2 0.00000147 elu            0.0962\n#&gt;  2 specificity    0.910  Fold01            2 0.00000147 elu            0.0962\n#&gt;  3 brier_class    0.0659 Fold01            2 0.00000147 elu            0.0962\n#&gt;  4 roc_auc        0.967  Fold01            2 0.00000147 elu            0.0962\n#&gt;  5 sensitivity    1      Fold02            2 0.00000147 elu            0.0962\n#&gt;  6 specificity    0.474  Fold02            2 0.00000147 elu            0.0962\n#&gt;  7 brier_class    0.305  Fold02            2 0.00000147 elu            0.0962\n#&gt;  8 roc_auc        0.797  Fold02            2 0.00000147 elu            0.0962\n#&gt;  9 sensitivity    0.941  Fold03            2 0.00000147 elu            0.0962\n#&gt; 10 specificity    0.910  Fold03            2 0.00000147 elu            0.0962\n#&gt; # ℹ 986 more rows\n#&gt; # ℹ 3 more variables: class_weights &lt;dbl&gt;, .estimator &lt;chr&gt;, .config &lt;chr&gt;"
   },
   {
     "objectID": "slides/advanced-02-model-tuning.html#choose-a-parameter-combination",
     "href": "slides/advanced-02-model-tuning.html#choose-a-parameter-combination",
     "title": "2 - Model optimization by tuning",
     "section": "Choose a parameter combination ",
-    "text": "Choose a parameter combination \n\nshow_best(nnet_res, metric = \"brier_class\") |&gt; \n  relocate(.metric, mean) \n#&gt; # A tibble: 5 × 11\n#&gt;   .metric       mean hidden_units   penalty activation  learn_rate class_weights\n#&gt;   &lt;chr&gt;        &lt;dbl&gt;        &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;         &lt;dbl&gt;\n#&gt; 1 brier_class 0.0496           36 0.0000261 elu            0.0562           3.04\n#&gt; 2 brier_class 0.0705           14 0.000178  tanhshrink     0.0329           1   \n#&gt; 3 brier_class 0.0720           18 0.0562    log_sigmoid    0.631           19.4 \n#&gt; 4 brier_class 0.0962           40 0.0215    tanh           0.00293          7.12\n#&gt; 5 brier_class 0.100            44 0.383     log_sigmoid    0.0430          27.5 \n#&gt; # ℹ 4 more variables: .estimator &lt;chr&gt;, n &lt;int&gt;, std_err &lt;dbl&gt;, .config &lt;chr&gt;"
+    "text": "Choose a parameter combination \n\nshow_best(nnet_res, metric = \"brier_class\") |&gt; \n  relocate(.metric, mean) \n#&gt; # A tibble: 5 × 11\n#&gt;   .metric       mean hidden_units    penalty activation learn_rate class_weights\n#&gt;   &lt;chr&gt;        &lt;dbl&gt;        &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;\n#&gt; 1 brier_class 0.0463           36    2.61e-5 elu           0.0562           3.04\n#&gt; 2 brier_class 0.0628           16    8.25e-8 log_sigmo…    0.00171          5.08\n#&gt; 3 brier_class 0.0646           40    2.15e-2 tanh          0.00293          7.12\n#&gt; 4 brier_class 0.0673           48    1.78e-9 relu          0.0112          11.2 \n#&gt; 5 brier_class 0.0694           26    4.64e-9 relu          0.482            9.17\n#&gt; # ℹ 4 more variables: .estimator &lt;chr&gt;, n &lt;int&gt;, std_err &lt;dbl&gt;, .config &lt;chr&gt;"
   },
   {
     "objectID": "slides/advanced-02-model-tuning.html#choose-a-parameter-combination-1",
     "href": "slides/advanced-02-model-tuning.html#choose-a-parameter-combination-1",
     "title": "2 - Model optimization by tuning",
     "section": "Choose a parameter combination ",
-    "text": "Choose a parameter combination \nCreate your own tibble for final parameters or use one of the tune::select_*() functions:\n\nnnet_best &lt;- select_best(nnet_res, metric = \"brier_class\")\nnnet_best\n#&gt; # A tibble: 1 × 6\n#&gt;   hidden_units   penalty activation learn_rate class_weights .config         \n#&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;           \n#&gt; 1           36 0.0000261 elu            0.0562          3.04 pre0_mod18_post0\n\ncollect_metrics(nnet_res) |&gt; \n  inner_join(nnet_best) |&gt; \n  select(.metric, mean)\n#&gt; # A tibble: 4 × 2\n#&gt;   .metric       mean\n#&gt;   &lt;chr&gt;        &lt;dbl&gt;\n#&gt; 1 brier_class 0.0496\n#&gt; 2 roc_auc     0.965 \n#&gt; 3 sensitivity 0.828 \n#&gt; 4 specificity 0.950"
+    "text": "Choose a parameter combination \nCreate your own tibble for final parameters or use one of the tune::select_*() functions:\n\nnnet_best &lt;- select_best(nnet_res, metric = \"brier_class\")\nnnet_best\n#&gt; # A tibble: 1 × 6\n#&gt;   hidden_units   penalty activation learn_rate class_weights .config         \n#&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;           \n#&gt; 1           36 0.0000261 elu            0.0562          3.04 pre0_mod18_post0\n\ncollect_metrics(nnet_res) |&gt; \n  inner_join(nnet_best) |&gt; \n  select(.metric, mean)\n#&gt; # A tibble: 4 × 2\n#&gt;   .metric       mean\n#&gt;   &lt;chr&gt;        &lt;dbl&gt;\n#&gt; 1 brier_class 0.0463\n#&gt; 2 roc_auc     0.967 \n#&gt; 3 sensitivity 0.799 \n#&gt; 4 specificity 0.958"
   },
   {
     "objectID": "slides/advanced-02-model-tuning.html#checking-approximate-calibration",
@@ -11309,7 +11309,7 @@
     "href": "slides/advanced-02-model-tuning.html#multimetric-optimization",
     "title": "2 - Model optimization by tuning",
     "section": "Multimetric optimization ",
-    "text": "Multimetric optimization \n\nshow_best_desirability(\n  nnet_res, \n  maximize(sensitivity),\n  minimize(brier_class),\n  constrain(specificity, low = 0.8, high = 1.0)\n) |&gt; \n  relocate(class_weights, sensitivity, specificity, brier_class, .d_overall) \n#&gt; # A tibble: 5 × 14\n#&gt;   class_weights sensitivity specificity brier_class .d_overall hidden_units\n#&gt;           &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;int&gt;\n#&gt; 1          48.0       0.947       0.811      0.127       0.926           34\n#&gt; 2          33.7       0.941       0.805      0.130       0.919           32\n#&gt; 3          25.5       0.899       0.850      0.101       0.918           28\n#&gt; 4          29.6       0.917       0.830      0.117       0.915           38\n#&gt; 5          19.4       0.852       0.914      0.0720      0.907           18\n#&gt; # ℹ 8 more variables: penalty &lt;dbl&gt;, activation &lt;chr&gt;, learn_rate &lt;dbl&gt;,\n#&gt; #   .config &lt;chr&gt;, roc_auc &lt;dbl&gt;, .d_max_sensitivity &lt;dbl&gt;,\n#&gt; #   .d_min_brier_class &lt;dbl&gt;, .d_box_specificity &lt;dbl&gt;"
+    "text": "Multimetric optimization \n\nshow_best_desirability(\n  nnet_res, \n  maximize(sensitivity),\n  minimize(brier_class),\n  constrain(specificity, low = 0.8, high = 1.0)\n) |&gt; \n  relocate(class_weights, sensitivity, specificity, brier_class, .d_overall) \n#&gt; # A tibble: 5 × 14\n#&gt;   class_weights sensitivity specificity brier_class .d_overall hidden_units\n#&gt;           &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;int&gt;\n#&gt; 1         29.6        0.947       0.859      0.0948      0.940           38\n#&gt; 2         50          0.958       0.841      0.111       0.937           30\n#&gt; 3          7.12       0.899       0.914      0.0646      0.930           40\n#&gt; 4         11.2        0.894       0.914      0.0673      0.925           48\n#&gt; 5         25.5        0.923       0.833      0.111       0.917           28\n#&gt; # ℹ 8 more variables: penalty &lt;dbl&gt;, activation &lt;chr&gt;, learn_rate &lt;dbl&gt;,\n#&gt; #   .config &lt;chr&gt;, roc_auc &lt;dbl&gt;, .d_max_sensitivity &lt;dbl&gt;,\n#&gt; #   .d_min_brier_class &lt;dbl&gt;, .d_box_specificity &lt;dbl&gt;"
   },
   {
     "objectID": "slides/advanced-02-model-tuning.html#however",
@@ -11330,21 +11330,21 @@
     "href": "slides/advanced-02-model-tuning.html#fitting-a-workflow",
     "title": "2 - Model optimization by tuning",
     "section": "Fitting a workflow  ",
-    "text": "Fitting a workflow  \nLet’s say that we want to train the model on the “best” parameter estimates.\nWe can use a tibble of tuning parameters and splice them into the workflow in place of tune():\n\n\n\nset.seed(398)\nnnet_sens_fit &lt;-\n  nnet_wflow |&gt;\n  finalize_workflow(more_sens) |&gt;\n  fit(sim_train)\n\n\n\nnnet_sens_fit |&gt; extract_fit_engine()\n#&gt; Multilayer perceptron\n#&gt; \n#&gt; relu activation,\n#&gt; 34 hidden units,\n#&gt; 1,124 model parameters\n#&gt; 1,499 samples, 30 features, 2 classes \n#&gt; class weights event=47.95833, no_event= 1.00000 \n#&gt; weight decay: 6.812921e-10 \n#&gt; dropout proportion: 0 \n#&gt; batch size: 1350 \n#&gt; learn rate: 0.006556418 \n#&gt; validation loss after 13 epochs: 0.0969"
+    "text": "Fitting a workflow  \nLet’s say that we want to train the model on the “best” parameter estimates.\nWe can use a tibble of tuning parameters and splice them into the workflow in place of tune():\n\n\n\nset.seed(398)\nnnet_sens_fit &lt;-\n  nnet_wflow |&gt;\n  finalize_workflow(more_sens) |&gt;\n  fit(sim_train)\n\n\n\nnnet_sens_fit |&gt; extract_fit_engine()\n#&gt; Multilayer perceptron\n#&gt; \n#&gt; elu activation,\n#&gt; 38 hidden units,\n#&gt; 1,256 model parameters\n#&gt; 1,499 samples, 30 features, 2 classes \n#&gt; class weights event=29.58333, no_event= 1.00000 \n#&gt; weight decay: 1e-05 \n#&gt; dropout proportion: 0 \n#&gt; batch size: 1350 \n#&gt; learn rate: 0.001 \n#&gt; validation loss after 68 epochs: 0.145"
   },
   {
     "objectID": "slides/advanced-02-model-tuning.html#ordering-off-of-the-menu",
     "href": "slides/advanced-02-model-tuning.html#ordering-off-of-the-menu",
     "title": "2 - Model optimization by tuning",
     "section": "Ordering off of the menu  ",
-    "text": "Ordering off of the menu  \nIf we want to choose from the numerically best for an existing metric, there is a simpler function:\n\n\n\nset.seed(398)\nmlp_brier_fit &lt;-\n  nnet_res |&gt;\n  fit_best(metric = \"brier_class\")\n\n\n\nmlp_brier_fit |&gt; extract_fit_engine()\n#&gt; Multilayer perceptron\n#&gt; \n#&gt; elu activation,\n#&gt; 36 hidden units,\n#&gt; 1,190 model parameters\n#&gt; 1,499 samples, 30 features, 2 classes \n#&gt; class weights event=3.041667, no_event=1.000000 \n#&gt; weight decay: 2.610157e-05 \n#&gt; dropout proportion: 0 \n#&gt; batch size: 1350 \n#&gt; learn rate: 0.05623413 \n#&gt; validation loss after 2 epochs: 0.304"
+    "text": "Ordering off of the menu  \nIf we want to choose from the numerically best for an existing metric, there is a simpler function:\n\n\n\nset.seed(398)\nmlp_brier_fit &lt;-\n  nnet_res |&gt;\n  fit_best(metric = \"brier_class\")\n\n\n\nmlp_brier_fit |&gt; extract_fit_engine()\n#&gt; Multilayer perceptron\n#&gt; \n#&gt; elu activation,\n#&gt; 36 hidden units,\n#&gt; 1,190 model parameters\n#&gt; 1,499 samples, 30 features, 2 classes \n#&gt; class weights event=3.041667, no_event=1.000000 \n#&gt; weight decay: 2.610157e-05 \n#&gt; dropout proportion: 0 \n#&gt; batch size: 1350 \n#&gt; learn rate: 0.05623413 \n#&gt; validation loss after 6 epochs: 0.411"
   },
   {
     "objectID": "slides/advanced-02-model-tuning.html#extracting-results",
     "href": "slides/advanced-02-model-tuning.html#extracting-results",
     "title": "2 - Model optimization by tuning",
     "section": "Extracting Results     ",
-    "text": "Extracting Results     \nIf we want to know about the resampled workflow, we can write a function that can return information from tune_grid().\n\nFor example, this one can save the optimization process results:\n\n\n\nextract_iter_hist &lt;- function(wflow) {\n  require(tidymodels)\n  require(tibble)\n  wflow |&gt;\n    extract_fit_engine() |&gt;\n    pluck(\"loss\") |&gt;\n    as_tibble_col(\"loss\") |&gt;\n    mutate(epoch = row_number() - 1)\n}\n\n\n\nmlp_brier_fit |&gt; \n  extract_iter_hist() |&gt; \n  slice(1:5)\n#&gt; # A tibble: 5 × 2\n#&gt;    loss epoch\n#&gt;   &lt;dbl&gt; &lt;dbl&gt;\n#&gt; 1 0.696     0\n#&gt; 2 0.304     1\n#&gt; 3 0.217     2\n#&gt; 4 0.316     3\n#&gt; 5 0.619     4"
+    "text": "Extracting Results     \nIf we want to know about the resampled workflow, we can write a function that can return information from tune_grid().\n\nFor example, this one can save the optimization process results:\n\n\n\nextract_iter_hist &lt;- function(wflow) {\n  require(tidymodels)\n  require(tibble)\n  wflow |&gt;\n    extract_fit_engine() |&gt;\n    pluck(\"loss\") |&gt;\n    as_tibble_col(\"loss\") |&gt;\n    mutate(epoch = row_number() - 1)\n}\n\n\n\nmlp_brier_fit |&gt; \n  extract_iter_hist() |&gt; \n  slice(1:5)\n#&gt; # A tibble: 5 × 2\n#&gt;    loss epoch\n#&gt;   &lt;dbl&gt; &lt;dbl&gt;\n#&gt; 1 0.517     0\n#&gt; 2 0.501     1\n#&gt; 3 0.483     2\n#&gt; 4 0.461     3\n#&gt; 5 0.437     4"
   },
   {
     "objectID": "slides/advanced-02-model-tuning.html#your-turn",
@@ -11771,7 +11771,7 @@
     "href": "slides/advanced-04-feature-engineering-part-one.html#umap-with-recipes",
     "title": "4 - Feature engineering: dummies and embeddings",
     "section": "umap with recipes  ",
-    "text": "umap with recipes  \n\nlibrary(embed)\nset.seed(1234)\n\nrecipe(mpg ~ ., data = mtcars) |&gt;\n  step_umap(all_numeric_predictors()) |&gt;\n  prep() |&gt;\n  bake(NULL)\n#&gt; # A tibble: 32 × 3\n#&gt;      mpg  UMAP1  UMAP2\n#&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n#&gt;  1  21   -1.18   1.80 \n#&gt;  2  21   -1.50   1.68 \n#&gt;  3  22.8  0.511  2.91 \n#&gt;  4  21.4  0.613 -0.787\n#&gt;  5  18.7  1.18  -2.83 \n#&gt;  6  18.1  0.144 -0.242\n#&gt;  7  14.3  1.16  -3.18 \n#&gt;  8  24.4  0.598  1.95 \n#&gt;  9  22.8  0.265  1.60 \n#&gt; 10  19.2 -1.17   0.841\n#&gt; # ℹ 22 more rows"
+    "text": "umap with recipes  \n\nlibrary(embed)\nset.seed(1234)\n\nrecipe(mpg ~ ., data = mtcars) |&gt;\n  step_umap(all_numeric_predictors()) |&gt;\n  prep() |&gt;\n  bake(NULL)\n#&gt; # A tibble: 32 × 3\n#&gt;      mpg  UMAP1 UMAP2\n#&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;\n#&gt;  1  21    1.50   2.26\n#&gt;  2  21    1.26   2.02\n#&gt;  3  22.8  2.17   4.19\n#&gt;  4  21.4 -1.38  -1.67\n#&gt;  5  18.7 -2.67  -2.66\n#&gt;  6  18.1 -0.759 -1.57\n#&gt;  7  14.3 -3.19  -3.37\n#&gt;  8  24.4  1.31   3.91\n#&gt;  9  22.8  2.06   2.46\n#&gt; 10  19.2  0.876  2.31\n#&gt; # ℹ 22 more rows"
   },
   {
     "objectID": "slides/advanced-04-feature-engineering-part-one.html#isomap",
@@ -11925,7 +11925,7 @@
     "href": "slides/advanced-06-postprocessing.html#multimetric-optimization",
     "title": "6 - Postprocessing",
     "section": "Multimetric optimization ",
-    "text": "Multimetric optimization \n\nnnet_thrsh_res |&gt;\n  show_best_desirability(\n    maximize(sensitivity),\n    minimize(brier_class),\n    constrain(specificity, low = 0.8, high = 1.0)\n  ) |&gt;\n  relocate(threshold, sensitivity, specificity, brier_class, .d_overall)\n#&gt; # A tibble: 5 × 14\n#&gt;   threshold sensitivity specificity brier_class .d_overall hidden_units  penalty\n#&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;int&gt;    &lt;dbl&gt;\n#&gt; 1    0.0218       0.935       0.870      0.0449      0.948           36 2.61e- 5\n#&gt; 2    0.250        0.828       0.951      0.0418      0.902           28 2.61e-10\n#&gt; 3    0.209        0.833       0.936      0.0436      0.896            8 1   e-10\n#&gt; 4    0.188        0.833       0.934      0.0445      0.891           18 5.62e- 2\n#&gt; 5    0.0634       0.899       0.890      0.0527      0.884           40 2.15e- 2\n#&gt; # ℹ 7 more variables: activation &lt;chr&gt;, learn_rate &lt;dbl&gt;, .config &lt;chr&gt;,\n#&gt; #   roc_auc &lt;dbl&gt;, .d_max_sensitivity &lt;dbl&gt;, .d_min_brier_class &lt;dbl&gt;,\n#&gt; #   .d_box_specificity &lt;dbl&gt;"
+    "text": "Multimetric optimization \n\nnnet_thrsh_res |&gt;\n  show_best_desirability(\n    maximize(sensitivity),\n    minimize(brier_class),\n    constrain(specificity, low = 0.8, high = 1.0)\n  ) |&gt;\n  relocate(threshold, sensitivity, specificity, brier_class, .d_overall)\n#&gt; # A tibble: 5 × 14\n#&gt;   threshold sensitivity specificity brier_class .d_overall hidden_units  penalty\n#&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;        &lt;int&gt;    &lt;dbl&gt;\n#&gt; 1     0.250       0.853       0.947      0.0425      0.939           28 2.61e-10\n#&gt; 2     0.292       0.822       0.953      0.0405      0.939           38 1   e- 5\n#&gt; 3     0.105       0.882       0.897      0.0470      0.924           48 1.78e- 9\n#&gt; 4     0.209       0.839       0.929      0.0468      0.910            8 1   e-10\n#&gt; 5     0.126       0.852       0.903      0.0526      0.880           42 3.16e- 3\n#&gt; # ℹ 7 more variables: activation &lt;chr&gt;, learn_rate &lt;dbl&gt;, .config &lt;chr&gt;,\n#&gt; #   roc_auc &lt;dbl&gt;, .d_max_sensitivity &lt;dbl&gt;, .d_min_brier_class &lt;dbl&gt;,\n#&gt; #   .d_box_specificity &lt;dbl&gt;"
   },
   {
     "objectID": "slides/advanced-06-postprocessing.html#calibration",
@@ -12007,14 +12007,14 @@
   {
     "objectID": "slides/advanced-08-wrapping-up.html#your-turn",
     "href": "slides/advanced-08-wrapping-up.html#your-turn",
-    "title": "9 - Wrapping up",
+    "title": "8 - Wrapping up",
     "section": "Your turn",
     "text": "Your turn\n\nWhat is one thing you learned that surprised you?\nWhat is one thing you learned that you plan to use?\n\n\n\n−+\n05:00"
   },
   {
     "objectID": "slides/advanced-08-wrapping-up.html#resources-to-keep-learning",
     "href": "slides/advanced-08-wrapping-up.html#resources-to-keep-learning",
-    "title": "9 - Wrapping up",
+    "title": "8 - Wrapping up",
     "section": "Resources to keep learning",
     "text": "Resources to keep learning\n\n\nhttps://www.tidymodels.org/\n\n\n\n\nhttps://www.tmwr.org/\n\n\n\n\nhttp://www.feat.engineering/\n\n\n\n\nhttps://tidymodels.aml4td.org/\n\n\n\n\nhttps://smltar.com/\n\n\n\n\nhttps://feaz-book.com/\n\n\n\nFollow us on Bluesky, Mastodon and at the tidyverse blog for updates!"
   },
@@ -12022,8 +12022,8 @@
     "objectID": "slides/extras-iterative-search.html#startup",
     "href": "slides/extras-iterative-search.html#startup",
     "title": "Extras - Iterative search",
-    "section": "",
-    "text": "library(tidymodels)\n#&gt; ── Attaching packages ──────────────────────────── tidymodels 1.4.1 ──\n#&gt; ✔ broom        1.0.9          ✔ rsample      1.3.1     \n#&gt; ✔ dials        1.4.2          ✔ tailor       0.1.0.9000\n#&gt; ✔ dplyr        1.1.4          ✔ tidyr        1.3.1     \n#&gt; ✔ infer        1.0.9          ✔ tune         2.0.0     \n#&gt; ✔ modeldata    1.5.1          ✔ workflows    1.3.0     \n#&gt; ✔ parsnip      1.3.3          ✔ workflowsets 1.1.1     \n#&gt; ✔ purrr        1.1.0          ✔ yardstick    1.3.2     \n#&gt; ✔ recipes      1.3.1\n#&gt; ── Conflicts ─────────────────────────────── tidymodels_conflicts() ──\n#&gt; ✖ purrr::discard() masks scales::discard()\n#&gt; ✖ dplyr::filter()  masks stats::filter()\n#&gt; ✖ dplyr::lag()     masks stats::lag()\n#&gt; ✖ recipes::step()  masks stats::step()\nlibrary(important)\nlibrary(probably)\n#&gt; \n#&gt; Attaching package: 'probably'\n#&gt; The following objects are masked from 'package:base':\n#&gt; \n#&gt;     as.factor, as.ordered\n\ntidymodels_prefer()\ntheme_set(theme_bw())\noptions(pillar.advice = FALSE, pillar.min_title_chars = Inf)\nmirai::daemons(parallel::detectCores())"
+    "section": "Startup!  ",
+    "text": "Startup!  \n\nlibrary(tidymodels)\nlibrary(important)\nlibrary(probably)\n\ntidymodels_prefer()\ntheme_set(theme_bw())\noptions(pillar.advice = FALSE, pillar.min_title_chars = Inf)\nmirai::daemons(parallel::detectCores())"
   },
   {
     "objectID": "slides/extras-iterative-search.html#more-startup",
@@ -12086,7 +12086,7 @@
     "href": "slides/extras-iterative-search.html#your-turn",
     "title": "Extras - Iterative search",
     "section": "Your turn",
-    "text": "Your turn\n\n\nYour GP makes predictions on two new candidate tuning parameters.\nWe want to minimize error.\nWhich should we choose?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n−+\n03:00"
+    "text": "Your turn\n\n\nYour GP makes predictions on two new candidate tuning parameters.\nWe want to minimize error.\nWhich should we choose?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n−+\n03:00"
   },
   {
     "objectID": "slides/extras-iterative-search.html#gp-fit-ribbon-is-mean---1sd",
@@ -12135,7 +12135,7 @@
     "href": "slides/extras-iterative-search.html#expected-improvement-1",
     "title": "Extras - Iterative search",
     "section": "Expected Improvement",
-    "text": "Expected Improvement\n\n\n\n\n\n\n\n\n\n\nAML4TD, TMwR"
+    "text": "Expected Improvement\n\n\nAML4TD, TMwR"
   },
   {
     "objectID": "slides/extras-iterative-search.html#bo-in-tidymodels",
