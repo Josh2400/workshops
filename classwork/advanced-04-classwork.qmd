@@ -43,7 +43,14 @@ Figure out whether `step_dummy_extract()` or `step_dummy_multi_choice()` is most
 # Your code here!
 
 ```
+## Applying PCA with recipes
 
+Either use the `num_comp` argument.
+
+```{r}
+rec <- recipe(mpg ~ ., data = mtcars) |>
+  step_normalize(all_predictors()) |>
+  step_pca(all_numeric_predictors(), num_comp = 5)
 ## Your turn
 
 Apply PCA using `step_pca()` to `leaf_data` data set.
