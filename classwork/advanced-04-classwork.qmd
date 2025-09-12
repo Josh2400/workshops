@@ -43,6 +43,7 @@ Figure out whether `step_dummy_extract()` or `step_dummy_multi_choice()` is most
 # Your code here!
 
 ```
+
 ## Applying PCA with recipes
 
 Either use the `num_comp` argument.
@@ -51,13 +52,98 @@ Either use the `num_comp` argument.
 rec <- recipe(mpg ~ ., data = mtcars) |>
   step_normalize(all_predictors()) |>
   step_pca(all_numeric_predictors(), num_comp = 5)
-## Your turn
+```
+
+Or using a threshold
+
+```{r}
+rec <- recipe(mpg ~ ., data = mtcars) |>
+  step_normalize(all_predictors()) |>
+  step_pca(all_numeric_predictors(), threshold = 0.8)
+```
+
+## Your Turn
 
 Apply PCA using `step_pca()` to `leaf_data` data set.
 
 Experiment with different values of `num_comp` and or `threshold`.
 
+
 ```{r}
 # Your code here!
 
 ```
+
+## Truncated PCA with recipes
+
+```{r}
+library(embed)
+
+rec <- recipe(mpg ~ ., data = mtcars) |>
+  step_normalize(all_predictors()) |>
+  step_pca_truncated(all_numeric_predictors(), num_comp = 5)
+```
+
+## Sparse PCA with recipes
+
+```{r}
+library(embed)
+
+rec <- recipe(mpg ~ ., data = mtcars) |>
+  step_normalize(all_predictors()) |>
+  step_pca_sparse(all_numeric_predictors(), num_comp = 5, predictor_prop = 0.8)
+```
+
+```{r}
+recipe(mpg ~ ., data = mtcars) |>
+  step_normalize(all_predictors()) |>
+  step_pca_sparse(
+    all_numeric_predictors(),
+    num_comp = 4,
+    predictor_prop = 0.8
+  ) |>
+  prep() |>
+  tidy(number = 2) |>
+  pivot_wider(names_from = component, values_from = value) |>
+  select(-id)
+```
+
+
+## NNMF with recipes
+
+```{r}
+set.seed(1234)
+
+recipe(mpg ~ ., data = mtcars) |>
+  step_nnmf_sparse(all_numeric_predictors(), num_comp = 2) |>
+  prep() |>
+  tidy(number = 1) |>
+  pivot_wider(names_from = component, values_from = value) |>
+  select(-id)
+
+```
+
+## UMAP with recipes
+
+```{r}
+library(embed)
+set.seed(1234)
+
+recipe(mpg ~ ., data = mtcars) |>
+  step_umap(all_numeric_predictors()) |>
+  prep() |>
+  bake(NULL)
+```
+
+## ISomap with recipes
+
+```{r}
+library(embed)
+set.seed(1234)
+
+recipe(mpg ~ ., data = mtcars) |>
+  step_isomap(all_numeric_predictors(), neighbors = 10) |>
+  prep() |>
+  bake(NULL)
+```
+

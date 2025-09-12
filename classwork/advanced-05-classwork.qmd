@@ -19,6 +19,15 @@ theme_set(theme_bw())
 options(pillar.advice = FALSE, pillar.min_title_chars = Inf)
 ```
 
+## Hotel data splitting
+
+```{r}
+set.seed(1234)
+hotel_split <- initial_split(hotel_rates)
+hotel_train <- training(hotel_split)
+hotel_test <- testing(hotel_split)
+```
+
 ## Your turn
 
 Load and explore the `hotel_train` data.
@@ -37,6 +46,22 @@ Apply B-splines to some variables using `step_spline_b()`.
 ```{r}
 # Your code here!
 
+```
+
+## Target encoding in recipes
+
+```{r}
+recipe(avg_price_per_room ~ ., data = hotel_train) |>
+  step_lencode(
+    agent,
+    country,
+    company,
+    outcome = vars("avg_price_per_room"),
+    smooth = TRUE,
+  ) |>
+  prep() |>
+  bake(NULL) |>
+  select(agent, country, company)
 ```
 
 ## Your turn
@@ -71,4 +96,31 @@ Apply date steps to the `arrival_date` variable and try to see if we capture any
 ```{r}
 # Your code here!
 
+```
+
+## time events
+
+```{r}
+library(almanac)
+
+rule_1 <- weekly() |>
+  recur_on_weekdays() |>
+  rsetdiff(hol_christmas())
+
+rule_2 <- monthly(since = "2000-01-01") |>
+  recur_on_interval(3) |>
+  recur_on_day_of_month(1)
+
+rule_3 <- yearly("1997-06-05") |>
+  recur_on_day_of_week("Thursday") |>
+  recur_on_month_of_year(c("Jun", "July", "Aug"))
+```
+
+## `step_time_event()`
+
+```{r}
+rules <- list(rule_1 = rule_1, rule_2 = rule_2, rule_3 = rule_3)
+
+recipe(~arrival_date, data = hotel_rates) |>
+  step_time_event(arrival_date, rules = rules)
 ```
