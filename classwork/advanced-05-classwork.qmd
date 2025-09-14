@@ -1,6 +1,6 @@
 ---
-title: "5 - Iterative Search - Classwork"
-subtitle: "Advanced tidymodels"
+title: "5 - Feature engineering: splines, target encoding and dates"
+subtitle: "Getting More Out of Feature Engineering and Tuning for Machine Learning"
 editor_options: 
   chunk_output_type: console
 ---
@@ -11,128 +11,116 @@ We recommend restarting R between each slide deck!
 
 ```{r}
 library(tidymodels)
-library(probably)
-library(finetune)
-
-# ------------------------------------------------------------------------------
-# Some options
+library(embed)
+library(extrasteps)
 
 tidymodels_prefer()
 theme_set(theme_bw())
 options(pillar.advice = FALSE, pillar.min_title_chars = Inf)
-
-# ------------------------------------------------------------------------------
-# For parallel processing. You can use these if you like:
-
-# cores <- parallelly::availableCores(logical = FALSE)
-# cl <- parallel::makePSOCKcluster(cores)
-# doParallel::registerDoParallel(cl)
-
-# ------------------------------------------------------------------------------
-# Setup the data
-
-data(hotel_rates)
-set.seed(295)
-hotel_rates <- 
-  hotel_rates |> 
-  sample_n(5000) |> 
-  arrange(arrival_date) |> 
-  select(-arrival_date) |>  
-  mutate(
-    company = factor(as.character(company)),
-    country = factor(as.character(country)),
-    agent = factor(as.character(agent))
-  )
-
-set.seed(4028)
-hotel_split <- initial_split(hotel_rates, strata = avg_price_per_room)
-
-hotel_train <- training(hotel_split)
-hotel_test <- testing(hotel_split)
-
-set.seed(472)
-hotel_rs <- vfold_cv(hotel_train, strata = avg_price_per_room)
 ```
 
-## Our Boosting Model
+## Hotel data splitting
 
 ```{r}
-#| label: setup-lgbm
-
-lgbm_spec <- 
-  boost_tree(trees = 1000, learn_rate = tune(), min_n = tune(), 
-             tree_depth = tune(), loss_reduction = tune(), 
-             stop_iter = tune()) |> 
-  set_mode("regression") |> 
-  set_engine("lightgbm", num_threads = 1)
-
-lgbm_wflow <- workflow(avg_price_per_room ~ ., lgbm_spec)
-
-lgbm_param <- 
-  lgbm_wflow |>
-    extract_parameter_set_dials() |>
-    update(learn_rate = learn_rate(c(-5, -1)))
+set.seed(1234)
+hotel_split <- initial_split(hotel_rates)
+hotel_train <- training(hotel_split)
+hotel_test <- testing(hotel_split)
 ```
 
-## An Initial Grid
+## Your turn
 
-```{r tuning} 
-#| label: lgb-bo-initial
-#| cache: true
-reg_metrics <- metric_set(mae, rsq)
+Load and explore the `hotel_train` data.
 
-set.seed(12)
-init_res <-
-  lgbm_wflow |>
-  tune_grid(
-    resamples = hotel_rs,
-    grid = nrow(lgbm_param) + 2,
-    param_info = lgbm_param,
-    metrics = reg_metrics
-  )
-
-show_best(init_res, metric = "mae") |> select(-.metric, -.estimator)
-```
-
-## BO using tidymodels
-
-```{r tuning} 
-#| label: lgb-bo
-#| cache: true
-#| message: true
-#| code-line-numbers: "1|6,8-11|"
-
-ctrl_bo <- control_bayes(verbose_iter = TRUE) # <- for demonstration
-
-set.seed(15)
-lgbm_bayes_res <-
-  lgbm_wflow |>
-  tune_bayes(
-    resamples = hotel_rs,
-    initial = init_res,     # <- initial results
-    iter = 20,
-    param_info = lgbm_param,
-    control = ctrl_bo,
-    metrics = reg_metrics
-  )
-```
-
-
-## Your turn {transition="slide-in"}
-
-*Let's try a different acquisition function: `conf_bound(kappa)`.*
-
-*We'll use the `objective` argument to set it.*
-
-*Choose your own `kappa` value:*
-
- - *Larger values will explore the space more.* 
- - *"Large" values are usually less than one.*
-
-**Bonus points**: Before the optimization is done, press `<esc>` and see what happens.
-
+Comes loaded with the modeldata package.
 
 ```{r}
 # Your code here!
 
+```
+
+## Your turn
+
+Apply B-splines to some variables using `step_spline_b()`.
+
+```{r}
+# Your code here!
+
+```
+
+## Target encoding in recipes
+
+```{r}
+recipe(avg_price_per_room ~ ., data = hotel_train) |>
+  step_lencode(
+    agent,
+    country,
+    company,
+    outcome = vars("avg_price_per_room"),
+    smooth = TRUE,
+  ) |>
+  prep() |>
+  bake(NULL) |>
+  select(agent, country, company)
+```
+
+## Your turn
+
+Apply target encoding to the data set, see how it affects different predictors, not just the ones we listed here.
+
+- `step_lencode()`
+- `step_lencode_glm()`
+- `step_lencode_bayes()`
+- `step_lencode_mixed()`
+
+```{r}
+# Your code here!
+
+```
+
+## Your turn
+
+Explore the `arrival_date` variable and its relation to `avg_price_per_room`.
+
+The lubridate package might provide helpful.
+
+```{r}
+# Your code here!
+
+```
+
+## Your turn
+
+Apply date steps to the `arrival_date` variable and try to see if we capture anything about `avg_price_per_room`.
+
+```{r}
+# Your code here!
+
+```
+
+## time events
+
+```{r}
+library(almanac)
+
+rule_1 <- weekly() |>
+  recur_on_weekdays() |>
+  rsetdiff(hol_christmas())
+
+rule_2 <- monthly(since = "2000-01-01") |>
+  recur_on_interval(3) |>
+  recur_on_day_of_month(1)
+
+rule_3 <- yearly("1997-06-05") |>
+  recur_on_day_of_week("Thursday") |>
+  recur_on_month_of_year(c("Jun", "July", "Aug"))
+```
+
+## `step_time_event()`
+
+```{r}
+rules <- list(rule_1 = rule_1, rule_2 = rule_2, rule_3 = rule_3)
+
+recipe(~arrival_date, data = hotel_rates) |>
+  step_time_event(arrival_date, rules = rules)
 ```

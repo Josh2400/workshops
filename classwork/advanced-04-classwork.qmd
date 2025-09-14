@@ -1,6 +1,6 @@
 ---
-title: "4 - Grid Search via Racing - Classwork"
-subtitle: "Advanced tidymodels"
+title: "4 - Feature engineering: dummies and embeddings"
+subtitle: "Getting More Out of Feature Engineering and Tuning for Machine Learning"
 editor_options: 
   chunk_output_type: console
 ---
@@ -9,105 +9,141 @@ We recommend restarting R between each slide deck!
 
 ## Setup
 
-Setup from deck 3
-
 ```{r}
 library(tidymodels)
-library(textrecipes)
-library(bonsai)
+library(embed)
+library(extrasteps)
 
-# Max's usual settings: 
 tidymodels_prefer()
 theme_set(theme_bw())
-options(
-  pillar.advice = FALSE, 
-  pillar.min_title_chars = Inf
-)
+options(pillar.advice = FALSE, pillar.min_title_chars = Inf)
 
-reg_metrics <- metric_set(mae, rsq)
-
-data(hotel_rates)
-set.seed(295)
-hotel_rates <- 
-  hotel_rates |> 
-  sample_n(5000) |> 
-  arrange(arrival_date) |> 
-  select(-arrival_date) |> 
-  mutate(
-    company = factor(as.character(company)),
-    country = factor(as.character(country)),
-    agent = factor(as.character(agent))
-  )
-
-set.seed(4028)
-hotel_split <-
-  initial_split(hotel_rates, strata = avg_price_per_room)
-
-hotel_train <- training(hotel_split)
-hotel_test <- testing(hotel_split)
-
-set.seed(472)
-hotel_rs <- vfold_cv(hotel_train, strata = avg_price_per_room)
-
-hotel_rec <-
-  recipe(avg_price_per_room ~ ., data = hotel_train) |>
-  step_YeoJohnson(lead_time) |>
-  step_dummy_hash(agent,   num_terms = tune("agent hash")) |>
-  step_dummy_hash(company, num_terms = tune("company hash")) |>
-  step_zv(all_predictors())
-
-lgbm_spec <- 
-  boost_tree(trees = tune(), learn_rate = tune(), min_n = tune()) |> 
-  set_mode("regression") |> 
-  set_engine("lightgbm", num_threads = 1)
-
-lgbm_wflow <- workflow(hotel_rec, lgbm_spec)
-
-lgbm_param <-
-  lgbm_wflow |>
-  extract_parameter_set_dials() |>
-  update(`agent hash`   = num_hash(c(3, 8)),
-         `company hash` = num_hash(c(3, 8)))
+# Load our example data for this section
+"https://github.com/tidymodels/workshops/raw/refs/heads/2025-GMOFETML/slides/leaf_data.RData" |>
+  url() |>
+  load()
 ```
-
-## Racing 
-
-```{r } 
-# Let's use a larger grid
-set.seed(8945)
-lgbm_grid <- 
-  lgbm_param |> 
-  grid_space_filling(size = 50)
-
-library(finetune)
-
-set.seed(9)
-lgbm_race_res <-
-  lgbm_wflow |>
-  tune_race_anova(
-    resamples = hotel_rs,
-    grid = lgbm_grid, 
-    metrics = reg_metrics
-  )
-```
-
-```{r}
-show_best(lgbm_race_res, metric = "mae")
-```
-
-```{r}
-plot_race(lgbm_race_res) + 
-  scale_x_continuous(breaks = pretty_breaks())
-```
-
 
 ## Your turn
 
-Run `tune_race_anova()` with a different seed.
+Load and explore the leaf data.
 
-Did you get the same or similar results?
+Make time to look at the `edge` column and think about how one would encode it into numerics.
 
 ```{r}
 # Your code here!
 
 ```
+
+## Your turn
+
+Figure out whether `step_dummy_extract()` or `step_dummy_multi_choice()` is most appropriate on the `edge` variable in `leaf_data` and apply it.
+
+```{r}
+# Your code here!
+
+```
+
+## Applying PCA with recipes
+
+Either use the `num_comp` argument.
+
+```{r}
+rec <- recipe(mpg ~ ., data = mtcars) |>
+  step_normalize(all_predictors()) |>
+  step_pca(all_numeric_predictors(), num_comp = 5)
+```
+
+Or using a threshold
+
+```{r}
+rec <- recipe(mpg ~ ., data = mtcars) |>
+  step_normalize(all_predictors()) |>
+  step_pca(all_numeric_predictors(), threshold = 0.8)
+```
+
+## Your Turn
+
+Apply PCA using `step_pca()` to `leaf_data` data set.
+
+Experiment with different values of `num_comp` and or `threshold`.
+
+
+```{r}
+# Your code here!
+
+```
+
+## Truncated PCA with recipes
+
+```{r}
+library(embed)
+
+rec <- recipe(mpg ~ ., data = mtcars) |>
+  step_normalize(all_predictors()) |>
+  step_pca_truncated(all_numeric_predictors(), num_comp = 5)
+```
+
+## Sparse PCA with recipes
+
+```{r}
+library(embed)
+
+rec <- recipe(mpg ~ ., data = mtcars) |>
+  step_normalize(all_predictors()) |>
+  step_pca_sparse(all_numeric_predictors(), num_comp = 5, predictor_prop = 0.8)
+```
+
+```{r}
+recipe(mpg ~ ., data = mtcars) |>
+  step_normalize(all_predictors()) |>
+  step_pca_sparse(
+    all_numeric_predictors(),
+    num_comp = 4,
+    predictor_prop = 0.8
+  ) |>
+  prep() |>
+  tidy(number = 2) |>
+  pivot_wider(names_from = component, values_from = value) |>
+  select(-id)
+```
+
+
+## NNMF with recipes
+
+```{r}
+set.seed(1234)
+
+recipe(mpg ~ ., data = mtcars) |>
+  step_nnmf_sparse(all_numeric_predictors(), num_comp = 2) |>
+  prep() |>
+  tidy(number = 1) |>
+  pivot_wider(names_from = component, values_from = value) |>
+  select(-id)
+
+```
+
+## UMAP with recipes
+
+```{r}
+library(embed)
+set.seed(1234)
+
+recipe(mpg ~ ., data = mtcars) |>
+  step_umap(all_numeric_predictors()) |>
+  prep() |>
+  bake(NULL)
+```
+
+## ISomap with recipes
+
+```{r}
+library(embed)
+set.seed(1234)
+
+recipe(mpg ~ ., data = mtcars) |>
+  step_isomap(all_numeric_predictors(), neighbors = 10) |>
+  prep() |>
+  bake(NULL)
+```
+
