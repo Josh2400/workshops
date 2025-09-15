@@ -135,10 +135,10 @@ window.Quarto = {
 
 <link rel="stylesheet" href="../styles.css">
 <meta property="og:title" content="Annotations – Machine learning with tidymodels">
-<meta property="og:image" content="https://workshops.tidymodels.org/slides/figures/early-stopping-1.svg">
+<meta property="og:image" content="https://workshops.tidymodels.org/slides/figures/isomap-unknown-1.svg">
 <meta property="og:site_name" content="Machine learning with tidymodels">
 <meta name="twitter:title" content="Annotations – Machine learning with tidymodels">
-<meta name="twitter:image" content="https://workshops.tidymodels.org/slides/figures/early-stopping-1.svg">
+<meta name="twitter:image" content="https://workshops.tidymodels.org/slides/figures/isomap-unknown-1.svg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -278,7 +278,7 @@ window.Quarto = {
 </div>
 <p>If we <em>don’t</em> set the seed, R uses the clock time and the process ID to create a seed. This isn’t reproducible.</p>
 <p>Since we want our code to be reproducible, we set the seeds before random numbers are used.</p>
-<p>In theory, you can set the seed once at the start of a script. However, if we do interactive data analysis, we might unwittingly use random numbers while coding. In that case, the stream is not the same and we don’t get reproducible results.</p>
+<p>In theory, you can set the seed once at the start of a script. However, if we do interactive data analysis, we might unwittingly use random numbers while coding. In that case, the stream is not the same, and we don’t get reproducible results.</p>
 <p>The value of the seed is an integer and really has no meaning. Max has a script to generate random integers to use as seeds to “spread the randomness around”. It is basically:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">"set.seed("</span>, <span class="fu">sample.int</span>(<span class="dv">10000</span>, <span class="dv">5</span>), <span class="st">")"</span>, <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
@@ -290,9 +290,31 @@ window.Quarto = {
 </div>
 <hr size="5">
 </section>
+</section>
+<section id="introduction-3---what-makes-a-model" class="level1">
+<h1>Introduction 3 - What Makes A Model?</h1>
+<section id="what-is-wrong-with-this" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-wrong-with-this">What is wrong with this?</h2>
+<p>If we treat the preprocessing as a separate task, it raises the risk that we might accidentally overfit to the data at hand.</p>
+<p>For example, someone might estimate something from the entire data set (such as the principal components) and treat that data as if it were known (and not estimated). Depending on what was done with the data, the consequences of doing that could be:</p>
+<ul>
+<li>Your performance metrics are slightly-to-moderately optimistic (e.g., you might think your accuracy is 85% when it is actually 75%)</li>
+<li>A consequential component of the analysis is not right, and the model just doesn’t work.</li>
+</ul>
+<p>The big issue here is that you won’t be able to figure this out until you get a new piece of data, such as the test set.</p>
+<p>A really good example of this is in <a href="https://pubmed.ncbi.nlm.nih.gov/11983868/">‘Selection bias in gene extraction on the basis of microarray gene-expression data’</a>. The authors re-analyze a previous publication and show that the original researchers did not include feature selection in the workflow. Because of that, their performance statistics were extremely optimistic. In one case, they could do the original analysis on complete noise and still achieve zero errors.</p>
+<p>Generally speaking, this problem is referred to as <a href="https://en.wikipedia.org/wiki/Leakage_(machine_learning)">data leakage</a>. Some other references:</p>
+<ul>
+<li><a href="https://bookdown.org/max/FES/selection-overfitting.html">Overfitting to Predictors and External Validation</a></li>
+<li><a href="https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/hash/757b505cfd34c64c85ca5b5690ee5293-Abstract-round2.html">Are We Learning Yet? A Meta Review of Evaluation Failures Across Machine Learning</a></li>
+<li><a href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=Navigating+the+pitfalls+of+applying+machine+learning+in+genomics&amp;btnG=">Navigating the pitfalls of applying machine learning in genomics</a></li>
+<li><a href="https://academic.oup.com/bioinformatics/article/23/19/2507/185254">A review of feature selection techniques in bioinformatics</a></li>
+<li><a href="https://www.jmlr.org/papers/volume11/cawley10a/cawley10a.pdf">On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation</a></li>
+</ul>
+</section>
 <section id="understand-your-model" class="level2">
 <h2 class="anchored" data-anchor-id="understand-your-model">Understand your model</h2>
-<p>We’ve abbreviated the code necessary to make the exact plot on the previous slide. The full code is:</p>
+<p>On the next slide, we’ve abbreviated the code necessary to make this plot. If you want to replicate the plot exactly, you’ll need:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>split_fun <span class="ot">&lt;-</span> <span class="cf">function</span>(x, labs, digits, varlen, faclen) {</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(labs)) {</span>
@@ -317,28 +339,6 @@ window.Quarto = {
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">clip.right.labs =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">split.fun =</span> split_fun</span>
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="introduction-3---what-makes-a-model" class="level1">
-<h1>Introduction 3 - What Makes A Model?</h1>
-<section id="what-is-wrong-with-this" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-wrong-with-this">What is wrong with this?</h2>
-<p>If we treat the preprocessing as a separate task, it raises the risk that we might accidentally overfit to the data at hand.</p>
-<p>For example, someone might estimate something from the entire data set (such as the principle components) and treat that data as if it were known (and not estimated). Depending on the what was done with the data, consequences in doing that could be:</p>
-<ul>
-<li>Your performance metrics are slightly-to-moderately optimistic (e.g.&nbsp;you might think your accuracy is 85% when it is actually 75%)</li>
-<li>A consequential component of the analysis is not right and the model just doesn’t work.</li>
-</ul>
-<p>The big issue here is that you won’t be able to figure this out until you get a new piece of data, such as the test set.</p>
-<p>A really good example of this is in <a href="https://pubmed.ncbi.nlm.nih.gov/11983868/">‘Selection bias in gene extraction on the basis of microarray gene-expression data’</a>. The authors re-analyze a previous publication and show that the original researchers did not include feature selection in the workflow. Because of that, their performance statistics were extremely optimistic. In one case, they could do the original analysis on complete noise and still achieve zero errors.</p>
-<p>Generally speaking, this problem is referred to as <a href="https://en.wikipedia.org/wiki/Leakage_(machine_learning)">data leakage</a>. Some other references:</p>
-<ul>
-<li><a href="https://bookdown.org/max/FES/selection-overfitting.html">Overfitting to Predictors and External Validation</a></li>
-<li><a href="https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/hash/757b505cfd34c64c85ca5b5690ee5293-Abstract-round2.html">Are We Learning Yet? A Meta Review of Evaluation Failures Across Machine Learning</a></li>
-<li><a href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=Navigating+the+pitfalls+of+applying+machine+learning+in+genomics&amp;btnG=">Navigating the pitfalls of applying machine learning in genomics</a></li>
-<li><a href="https://academic.oup.com/bioinformatics/article/23/19/2507/185254">A review of feature selection techniques in bioinformatics</a></li>
-<li><a href="https://www.jmlr.org/papers/volume11/cawley10a/cawley10a.pdf">On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation</a></li>
-</ul>
 <hr size="5">
 </section>
 </section>
@@ -349,11 +349,7 @@ window.Quarto = {
 <p>The Brier score measures how close a model probability estimate is to its best possible value (i.e., zero or one).</p>
 <p>In the best case, the model is perfect, and every prediction equals 0.0 or 1.0 (depending on the true class). In this case, the Brier score is zero.</p>
 <p>When the model is uninformative and there are two classes, the worst-case values range from 0.25 to about 0.50. Imagine that the model predicts the same noninformative prediction of 50% (basically “¯\<em>(ツ)</em>/¯”). In that case, every prediction is either <span class="math inline">\((0.00 - 0.50)^2\)</span> or <span class="math inline">\((1.00 - 0.50)^2\)</span>. The average of those is 0.25.</p>
-<p>There are many different ways a model can be bad though, and some of these will produce Brier scores between 0.25 and 0.50.</p>
-</section>
-<section id="dangers-of-overfitting" class="level2">
-<h2 class="anchored" data-anchor-id="dangers-of-overfitting">Dangers of overfitting</h2>
-<p>See the <a href="https://aml4td.org/chapters/overfitting.html">“Overfitting” chapter</a> of AML4TD for more information.</p>
+<p>There are many different ways a model can be bad, though, and some of these will produce Brier scores between 0.25 and 0.50.</p>
 </section>
 <section id="where-are-the-fitted-models" class="level2">
 <h2 class="anchored" data-anchor-id="where-are-the-fitted-models">Where are the fitted models?</h2>
@@ -367,17 +363,8 @@ window.Quarto = {
 <hr size="5">
 </section>
 </section>
-<section id="advanced-2---feature-engineering" class="level1">
-<h1>Advanced 2 - Feature Engineering</h1>
-<section id="resampling-strategy" class="level2">
-<h2 class="anchored" data-anchor-id="resampling-strategy">Resampling Strategy</h2>
-<p>These data have a time component, and while not a typical time series data set, we have the option to use a time series resampling method.</p>
-<p>An example is shown in the extra slides “Case Study on Transportation”.</p>
-<p>Consider the agent data. Cross-validation may not group all of an agent’s data into the analysis or assessment sets. In this case, our analysis data might have future data that is later than the agent’s data in the assessment set.</p>
-</section>
-</section>
-<section id="advanced-3---tuning-hyperparameters" class="level1">
-<h1>Advanced 3 - Tuning Hyperparameters</h1>
+<section id="advanced-2---model-optimization-by-tuning" class="level1">
+<h1>Advanced 2 - Model optimization by tuning</h1>
 <section id="different-types-of-grids" class="level2">
 <h2 class="anchored" data-anchor-id="different-types-of-grids">Different types of grids</h2>
 <p>More on space-filling designs in Chapters <a href="https://bookdown.org/rbg/surrogates/chap4.html">4</a> and <a href="https://bookdown.org/rbg/surrogates/chap5.html">5</a> of <em>Surrogates: Gaussian process modeling, design, and optimization for the applied sciences</em>.</p>
@@ -385,16 +372,16 @@ window.Quarto = {
 </section>
 <section id="extract-and-update-parameters" class="level2">
 <h2 class="anchored" data-anchor-id="extract-and-update-parameters">Extract and update parameters</h2>
-<p>In about 90% of the cases, the dials function that you use to update the parameter range has the same name as the argument. For example, if you were to update the <code>mtry</code> parameter in a random forests model, the code would look like</p>
+<p>In about 90% of the cases, the dials function that you use to update the parameter range has the same name as the argument. For example, if you were to update the <code>mtry</code> parameter in a random forest model, the code would look like</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>parameter_object <span class="sc">|&gt;</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update</span>(<span class="at">mtry =</span> <span class="fu">mtry</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">100</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>There are some cases where the parameter function, or its associated values, are different from the argument name.</p>
-<p>For example, with <code>step_spline_naturall()</code>, we might want to tune the <code>deg_free</code> argument (for the degrees of freedom of a spline function. ). In this case, the argument name is <code>deg_free</code> but we update it with <code>spline_degree()</code>.</p>
+<p>In some cases, the parameter function or its associated values differ from the argument name.</p>
+<p>For example, with <code>step_spline_naturall()</code>, we might want to tune the <code>deg_free</code> argument (for the degrees of freedom of a spline function). In this case, the argument name is <code>deg_free</code>, but we update it with <code>spline_degree()</code>.</p>
 <p><code>deg_free</code> represents the general concept of degrees of freedom and could be associated with many different things. For example, if we ever had an argument that was the number of degrees of freedom for a <span class="math inline">\(t\)</span> distribution, we would call that argument <code>deg_free</code>.</p>
-<p>For splines, we probably want a wider range for the degrees of freedom. We made a specialized function called <code>spline_degree()</code> to be used in these cases.</p>
-<p>How can you tell when this happens? There is a helper function called <code>tunable()</code> and that gives information on how we make the default ranges for parameters. There is a column in these objects names <code>call_info</code>:</p>
+<p>We probably want a wider range of degrees of freedom for splines. To this end, we created a specialized function called <code>spline_degree()</code>.</p>
+<p>How can you tell when this happens? There is a helper function called <code>tunable()</code>, and that gives information on how we make the default ranges for parameters. There is a column in these objects names <code>call_info</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ns_tunable <span class="ot">&lt;-</span> </span>
@@ -419,8 +406,8 @@ window.Quarto = {
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1]  2 15</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="grid-search" class="level2">
-<h2 class="anchored" data-anchor-id="grid-search">Grid Search</h2>
+<section id="neural-network-tuning" class="level2">
+<h2 class="anchored" data-anchor-id="neural-network-tuning">Neural network tuning</h2>
 <p>There might be some warnings that</p>
 <blockquote class="blockquote">
 <p>“Early stopping occurred at epoch 3 due to numerical overflow of the loss function.”</p>
@@ -440,41 +427,60 @@ window.Quarto = {
 <li>future is more mature and is geared towards users and developers.</li>
 <li>mirai contains its own queuing system and can be more efficient in allocating work.</li>
 </ul>
+<hr size="5">
 </section>
-<section id="early-stopping-for-boosted-trees" class="level2">
-<h2 class="anchored" data-anchor-id="early-stopping-for-boosted-trees">Early stopping for boosted trees</h2>
-<p>When deciding on the number of boosting iterations, there are two main strategies:</p>
-<ul>
-<li><p>Directly tune it (<code>trees = tune()</code>)</p></li>
-<li><p>Set it to one value and tune the number of early stopping iterations (<code>trees = 500</code>, <code>stop_iter = tune()</code>).</p></li>
-</ul>
-<p>Early stopping is when we monitor the performance of the model. If the model doesn’t make any improvements for <code>stop_iter</code> iterations, training stops.</p>
-<p>Here’s an example where, after eleven iterations, performance starts to get worse.</p>
+</section>
+<section id="advanced-4---feature-engineering-dummies-and-embeddings" class="level1">
+<h1>Advanced 4 - Feature Engineering: dummies and embeddings</h1>
+<section id="isomap-with-recipes" class="level2">
+<h2 class="anchored" data-anchor-id="isomap-with-recipes">isomap with recipes</h2>
+<p>The results from Isomap, unlike UMAP, cannot be distorted in the same way. Here, the number of neighbors changes between the charts. Each of the charts is an application of Isomap on the same completely random data. The points are in different locations, but none of the charts appear to show any patterns.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="figures/early-stopping-1.svg" class="img-fluid figure-img"></p>
+<p><img src="figures/isomap-unknown-1.svg" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>This is likely due to over-fitting so we stop the model at eleven boosting iterations.</p>
-<p>Early stopping usually has good results and takes far less time.</p>
-<p>We <em>could</em> an engine argument called <code>validation</code> here. That’s not an argument to any function in the lightgbm package.</p>
-<p>bonsai has its own wrapper around (<code>lightgbm::lgb.train()</code>) called <code>bonsai::train_lightgbm()</code>. We use that here and it has a <code>validation</code> argument.</p>
-<p>How would you know that? There are a few different ways:</p>
-<ul>
-<li>Look at the documentation in <code>?boost_tree</code> and click on the <code>lightgbm</code> entry in the engine list.</li>
-<li>Check out the pkgdown reference website <a href="https://parsnip.tidymodels.org/reference/index.html" class="uri">https://parsnip.tidymodels.org/reference/index.html</a></li>
-<li>Run the <code>translate()</code> function on the parsnip specification object.</li>
-</ul>
-<p>The first two options are best since they tell you a lot more about the particularities of each model engine (there are a lot for lightgbm).</p>
-<hr size="5">
 </section>
 </section>
-<section id="advanced-4---iterative-search" class="level1">
-<h1>Advanced 4 - Iterative Search</h1>
+<section id="advanced-extras---effect-encodings" class="level1">
+<h1>Advanced Extras - Effect Encodings</h1>
+<section id="per-agent-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="per-agent-statistics">Per-agent statistics</h2>
+<p>The effect encoding method essentially takes the effect of a variable, like an agent, and creates a data column for that effect. In our example, the agent’s effect on the ADR is quantified by a model and then added as a data column to be used in the model.</p>
+<p>Suppose agent Max has a single reservation in the data, with an ADR of €200. If we use a naive estimate for Max’s effect, the model is told that Max should always produce an effect of €200. That’s a very poor estimate since it is from a single data point.</p>
+<p>Contrast this with seasoned agent Davis, who has taken 250 reservations with an average ADR of €100. Davis’s mean is more predictive because it is estimated with better data (i.e., more total reservations). Partial pooling leverages the entire data set and can borrow strength from all of the agents. It is a common tool in Bayesian estimation and non-Bayesian mixed models. If an agent’s data is of good quality, the partial pooling effect estimate is closer to the raw mean. Max’s data is not great and is “shrunk” towards the center of the overall average. Since there is so little known about Max’s reservation history, this is a better effect estimate (until more data is available for him).</p>
+<p>The Stan documentation has a pretty good vignette on this: <a href="https://cran.r-project.org/web/packages/rstanarm/vignettes/pooling.html" class="uri">https://cran.r-project.org/web/packages/rstanarm/vignettes/pooling.html</a></p>
+<p>Also, <em>Bayes Rules!</em> has a nice section on this: <a href="https://www.bayesrulesbook.com/chapter-15.html" class="uri">https://www.bayesrulesbook.com/chapter-15.html</a></p>
+<p>Since this example has a numeric outcome, partial pooling is very similar to the James–Stein estimator: <a href="https://en.wikipedia.org/wiki/James–Stein_estimator" class="uri">https://en.wikipedia.org/wiki/James–Stein_estimator</a></p>
+</section>
+<section id="agent-effects" class="level2">
+<h2 class="anchored" data-anchor-id="agent-effects">Agent effects</h2>
+<p>Effect encoding might result in a somewhat circular argument: the column is more likely to be important to the model since it is the output of a separate model. The risk here is that we might overfit the effect to the data. For this reason, it is super important to verify that we aren’t overfitting by checking with resampling (or a validation set).</p>
+<p>Partial pooling somewhat lowers the risk of overfitting since it tends to correct for agents with small sample sizes. However, it can’t correct for improper data usage or data leakage.</p>
+</section>
+</section>
+<section id="advanced-extras---case-study-on-transportation" class="level1">
+<h1>Advanced Extras - Case Study on Transportation</h1>
+<section id="a-recipe---handle-correlations" class="level2">
+<h2 class="anchored" data-anchor-id="a-recipe---handle-correlations">A recipe - handle correlations</h2>
+<p>In this code chunk, what’s the story with <code>!!stations</code>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>chi_pca_rec <span class="ot">&lt;-</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  chi_rec <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_normalize</span>(<span class="fu">all_of</span>(<span class="sc">!!</span>stations)) <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_pca</span>(<span class="fu">all_of</span>(<span class="sc">!!</span>stations), <span class="at">num_comp =</span> <span class="fu">tune</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>stations</code> is a vector of names of 20 columns that we want to use in the steps. If the list were shorter, we could type them in (e.g., <code>c("col1", "col2")</code>, etc.).</p>
+<p>The vector lives in our global workspace, and if we are in parallel, the worker processes might not have access to <code>stations</code>. The <code>!!</code> (frequently said as “bang bang”) inserts the actual contents of the vector into the <code>all_of()</code> calls so that it looks like you just typed it in.</p>
+<p>This means that the parallel process workers have a copy of the data in their reach, and the code will run without error.</p>
+</section>
+</section>
+<section id="advanced-extras---iterative-search" class="level1">
+<h1>Advanced extras - Iterative Search</h1>
 <section id="gaussian-processes-and-optimization" class="level2">
 <h2 class="anchored" data-anchor-id="gaussian-processes-and-optimization">Gaussian Processes and Optimization</h2>
 <p>Some other references for GP’s:</p>
@@ -492,74 +498,6 @@ window.Quarto = {
 <li><em>Bayesian Optimization</em>, Chapter 6 <a href="https://github.com/bayesoptbook/bayesoptbook.github.io/tree/master/book">(pdf)</a></li>
 <li><em>Gaussian Processes for Machine Learning</em></li>
 </ul>
-</section>
-</section>
-<section id="advanced-4---feature-engieering-dummies-and-embeddings" class="level1">
-<h1>Advanced 4 - Feature Engieering: dummies and embeddings</h1>
-<section id="isomap-with-recipes" class="level2">
-<h2 class="anchored" data-anchor-id="isomap-with-recipes">isomap with recipes</h2>
-<p>The results from isomap unlike UMAP is not able to be distorted in the same way. Here the number of nieghbors change between the charts. Each of the charts are an application of isomap on the same completely random data. The points are in different locations but none of the charts appear to show any patterns.</p>
-<div class="cell">
-<pre><code>#&gt; Warning: The `x` argument of `as_tibble.matrix()` must have unique column
-#&gt; names if `.name_repair` is omitted as of tibble 2.0.0.
-#&gt; ℹ Using compatibility `.name_repair`.
-#&gt; 2025-09-12 16:16:12.79407: Isomap START
-#&gt; 2025-09-12 16:16:12.79438: constructing knn graph
-#&gt; 2025-09-12 16:16:12.809287: calculating geodesic distances
-#&gt; 2025-09-12 16:16:12.811557: Classical Scaling
-#&gt; 2025-09-12 16:16:12.906783: Isomap START
-#&gt; 2025-09-12 16:16:12.906994: constructing knn graph
-#&gt; 2025-09-12 16:16:12.915278: calculating geodesic distances
-#&gt; 2025-09-12 16:16:12.916754: Classical Scaling
-#&gt; 2025-09-12 16:16:13.004841: Isomap START
-#&gt; 2025-09-12 16:16:13.005053: constructing knn graph
-#&gt; 2025-09-12 16:16:13.013953: calculating geodesic distances
-#&gt; 2025-09-12 16:16:13.016004: Classical Scaling
-#&gt; 2025-09-12 16:16:13.12789: Isomap START
-#&gt; 2025-09-12 16:16:13.128084: constructing knn graph
-#&gt; 2025-09-12 16:16:13.139414: calculating geodesic distances
-#&gt; 2025-09-12 16:16:13.142409: Classical Scaling</code></pre>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="figures/umap-unknown-1.svg" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="advanced-extras---effect-encodings" class="level1">
-<h1>Advanced Extras - Effect Encodings</h1>
-<section id="per-agent-statistics" class="level2">
-<h2 class="anchored" data-anchor-id="per-agent-statistics">Per-agent statistics</h2>
-<p>The effect encoding method essentially takes the effect of a variable, like agent, and makes a data column for that effect. In our example, affect of the agent on the ADR is quantified by a model and then added as a data column to be used in the model.</p>
-<p>Suppose agent Max has a single reservation in the data and it had an ADR of €200. If we used a naive estimate for Max’s effect, the model is being told that Max should always produce an effect of €200. That’s a very poor estimate since it is from a single data point.</p>
-<p>Contrast this with seasoned agent Davis, who has taken 250 reservations with an average ADR of €100. Davis’s mean is more predictive because it is estimated with better data (i.e., more total reservations). Partial pooling leverages the entire data set and can borrow strength from all of the agents. It is a common tool in Bayesian estimation and non-Bayesian mixed models. If a agent’s data is of good quality, the partial pooling effect estimate is closer to the raw mean. Max’s data is not great and is “shrunk” towards the center of the overall average. Since there is so little known about Max’s reservation history, this is a better effect estimate (until more data is available for him).</p>
-<p>The Stan documentation has a pretty good vignette on this: <a href="https://cran.r-project.org/web/packages/rstanarm/vignettes/pooling.html" class="uri">https://cran.r-project.org/web/packages/rstanarm/vignettes/pooling.html</a></p>
-<p>Also, <em>Bayes Rules!</em> has a nice section on this: <a href="https://www.bayesrulesbook.com/chapter-15.html" class="uri">https://www.bayesrulesbook.com/chapter-15.html</a></p>
-<p>Since this example has a numeric outcome, partial pooling is very similar to the James–Stein estimator: <a href="https://en.wikipedia.org/wiki/James–Stein_estimator" class="uri">https://en.wikipedia.org/wiki/James–Stein_estimator</a></p>
-</section>
-<section id="agent-effects" class="level2">
-<h2 class="anchored" data-anchor-id="agent-effects">Agent effects</h2>
-<p>Effect encoding might result in a somewhat circular argument: the column is more likely to be important to the model since it is the output of a separate model. The risk here is that we might over-fit the effect to the data. For this reason, it is super important to make sure that we verify that we aren’t overfitting by checking with resampling (or a validation set).</p>
-<p>Partial pooling somewhat lowers the risk of overfitting since it tends to correct for agents with small sample sizes. It can’t correct for improper data usage or data leakage though.</p>
-</section>
-</section>
-<section id="advanced-extras---case-study-on-transportation" class="level1">
-<h1>Advanced Extras - Case Study on Transportation</h1>
-<section id="a-recipe---handle-correlations" class="level2">
-<h2 class="anchored" data-anchor-id="a-recipe---handle-correlations">A recipe - handle correlations</h2>
-<p>In this code chunk, What’s the story with <code>!!stations</code>?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>chi_pca_rec <span class="ot">&lt;-</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  chi_rec <span class="sc">|&gt;</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_normalize</span>(<span class="fu">all_of</span>(<span class="sc">!!</span>stations)) <span class="sc">|&gt;</span> </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_pca</span>(<span class="fu">all_of</span>(<span class="sc">!!</span>stations), <span class="at">num_comp =</span> <span class="fu">tune</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><code>stations</code> is a vector of names of 20 columns that we want to use in the steps. If the list were shorter, we could type them in (e.g., <code>c("col1", "col2")</code> etc.).</p>
-<p>The vector lives in our global workspace, and if we are in parallel, the worker processes might not have access to <code>stations</code>. The <code>!!</code> (frequently said as “bang bang”) inserts the actual contents of the vector into the <code>all_of()</code> calls so that it looks like you just typed it in.</p>
-<p>This means that the parallel process workers have a copy of the data in their reach and the code will run without error.</p>
 
 
 </section>

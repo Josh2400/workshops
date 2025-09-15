@@ -343,7 +343,7 @@
 <p>The vertical green line shows that early stopping occurred.</p>
 </div></div>
 </section>
-<section id="did-it-work" class="slide level2 annotation">
+<section id="did-it-work" class="slide level2">
 <h2>Did it work? <img data-src="hexes/yardstick.png" class="absolute" style="top: -20px; right: 0px; width: 64px; height: 74.24px; "> <img data-src="hexes/rsample.png" class="absolute" style="top: -20px; right: 64px; width: 64px; height: 74.24px; "> <img data-src="hexes/brulee.png" class="absolute" style="top: -20px; right: 128px; width: 64px; height: 74.24px; "> <img data-src="hexes/broom.png" class="absolute" style="top: -20px; right: 192px; width: 64px; height: 74.24px; "></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6" data-code-line-numbers="|1|2|3|5-6|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>assessment_data <span class="ot">&lt;-</span> <span class="fu">assessment</span>(sim_rs<span class="sc">$</span>splits[[<span class="dv">1</span>]])</span>
@@ -605,7 +605,7 @@ Brier = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
 </div>
 <p><a href="https://aml4td.org/chapters/grid-search.html#sec-irregular-grid">Space-filling designs</a> (SFD) attempt to cover the parameter space without redundant candidates. We recommend these the most, and they are the default.</p>
 </section>
-<section id="extract-and-update-parameters" class="slide level2">
+<section id="extract-and-update-parameters" class="slide level2 annotation">
 <h2>Extract and update parameters <img data-src="hexes/workflows.png" class="absolute" style="top: -20px; right: 0px; width: 64px; height: 74.24px; "> <img data-src="hexes/dials.png" class="absolute" style="top: -20px; right: 64px; width: 64px; height: 74.24px; "></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>nnet_param <span class="ot">&lt;-</span> </span>
@@ -624,8 +624,8 @@ Brier = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
 <span id="cb11-14"><a></a><span class="co">#&gt; </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="grid-search-3" class="slide level2">
-<h2>Grid Search <img data-src="hexes/workflows.png" class="absolute" style="top: -20px; right: 0px; width: 64px; height: 74.24px; "> <img data-src="hexes/tune.png" class="absolute" style="top: -20px; right: 64px; width: 64px; height: 74.24px; "> <img data-src="hexes/dials.png" class="absolute" style="top: -20px; right: 128px; width: 64px; height: 74.24px; "></h2>
+<section id="neural-network-tuning" class="slide level2 annotation">
+<h2>Neural network tuning <img data-src="hexes/workflows.png" class="absolute" style="top: -20px; right: 0px; width: 64px; height: 74.24px; "> <img data-src="hexes/tune.png" class="absolute" style="top: -20px; right: 64px; width: 64px; height: 74.24px; "> <img data-src="hexes/dials.png" class="absolute" style="top: -20px; right: 128px; width: 64px; height: 74.24px; "></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12" data-code-line-numbers="|1|5|8|10|11|12|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>ctrl <span class="ot">&lt;-</span> <span class="fu">control_grid</span>(<span class="at">save_pred =</span> <span class="cn">TRUE</span>, <span class="at">save_workflow =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb12-2"><a></a></span>
@@ -662,7 +662,7 @@ Brier = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
       }</style></aside>
 </div>
 </section>
-<section id="running-in-parallel" class="slide level2">
+<section id="running-in-parallel" class="slide level2 annotation">
 <h2>Running in parallel</h2>
 <ul>
 <li><p>Grid search, combined with resampling, requires fitting a lot of models!</p></li>
@@ -721,7 +721,7 @@ Brier = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
 <p><br></p>
 <p>The next slide deck (on racing) includes more examples of speed-ups for a different model.</p>
 </section>
-<section id="grid-search-4" class="slide level2">
+<section id="grid-search-3" class="slide level2">
 <h2>Grid Search <img data-src="hexes/workflows.png" class="absolute" style="top: -20px; right: 0px; width: 64px; height: 74.24px; "> <img data-src="hexes/tune.png" class="absolute" style="top: -20px; right: 64px; width: 64px; height: 74.24px; "> <img data-src="hexes/dials.png" class="absolute" style="top: -20px; right: 128px; width: 64px; height: 74.24px; "></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>nnet_res </span>

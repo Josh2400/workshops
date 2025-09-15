@@ -543,8 +543,8 @@ output grouped by <code>tree_no_tree</code>.</em></p>
 </div>
 </div>
 </section>
-<section id="brier-score" class="slide level2">
-<h2>Brier score</h2>
+<section id="brier-score-formula" class="slide level2">
+<h2>Brier score formula</h2>
 <p>What if we don’t turn predicted probabilities into class predictions?</p>
 <div class="fragment">
 <p>The Brier score is analogous to the mean squared error in regression models:</p>
@@ -553,7 +553,7 @@ Brier_{class} = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
 \]</span></p>
 </div>
 </section>
-<section id="brier-score-1" class="slide level2 annotation">
+<section id="brier-score" class="slide level2 annotation">
 <h2>Brier score</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">augment</span>(forested_fit, <span class="at">new_data =</span> forested_train) <span class="sc">|&gt;</span> </span>
@@ -622,10 +622,13 @@ Brier_{class} = \frac{1}{NC}\sum_{i=1}^N\sum_{k=1}^C (y_{ik} - \hat{p}_{ik})^2
 <h1>⚠️ DANGERS OF OVERFITTING ⚠️</h1>
 
 </section>
-<section id="dangers-of-overfitting-1" class="slide level2 annotation">
+<section id="dangers-of-overfitting-1" class="slide level2">
 <h2>Dangers of overfitting</h2>
 
-<img data-src="https://raw.githubusercontent.com/topepo/2022-nyr-workshop/main/images/tuning-overfitting-train-1.svg" class="r-stretch"></section>
+<img data-src="https://raw.githubusercontent.com/topepo/2022-nyr-workshop/main/images/tuning-overfitting-train-1.svg" class="r-stretch"><div class="absolute" style="bottom: 0px; right: 0px; ">
+<p><a href="https://aml4td.org/chapters/overfitting.html">AML4TD</a></p>
+</div>
+</section>
 <section id="dangers-of-overfitting-2" class="slide level2">
 <h2>Dangers of overfitting ⚠️</h2>
 
