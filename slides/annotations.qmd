@@ -110,7 +110,7 @@ Generally speaking, this problem is referred to as [data leakage](https://en.wik
 
 ## Understand your model
 
-We've abbreviated the code necessary to make the exact plot on the previous slide. The full code is:
+On the next slide, we've abbreviated the code necessary to make this plot. If you want to replicate the plot exactly, you'll need:
 
 ```r
 library(rpart.plot)
