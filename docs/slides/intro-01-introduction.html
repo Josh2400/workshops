@@ -263,7 +263,7 @@
 <li>Max Kuhn</li>
 </ul>
 <div class="fragment">
-<p>+ our TA today, Kristin Bott!</p>
+<p>+ our TAs today, Kristin Bott and Ashley Henry!</p>
 </div>
 <div class="fragment">
 <p>Many thanks to Davis Vaughan, Julia Silge, David Robinson, Julie Jung, Alison Hill, and Desirée De Leon for their role in creating these materials!</p>
@@ -277,7 +277,7 @@
 <h2>Getting the materials</h2>
 <p><br></p>
 <h3 id="if-you-are-using-posit-cloud">If you are using Posit Cloud:</h3>
-<p><i class="fa fa-cloud"></i> Log in to Posit Cloud (free): TODO-ADD-LATER</p>
+<p><i class="fa fa-cloud"></i> Log in to Posit Cloud (free): Link on Discord</p>
 <p><br></p>
 <h3 id="if-you-are-working-locally">If you are working locally:</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># local download</span></span>
@@ -400,13 +400,13 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(tidymodels)</span>
 <span id="cb2-2"><a></a><span class="co">#&gt; ── Attaching packages ──────────────────────────── tidymodels 1.4.1 ──</span></span>
-<span id="cb2-3"><a></a><span class="co">#&gt; ✔ broom        1.0.9          ✔ rsample      1.3.1     </span></span>
-<span id="cb2-4"><a></a><span class="co">#&gt; ✔ dials        1.4.2          ✔ tailor       0.1.0.9000</span></span>
-<span id="cb2-5"><a></a><span class="co">#&gt; ✔ dplyr        1.1.4          ✔ tidyr        1.3.1     </span></span>
-<span id="cb2-6"><a></a><span class="co">#&gt; ✔ infer        1.0.9          ✔ tune         2.0.0     </span></span>
-<span id="cb2-7"><a></a><span class="co">#&gt; ✔ modeldata    1.5.1          ✔ workflows    1.3.0     </span></span>
-<span id="cb2-8"><a></a><span class="co">#&gt; ✔ parsnip      1.3.3          ✔ workflowsets 1.1.1     </span></span>
-<span id="cb2-9"><a></a><span class="co">#&gt; ✔ purrr        1.1.0          ✔ yardstick    1.3.2     </span></span>
+<span id="cb2-3"><a></a><span class="co">#&gt; ✔ broom        1.0.9     ✔ rsample      1.3.1</span></span>
+<span id="cb2-4"><a></a><span class="co">#&gt; ✔ dials        1.4.2     ✔ tailor       0.1.0</span></span>
+<span id="cb2-5"><a></a><span class="co">#&gt; ✔ dplyr        1.1.4     ✔ tidyr        1.3.1</span></span>
+<span id="cb2-6"><a></a><span class="co">#&gt; ✔ infer        1.0.9     ✔ tune         2.0.0</span></span>
+<span id="cb2-7"><a></a><span class="co">#&gt; ✔ modeldata    1.5.1     ✔ workflows    1.3.0</span></span>
+<span id="cb2-8"><a></a><span class="co">#&gt; ✔ parsnip      1.3.3     ✔ workflowsets 1.1.1</span></span>
+<span id="cb2-9"><a></a><span class="co">#&gt; ✔ purrr        1.1.0     ✔ yardstick    1.3.2</span></span>
 <span id="cb2-10"><a></a><span class="co">#&gt; ✔ recipes      1.3.1</span></span>
 <span id="cb2-11"><a></a><span class="co">#&gt; ── Conflicts ─────────────────────────────── tidymodels_conflicts() ──</span></span>
 <span id="cb2-12"><a></a><span class="co">#&gt; ✖ purrr::discard() masks scales::discard()</span></span>
@@ -473,7 +473,7 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># Install the packages for the workshop</span></span>
 <span id="cb3-2"><a></a>pkgs <span class="ot">&lt;-</span> </span>
-<span id="cb3-3"><a></a>  <span class="fu">c</span>(<span class="st">"bonsai"</span>, <span class="st">"Cubist"</span>, <span class="st">"doParallel"</span>, <span class="st">"earth"</span>, <span class="st">"embed"</span>, <span class="st">"finetune"</span>, </span>
+<span id="cb3-3"><a></a>  <span class="fu">c</span>(<span class="st">"bonsai"</span>, <span class="st">"Cubist"</span>, <span class="st">"doParallel"</span>, <span class="st">"earth"</span>, <span class="st">"embed"</span>, <span class="st">"finetune"</span>, <span class="st">"forested"</span>,</span>
 <span id="cb3-4"><a></a>    <span class="st">"lightgbm"</span>, <span class="st">"lme4"</span>, <span class="st">"parallelly"</span>, <span class="st">"plumber"</span>, <span class="st">"probably"</span>, </span>
 <span id="cb3-5"><a></a>    <span class="st">"ranger"</span>, <span class="st">"rpart"</span>, <span class="st">"rpart.plot"</span>, <span class="st">"rules"</span>, <span class="st">"splines2"</span>, <span class="st">"stacks"</span>, </span>
 <span id="cb3-6"><a></a>    <span class="st">"text2vec"</span>, <span class="st">"textrecipes"</span>, <span class="st">"tidymodels"</span>, <span class="st">"vetiver"</span>)</span>
@@ -652,11 +652,11 @@
 </tr>
 <tr class="even">
 <td style="text-align: left;">stacks</td>
-<td style="text-align: left;">1.1.1.9001</td>
+<td style="text-align: left;">1.1.1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">tailor</td>
-<td style="text-align: left;">0.1.0.9000</td>
+<td style="text-align: left;">0.1.0</td>
 </tr>
 </tbody>
 </table>
