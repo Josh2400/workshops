@@ -107,7 +107,7 @@ Many thanks to Davis Vaughan, Julia Silge, David Robinson, Julie Jung, Alison Hi
 
 ### If you are using Posit Cloud: 
 
-<i class="fa fa-cloud"></i> Log in to Posit Cloud (free): TODO-ADD-LATER
+<i class="fa fa-cloud"></i> Log in to Posit Cloud (free): Link on Discord
 
 <br> 
 
