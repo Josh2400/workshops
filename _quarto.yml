@@ -10,6 +10,7 @@ project:
     - "archive/2024-03-conectaR-spanish/presentacion/*qmd"
     - "archive/2024-08-posit-conf/*qmd"
     - "archive/2025-08-nyr/*qmd"
+    - "archive/2025-09-posit-conf/*qmd"
     - "!classwork/"
     - "!CODE_OF_CONDUCT.md"
   resources:
